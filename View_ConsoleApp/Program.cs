@@ -7,7 +7,7 @@ namespace View_ConsoleApp
     {
         static void Main(string[] args)
         {
-            Character character = new Character("Друидус", 12);
+
         }
     }
 }
