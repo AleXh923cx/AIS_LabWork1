@@ -8,13 +8,16 @@ namespace Model
     {
         private List<Character> characters = new List<Character>()
         {
-            new Character("Бримис", 46),
-            new Character("Аэрен", 66),
-            new Character("Данудор", 80),
-            new Character("Гвинрил", 102),
-            new Character("Элалов", 92)
+            new Character(1, "Бримис", 46),
+            new Character(2, "Аэрен", 66),
+            new Character(3, "Данудор", 80),
+            new Character(4, "Гвинрил", 102),
+            new Character(5, "Элалов", 92)
         };
 
+        /// <summary>
+        /// </summary>
+        /// <returns>Cписок персонажей-деревьев</returns>
         public List<Character> GetAllCharacters()
         {
             return characters;

@@ -36,11 +36,12 @@
             button_nxt = new Button();
             button_prvs = new Button();
             dataGridView1 = new DataGridView();
+            characterBindingSource = new BindingSource(components);
+            logicBindingSource = new BindingSource(components);
+            idDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             nameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             ageDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             levelDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            characterBindingSource = new BindingSource(components);
-            logicBindingSource = new BindingSource(components);
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)characterBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)logicBindingSource).BeginInit();
@@ -106,31 +107,12 @@
             // 
             dataGridView1.AutoGenerateColumns = false;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { nameDataGridViewTextBoxColumn, ageDataGridViewTextBoxColumn, levelDataGridViewTextBoxColumn });
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn, nameDataGridViewTextBoxColumn, ageDataGridViewTextBoxColumn, levelDataGridViewTextBoxColumn });
             dataGridView1.DataSource = characterBindingSource;
             dataGridView1.Location = new Point(12, 113);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.Size = new Size(440, 150);
             dataGridView1.TabIndex = 6;
-            // 
-            // nameDataGridViewTextBoxColumn
-            // 
-            nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
-            nameDataGridViewTextBoxColumn.HeaderText = "Name";
-            nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-            // 
-            // ageDataGridViewTextBoxColumn
-            // 
-            ageDataGridViewTextBoxColumn.DataPropertyName = "Age";
-            ageDataGridViewTextBoxColumn.HeaderText = "Age";
-            ageDataGridViewTextBoxColumn.Name = "ageDataGridViewTextBoxColumn";
-            // 
-            // levelDataGridViewTextBoxColumn
-            // 
-            levelDataGridViewTextBoxColumn.DataPropertyName = "Level";
-            levelDataGridViewTextBoxColumn.HeaderText = "Level";
-            levelDataGridViewTextBoxColumn.Name = "levelDataGridViewTextBoxColumn";
-            levelDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // characterBindingSource
             // 
@@ -139,6 +121,37 @@
             // logicBindingSource
             // 
             logicBindingSource.DataSource = typeof(Model.Logic);
+            // 
+            // idDataGridViewTextBoxColumn
+            // 
+            idDataGridViewTextBoxColumn.DataPropertyName = "Id";
+            idDataGridViewTextBoxColumn.HeaderText = "№";
+            idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            idDataGridViewTextBoxColumn.ReadOnly = true;
+            idDataGridViewTextBoxColumn.Width = 40;
+            // 
+            // nameDataGridViewTextBoxColumn
+            // 
+            nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+            nameDataGridViewTextBoxColumn.HeaderText = "Name";
+            nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+            nameDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // ageDataGridViewTextBoxColumn
+            // 
+            ageDataGridViewTextBoxColumn.DataPropertyName = "Age";
+            ageDataGridViewTextBoxColumn.HeaderText = "Age";
+            ageDataGridViewTextBoxColumn.Name = "ageDataGridViewTextBoxColumn";
+            ageDataGridViewTextBoxColumn.ReadOnly = true;
+            ageDataGridViewTextBoxColumn.Width = 50;
+            // 
+            // levelDataGridViewTextBoxColumn
+            // 
+            levelDataGridViewTextBoxColumn.DataPropertyName = "Level";
+            levelDataGridViewTextBoxColumn.HeaderText = "Level";
+            levelDataGridViewTextBoxColumn.Name = "levelDataGridViewTextBoxColumn";
+            levelDataGridViewTextBoxColumn.ReadOnly = true;
+            levelDataGridViewTextBoxColumn.Width = 50;
             // 
             // Form1
             // 
@@ -174,9 +187,10 @@
         private Button button_prvs;
         private DataGridView dataGridView1;
         private BindingSource logicBindingSource;
+        private BindingSource characterBindingSource;
+        private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn ageDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn levelDataGridViewTextBoxColumn;
-        private BindingSource characterBindingSource;
     }
 }
