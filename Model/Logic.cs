@@ -14,5 +14,10 @@ namespace Model
             new Character("Гвинрил", 102),
             new Character("Элалов", 92)
         };
+
+        public List<Character> GetAllCharacters()
+        {
+            return characters;
+        }
     }
 }
