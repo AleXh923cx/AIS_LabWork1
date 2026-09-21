@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,9 +11,16 @@ namespace View_WinForms
 {
     public partial class Form1 : Form
     {
+        Logic logic = new Logic();
+
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_OnLoad(object sender, EventArgs e)
+        {
+            dataGridView1.DataContext = logic.GetAllCharacters();
         }
     }
 }

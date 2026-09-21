@@ -41,11 +41,9 @@
             levelDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             characterBindingSource = new BindingSource(components);
             logicBindingSource = new BindingSource(components);
-            logicBindingSource1 = new BindingSource(components);
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)characterBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)logicBindingSource).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)logicBindingSource1).BeginInit();
             SuspendLayout();
             // 
             // textBox_charName
@@ -109,7 +107,6 @@
             dataGridView1.AutoGenerateColumns = false;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Columns.AddRange(new DataGridViewColumn[] { nameDataGridViewTextBoxColumn, ageDataGridViewTextBoxColumn, levelDataGridViewTextBoxColumn });
-            dataGridView1.DataBindings.Add(new Binding("DataContext", logicBindingSource1, "", true));
             dataGridView1.DataSource = characterBindingSource;
             dataGridView1.Location = new Point(12, 113);
             dataGridView1.Name = "dataGridView1";
@@ -143,10 +140,6 @@
             // 
             logicBindingSource.DataSource = typeof(Model.Logic);
             // 
-            // logicBindingSource1
-            // 
-            logicBindingSource1.DataSource = typeof(Model.Logic);
-            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -163,10 +156,10 @@
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "АИС \"РПГ персонажи-деревьи\"";
+            Load += Form1_OnLoad;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ((System.ComponentModel.ISupportInitialize)characterBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)logicBindingSource).EndInit();
-            ((System.ComponentModel.ISupportInitialize)logicBindingSource1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -185,6 +178,5 @@
         private DataGridViewTextBoxColumn ageDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn levelDataGridViewTextBoxColumn;
         private BindingSource characterBindingSource;
-        private BindingSource logicBindingSource1;
     }
 }
