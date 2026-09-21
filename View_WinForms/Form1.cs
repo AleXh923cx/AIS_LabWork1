@@ -20,7 +20,7 @@ namespace View_WinForms
 
         private void Form1_OnLoad(object sender, EventArgs e)
         {
-            dataGridView1.DataContext = logic.GetAllCharacters();
+            characterBindingSource.DataSource = logic.GetAllCharacters();
         }
     }
 }
