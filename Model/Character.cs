@@ -29,7 +29,7 @@
             get { return _name; }
             set { _name = value; }
         }
-        public string Genus
+        public string Genus // Это как класс персонажа
         {
             get { return _genus; }
             set { _genus = value; }
