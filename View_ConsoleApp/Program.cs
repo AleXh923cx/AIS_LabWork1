@@ -9,11 +9,11 @@ namespace View_ConsoleApp
         {
             Logic logic = new Logic();
 
-            Console.WriteLine("| №  |       Name        |     Genus     |  Age  |");
-            Console.WriteLine("|----|-------------------|---------------|-------|");
+            Console.WriteLine("| №  |    Name    |   Genus  | Age |");
+            Console.WriteLine("|----|------------|----------|-----|");
             foreach (var chrcter in logic.GetAllCharacters())
             {
-                Console.WriteLine($"| {chrcter.Id,2} | {chrcter.Name,10} \t | {chrcter.Genus,8} \t | {chrcter.Age,2} \t |");
+                Console.WriteLine($"| {chrcter.Id,2} | {chrcter.Name,10} | {chrcter.Genus,8} | {chrcter.Age,3} |");
             }
 
             Console.ReadLine();
