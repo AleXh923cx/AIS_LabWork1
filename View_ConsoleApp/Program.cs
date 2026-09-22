@@ -39,10 +39,10 @@ namespace View_ConsoleApp
                             Console.Write("Введите имя персонажа: ");
                             string charName = Console.ReadLine();
                             Console.Write("Введите вид персонажа: ");
-                            string charClsName = Console.ReadLine();
+                            string charCls = Console.ReadLine();
                             Console.Write("Введите возраст персонажа: ");
-                            int charAgeName = int.Parse(Console.ReadLine());
-                            if (!logic.AddCharacter(charName, charClsName, charAgeName))
+                            int charAge = int.Parse(Console.ReadLine());
+                            if (!logic.AddCharacter(charName, charCls, charAge))
                             {
                                 Console.WriteLine("Не удалось создать персонажа-дерево! (либо имя и вид пустая, либо возраст ниже 0)");
                                 Console.ReadKey();
