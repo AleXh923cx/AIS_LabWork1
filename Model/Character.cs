@@ -4,17 +4,21 @@
     {
         private int _id;
         private string _name;
+        private string _genus;
         private int _age;
 
         /// <summary>
         /// Конструктор
         /// </summary>
+        /// <param name="id">Идентификатор</param>
         /// <param name="name">Имя</param>
+        /// <param name="genus">Вид</param>
         /// <param name="age">Возраст</param>
-        public Character(int id, string name, int age)
+        public Character(int id, string name, string genus, int age)
         {
             _id = id;
             Name = name;
+            Genus = genus;
             Age = age;
         }
 
@@ -24,6 +28,11 @@
         {
             get { return _name; }
             set { _name = value; }
+        }
+        public string Genus
+        {
+            get { return _genus; }
+            set { _genus = value; }
         }
         public int Age
         {

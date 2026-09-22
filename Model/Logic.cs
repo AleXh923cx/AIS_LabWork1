@@ -8,11 +8,11 @@ namespace Model
     {
         private List<Character> characters = new List<Character>()
         {
-            new Character(1, "Бримис", 46),
-            new Character(2, "Аэрен", 66),
-            new Character(3, "Данудор", 80),
-            new Character(4, "Гвинрил", 102),
-            new Character(5, "Элалов", 92)
+            new Character(1, "Бримис", "Берёза", 46),
+            new Character(2, "Аэрен", "Сосна", 66),
+            new Character(3, "Данудор", "Тополь", 80),
+            new Character(4, "Гвинрил", "Дуб", 102),
+            new Character(5, "Элалов", "Клён", 92)
         };
 
         /// <summary>
