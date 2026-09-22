@@ -18,20 +18,33 @@ namespace View_WinForms
             InitializeComponent();
         }
 
-        private void Form1_OnLoad(object sender, EventArgs e)
+        private void RefreshForm()
         {
             characterBindingSource.DataSource = logic.GetAllCharacters();
+            characterBindingSource.ResetBindings(false);
+        }
+
+        private void Form1_OnLoad(object sender, EventArgs e)
+        {
+            RefreshForm();
         }
 
         private void button_create_OnClick(object sender, EventArgs e)
         {
             string charName = textBox_charName.Text;
             string charCls = textBox_charGenus.Text;
-            int charAge = int.Parse(textBox_charAge.Text);
 
-            if (!logic.AddCharacter(charName, charCls, charAge))
+            if (int.TryParse(textBox_charAge.Text, out int charAge))
             {
-                MessageBox.Show("Не удалось создать персонажа-дерево! (либо имя и вид пустая, либо возраст ниже 0)", "Ошибка создания", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (!logic.AddCharacter(charName, charCls, charAge))
+                {
+                    MessageBox.Show("Не удалось создать персонажа-дерево! (либо имя и вид пустая, либо возраст ниже 0)", "Ошибка создания", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                RefreshForm();
+            }
+            else
+            {
+                MessageBox.Show("Возраст должен быть числом", "Ошибка создания", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

@@ -39,7 +39,7 @@
             levelDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             characterBindingSource = new BindingSource(components);
             logicBindingSource = new BindingSource(components);
-            textBox_сharName = new TextBox();
+            textBox_charName = new TextBox();
             textBox_charGenus = new TextBox();
             textBox_charAge = new TextBox();
             label3 = new Label();
@@ -127,13 +127,13 @@
             // 
             logicBindingSource.DataSource = typeof(Model.Logic);
             // 
-            // textBox_сharName
+            // textBox_charName
             // 
-            textBox_сharName.BorderStyle = BorderStyle.FixedSingle;
-            textBox_сharName.Location = new Point(552, 33);
-            textBox_сharName.Name = "textBox_сharName";
-            textBox_сharName.Size = new Size(140, 23);
-            textBox_сharName.TabIndex = 7;
+            textBox_charName.BorderStyle = BorderStyle.FixedSingle;
+            textBox_charName.Location = new Point(552, 33);
+            textBox_charName.Name = "textBox_charName";
+            textBox_charName.Size = new Size(140, 23);
+            textBox_charName.TabIndex = 7;
             // 
             // textBox_charGenus
             // 
@@ -191,7 +191,7 @@
             Controls.Add(label3);
             Controls.Add(textBox_charAge);
             Controls.Add(textBox_charGenus);
-            Controls.Add(textBox_сharName);
+            Controls.Add(textBox_charName);
             Controls.Add(dataGridView1);
             Controls.Add(button_prvs);
             Controls.Add(button_create);
@@ -221,7 +221,6 @@
         private DataGridViewTextBoxColumn genusDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn ageDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn levelDataGridViewTextBoxColumn;
-        private TextBox textBox_сharName;
         private TextBox textBox_charAge;
         private Label label3;
         private Label label4;
