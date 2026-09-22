@@ -22,10 +22,5 @@ namespace View_WinForms
         {
             characterBindingSource.DataSource = logic.GetAllCharacters();
         }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

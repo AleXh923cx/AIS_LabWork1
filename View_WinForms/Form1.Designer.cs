@@ -209,8 +209,6 @@
         #endregion
 
         private TextBox textBox_charName;
-        private Label label1;
-        private Label label2;
         private TextBox textBox_charAge;
         private Button button_create;
         private Button button_prvs;
