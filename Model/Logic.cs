@@ -63,7 +63,8 @@ namespace Model
         /// <param name="id">Идентификатор</param>
         public void DeleteCharacter(int id)
         {
-            
+            Character character = GetCharacterById(id);
+            characters.Remove(character);
         }
     }
 }
