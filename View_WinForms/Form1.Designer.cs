@@ -39,6 +39,12 @@
             levelDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             characterBindingSource = new BindingSource(components);
             logicBindingSource = new BindingSource(components);
+            textBox_сharName = new TextBox();
+            textBox_charAge = new TextBox();
+            textBox3 = new TextBox();
+            label3 = new Label();
+            label4 = new Label();
+            label5 = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)characterBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)logicBindingSource).BeginInit();
@@ -120,11 +126,71 @@
             // 
             logicBindingSource.DataSource = typeof(Model.Logic);
             // 
+            // textBox_сharName
+            // 
+            textBox_сharName.BorderStyle = BorderStyle.FixedSingle;
+            textBox_сharName.Location = new Point(552, 33);
+            textBox_сharName.Name = "textBox_сharName";
+            textBox_сharName.Size = new Size(140, 23);
+            textBox_сharName.TabIndex = 7;
+            // 
+            // textBox_charAge
+            // 
+            textBox_charAge.BorderStyle = BorderStyle.FixedSingle;
+            textBox_charAge.Location = new Point(552, 62);
+            textBox_charAge.Name = "textBox_charAge";
+            textBox_charAge.Size = new Size(140, 23);
+            textBox_charAge.TabIndex = 8;
+            // 
+            // textBox3
+            // 
+            textBox3.BorderStyle = BorderStyle.FixedSingle;
+            textBox3.Location = new Point(552, 91);
+            textBox3.Name = "textBox3";
+            textBox3.Size = new Size(140, 23);
+            textBox3.TabIndex = 9;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold);
+            label3.Location = new Point(506, 36);
+            label3.Name = "label3";
+            label3.Size = new Size(40, 20);
+            label3.TabIndex = 10;
+            label3.Text = "Имя";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold);
+            label4.Location = new Point(510, 65);
+            label4.Name = "label4";
+            label4.Size = new Size(36, 20);
+            label4.TabIndex = 11;
+            label4.Text = "Вид";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold);
+            label5.Location = new Point(482, 94);
+            label5.Name = "label5";
+            label5.Size = new Size(64, 20);
+            label5.TabIndex = 12;
+            label5.Text = "Возраст";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(704, 211);
+            Controls.Add(label5);
+            Controls.Add(label4);
+            Controls.Add(label3);
+            Controls.Add(textBox3);
+            Controls.Add(textBox_charAge);
+            Controls.Add(textBox_сharName);
             Controls.Add(dataGridView1);
             Controls.Add(button_prvs);
             Controls.Add(button_create);
@@ -137,6 +203,7 @@
             ((System.ComponentModel.ISupportInitialize)characterBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)logicBindingSource).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -155,5 +222,10 @@
         private DataGridViewTextBoxColumn genusDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn ageDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn levelDataGridViewTextBoxColumn;
+        private TextBox textBox_сharName;
+        private TextBox textBox3;
+        private Label label3;
+        private Label label4;
+        private Label label5;
     }
 }
