@@ -36,9 +36,19 @@ namespace View_ConsoleApp
                     switch (choice)
                     {
                         case 1:
+                            Console.Write("Введите имя персонажа: ");
+                            string charName = Console.ReadLine();
+                            Console.Write("Введите вид персонажа: ");
+                            string charClsName = Console.ReadLine();
+                            Console.Write("Введите возраст персонажа: ");
+                            int charAgeName = int.Parse(Console.ReadLine());
+                            logic.AddCharacter(charName, charClsName, charAgeName);
                             Console.Clear();
                             break;
                         case 2:
+                            Console.Write("Введите № персонажа: ");
+                            int charId = int.Parse(Console.ReadLine());
+                            logic.DeleteCharacter(charId);
                             Console.Clear();
                             break;
                         case 0:

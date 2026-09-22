@@ -23,6 +23,20 @@ namespace Model
         private List<Character> characters = new List<Character>();
         private int _tempId = 1;
 
+        public Logic()
+        {
+            AddCharacter("Бримис", "Берёза", 46);
+            AddCharacter("Аэрен", "Сосна", 66);
+            AddCharacter("Данудор", "Тополь", 80);
+            AddCharacter("Гвинрил", "Дуб", 102);
+            AddCharacter("Элалов", "Клён", 92);
+            AddCharacter("Каэрра", "Берёза", 76);
+            AddCharacter("Финтин", "Дуб", 70);
+            AddCharacter("Дэнлоу", "Сосна", 115);
+            AddCharacter("Эладор", "Ель", 38);
+            AddCharacter("Циркис", "Тополь", 59);
+        }
+
         /// <summary>
         /// </summary>
         /// <returns>Cписок персонажей-деревьев</returns>
