@@ -9,35 +9,49 @@ namespace View_ConsoleApp
         {
             Logic logic = new Logic();
 
-            // Заголовки таблицы
-            Console.WriteLine("| №  |    Имя     |   Вид    | Возраст | Уровень |");
-            Console.WriteLine("|----|------------|----------|---------|---------|");
+            bool cycleMenu = true;
 
-            // Записи таблицы
-            foreach (var chrcter in logic.GetAllCharacters())
+            while (cycleMenu)
             {
-                Console.WriteLine($"| {chrcter.Id,2} | {chrcter.Name,10} | {chrcter.Genus,8} | {chrcter.Age,7} | {chrcter.Level,7} |");
-            }
+                // Заголовки таблицы
+                Console.WriteLine("| №  |    Имя     |   Вид    | Возраст | Уровень |");
+                Console.WriteLine("|----|------------|----------|---------|---------|");
 
-            Console.WriteLine();
-            Console.WriteLine("Пункты:");
-            Console.WriteLine("1. Добавление сущности");
-            Console.WriteLine("2. Удаление сущности");
-            Console.WriteLine("0. Выход\n");
-
-            Console.Write("Выберите пункт: "); string userInput = Console.ReadLine();
-
-            if (int.TryParse(userInput, out int choice) && choice >= 0 && choice < 3)
-            {
-                switch (choice)
+                // Записи таблицы
+                foreach (var chrcter in logic.GetAllCharacters())
                 {
-                    case 0:
-                        return; // Конец
+                    Console.WriteLine($"| {chrcter.Id,2} | {chrcter.Name,10} | {chrcter.Genus,8} | {chrcter.Age,7} | {chrcter.Level,7} |");
                 }
-            }
-            else
-            {
-                Console.WriteLine("Неверный ввод");
+
+                Console.WriteLine();
+                Console.WriteLine("Пункты:");
+                Console.WriteLine("1. Добавление сущности");
+                Console.WriteLine("2. Удаление сущности");
+                Console.WriteLine("0. Выход\n");
+
+                Console.Write("Выберите пункт: "); string userInput = Console.ReadLine();
+
+                if (int.TryParse(userInput, out int choice) && choice >= 0 && choice < 3)
+                {
+                    switch (choice)
+                    {
+                        case 1:
+                            Console.Clear();
+                            break;
+                        case 2:
+                            Console.Clear();
+                            break;
+                        case 0:
+                            cycleMenu = false;
+                            break;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Неверный ввод! (диапазон ввода: 0-2)");
+                    Console.ReadKey();
+                    Console.Clear();
+                }
             }
         }
     }
