@@ -40,8 +40,8 @@
             characterBindingSource = new BindingSource(components);
             logicBindingSource = new BindingSource(components);
             textBox_сharName = new TextBox();
+            textBox_charGenus = new TextBox();
             textBox_charAge = new TextBox();
-            textBox3 = new TextBox();
             label3 = new Label();
             label4 = new Label();
             label5 = new Label();
@@ -58,6 +58,7 @@
             button_create.TabIndex = 4;
             button_create.Text = "Создать персонажа";
             button_create.UseVisualStyleBackColor = true;
+            button_create.Click += button_create_OnClick;
             // 
             // button_prvs
             // 
@@ -134,21 +135,21 @@
             textBox_сharName.Size = new Size(140, 23);
             textBox_сharName.TabIndex = 7;
             // 
+            // textBox_charGenus
+            // 
+            textBox_charGenus.BorderStyle = BorderStyle.FixedSingle;
+            textBox_charGenus.Location = new Point(552, 62);
+            textBox_charGenus.Name = "textBox_charGenus";
+            textBox_charGenus.Size = new Size(140, 23);
+            textBox_charGenus.TabIndex = 8;
+            // 
             // textBox_charAge
             // 
             textBox_charAge.BorderStyle = BorderStyle.FixedSingle;
-            textBox_charAge.Location = new Point(552, 62);
+            textBox_charAge.Location = new Point(552, 91);
             textBox_charAge.Name = "textBox_charAge";
             textBox_charAge.Size = new Size(140, 23);
-            textBox_charAge.TabIndex = 8;
-            // 
-            // textBox3
-            // 
-            textBox3.BorderStyle = BorderStyle.FixedSingle;
-            textBox3.Location = new Point(552, 91);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(140, 23);
-            textBox3.TabIndex = 9;
+            textBox_charAge.TabIndex = 9;
             // 
             // label3
             // 
@@ -188,8 +189,8 @@
             Controls.Add(label5);
             Controls.Add(label4);
             Controls.Add(label3);
-            Controls.Add(textBox3);
             Controls.Add(textBox_charAge);
+            Controls.Add(textBox_charGenus);
             Controls.Add(textBox_сharName);
             Controls.Add(dataGridView1);
             Controls.Add(button_prvs);
@@ -209,7 +210,7 @@
         #endregion
 
         private TextBox textBox_charName;
-        private TextBox textBox_charAge;
+        private TextBox textBox_charGenus;
         private Button button_create;
         private Button button_prvs;
         private DataGridView dataGridView1;
@@ -221,7 +222,7 @@
         private DataGridViewTextBoxColumn ageDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn levelDataGridViewTextBoxColumn;
         private TextBox textBox_сharName;
-        private TextBox textBox3;
+        private TextBox textBox_charAge;
         private Label label3;
         private Label label4;
         private Label label5;

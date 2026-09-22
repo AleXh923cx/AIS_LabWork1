@@ -22,5 +22,10 @@ namespace View_WinForms
         {
             characterBindingSource.DataSource = logic.GetAllCharacters();
         }
+
+        private void button_create_OnClick(object sender, EventArgs e)
+        {
+            
+        }
     }
 }
