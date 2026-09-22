@@ -40,6 +40,7 @@
             logicBindingSource = new BindingSource(components);
             idDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             nameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            genusDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             ageDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             levelDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
@@ -107,7 +108,7 @@
             // 
             dataGridView1.AutoGenerateColumns = false;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn, nameDataGridViewTextBoxColumn, ageDataGridViewTextBoxColumn, levelDataGridViewTextBoxColumn });
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn, nameDataGridViewTextBoxColumn, genusDataGridViewTextBoxColumn, ageDataGridViewTextBoxColumn, levelDataGridViewTextBoxColumn });
             dataGridView1.DataSource = characterBindingSource;
             dataGridView1.Location = new Point(12, 113);
             dataGridView1.Name = "dataGridView1";
@@ -125,7 +126,7 @@
             // idDataGridViewTextBoxColumn
             // 
             idDataGridViewTextBoxColumn.DataPropertyName = "Id";
-            idDataGridViewTextBoxColumn.HeaderText = "№";
+            idDataGridViewTextBoxColumn.HeaderText = "Id";
             idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
             idDataGridViewTextBoxColumn.ReadOnly = true;
             idDataGridViewTextBoxColumn.Width = 40;
@@ -136,6 +137,14 @@
             nameDataGridViewTextBoxColumn.HeaderText = "Name";
             nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
             nameDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // genusDataGridViewTextBoxColumn
+            // 
+            genusDataGridViewTextBoxColumn.DataPropertyName = "Genus";
+            genusDataGridViewTextBoxColumn.HeaderText = "Genus";
+            genusDataGridViewTextBoxColumn.Name = "genusDataGridViewTextBoxColumn";
+            genusDataGridViewTextBoxColumn.ReadOnly = true;
+            genusDataGridViewTextBoxColumn.Width = 80;
             // 
             // ageDataGridViewTextBoxColumn
             // 
@@ -190,6 +199,7 @@
         private BindingSource characterBindingSource;
         private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn genusDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn ageDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn levelDataGridViewTextBoxColumn;
     }
