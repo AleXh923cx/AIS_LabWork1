@@ -25,7 +25,14 @@ namespace View_WinForms
 
         private void button_create_OnClick(object sender, EventArgs e)
         {
-            
+            string charName = textBox_charName.Text;
+            string charCls = textBox_charGenus.Text;
+            int charAge = int.Parse(textBox_charAge.Text);
+
+            if (!logic.AddCharacter(charName, charCls, charAge))
+            {
+                MessageBox.Show("Не удалось создать персонажа-дерево! (либо имя и вид пустая, либо возраст ниже 0)", "Ошибка создания", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
