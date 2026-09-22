@@ -42,13 +42,21 @@ namespace View_ConsoleApp
                             string charClsName = Console.ReadLine();
                             Console.Write("Введите возраст персонажа: ");
                             int charAgeName = int.Parse(Console.ReadLine());
-                            logic.AddCharacter(charName, charClsName, charAgeName);
+                            if (!logic.AddCharacter(charName, charClsName, charAgeName))
+                            {
+                                Console.WriteLine("Не удалось создать персонажа-дерево! (либо имя и вид пустая, либо возраст ниже 0)");
+                                Console.ReadKey();
+                            }
                             Console.Clear();
                             break;
                         case 2:
                             Console.Write("Введите № персонажа: ");
                             int charId = int.Parse(Console.ReadLine());
-                            logic.DeleteCharacter(charId);
+                            if (!logic.DeleteCharacter(charId))
+                            {
+                                Console.WriteLine("Не удалось удалить персонажа-дерево! (несуществующий № персонажа)");
+                                Console.ReadKey();
+                            }
                             Console.Clear();
                             break;
                         case 0:
