@@ -46,7 +46,7 @@
             // 
             // button_create
             // 
-            button_create.Location = new Point(312, 168);
+            button_create.Location = new Point(552, 169);
             button_create.Name = "button_create";
             button_create.Size = new Size(140, 30);
             button_create.TabIndex = 4;
@@ -124,7 +124,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(464, 221);
+            ClientSize = new Size(704, 211);
             Controls.Add(dataGridView1);
             Controls.Add(button_prvs);
             Controls.Add(button_create);
