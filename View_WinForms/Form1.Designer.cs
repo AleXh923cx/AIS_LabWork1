@@ -126,7 +126,7 @@
             // idDataGridViewTextBoxColumn
             // 
             idDataGridViewTextBoxColumn.DataPropertyName = "Id";
-            idDataGridViewTextBoxColumn.HeaderText = "Id";
+            idDataGridViewTextBoxColumn.HeaderText = "№";
             idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
             idDataGridViewTextBoxColumn.ReadOnly = true;
             idDataGridViewTextBoxColumn.Width = 40;
@@ -134,14 +134,14 @@
             // nameDataGridViewTextBoxColumn
             // 
             nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
-            nameDataGridViewTextBoxColumn.HeaderText = "Name";
+            nameDataGridViewTextBoxColumn.HeaderText = "Имя";
             nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
             nameDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // genusDataGridViewTextBoxColumn
             // 
             genusDataGridViewTextBoxColumn.DataPropertyName = "Genus";
-            genusDataGridViewTextBoxColumn.HeaderText = "Genus";
+            genusDataGridViewTextBoxColumn.HeaderText = "Вид";
             genusDataGridViewTextBoxColumn.Name = "genusDataGridViewTextBoxColumn";
             genusDataGridViewTextBoxColumn.ReadOnly = true;
             genusDataGridViewTextBoxColumn.Width = 80;
@@ -149,18 +149,18 @@
             // ageDataGridViewTextBoxColumn
             // 
             ageDataGridViewTextBoxColumn.DataPropertyName = "Age";
-            ageDataGridViewTextBoxColumn.HeaderText = "Age";
+            ageDataGridViewTextBoxColumn.HeaderText = "Возраст";
             ageDataGridViewTextBoxColumn.Name = "ageDataGridViewTextBoxColumn";
             ageDataGridViewTextBoxColumn.ReadOnly = true;
-            ageDataGridViewTextBoxColumn.Width = 50;
+            ageDataGridViewTextBoxColumn.Width = 70;
             // 
             // levelDataGridViewTextBoxColumn
             // 
             levelDataGridViewTextBoxColumn.DataPropertyName = "Level";
-            levelDataGridViewTextBoxColumn.HeaderText = "Level";
+            levelDataGridViewTextBoxColumn.HeaderText = "Уровень";
             levelDataGridViewTextBoxColumn.Name = "levelDataGridViewTextBoxColumn";
             levelDataGridViewTextBoxColumn.ReadOnly = true;
-            levelDataGridViewTextBoxColumn.Width = 50;
+            levelDataGridViewTextBoxColumn.Width = 60;
             // 
             // Form1
             // 
