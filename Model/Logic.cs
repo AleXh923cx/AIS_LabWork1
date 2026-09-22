@@ -31,6 +31,16 @@ namespace Model
             return characters;
         }
 
+        public Character GetCharacterById(int id)
+        {
+            foreach (Character character in characters)
+            {
+                if (character.Id == id) return character;
+            }
+
+            return null; // "Не нашли по ключу - получи пустоту"
+        }
+
         /// <summary>
         /// Добавление
         /// </summary>
