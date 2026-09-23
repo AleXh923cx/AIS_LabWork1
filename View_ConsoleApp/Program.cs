@@ -38,17 +38,43 @@ namespace View_ConsoleApp
                         case 1:
                             Console.Write("Введите имя персонажа: ");
                             string charName = Console.ReadLine();
+                            if (string.IsNullOrEmpty(charName))
+                            {
+                                Console.WriteLine("ОШИБКА: Имя персонажа не должно быть пустым");
+                                Console.ReadKey();
+                                Console.Clear();
+                                break;
+                            }
                             Console.Write("Введите вид персонажа: ");
                             string charCls = Console.ReadLine();
-                            Console.Write("Введите возраст персонажа: ");
-                            int charAge = int.Parse(Console.ReadLine());
-                            if (!logic.AddCharacter(charName, charCls, charAge))
+                            if (string.IsNullOrEmpty(charCls))
                             {
-                                Console.WriteLine("Не удалось создать персонажа-дерево! (либо имя и вид пустая, либо возраст ниже 0)");
+                                Console.WriteLine("ОШИБКА: Вид персонажа не должно быть пустым");
                                 Console.ReadKey();
+                                Console.Clear();
+                                break;
                             }
-                            Console.Clear();
-                            break;
+                            Console.Write("Введите возраст персонажа: ");
+                            if (int.TryParse(Console.ReadLine(), out int charAge))
+                            {
+                                if (charAge < 0)
+                                {
+                                    Console.WriteLine("ОШИБКА: Возраст должен быть выше нуля");
+                                    Console.ReadKey();
+                                    Console.Clear();
+                                    break;
+                                }
+                                logic.AddCharacter(charName, charCls, charAge);
+                                Console.Clear();
+                                break;
+                            }
+                            else
+                            {
+                                Console.WriteLine("ОШИБКА: Возраст должен быть числом");
+                                Console.ReadKey();
+                                Console.Clear();
+                                break;
+                            }
                         case 2:
                             Console.Write("Введите № персонажа: ");
                             int charId = int.Parse(Console.ReadLine());
