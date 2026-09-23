@@ -195,6 +195,29 @@ namespace View_ConsoleApp
                                 Console.Clear();
                                 break;
                             case 6:
+                                Console.Write("Введите минимальный возраст: ");
+                                if (int.TryParse(Console.ReadLine(), out int minAge))
+                                {
+                                    if (minAge < 0)
+                                    {
+                                        Console.WriteLine("ОШИБКА: Минимальный возраст должен быть выше нуля");
+                                        Console.ReadKey();
+                                        Console.Clear();
+                                        break;
+                                    }
+
+                                    Console.Clear();
+                                    ShowTable(logic.GetCharacterListByAge(minAge));
+                                }
+                                else
+                                {
+                                    Console.WriteLine("ОШИБКА: Минимальный возраст должен быть числом");
+                                    break;
+                                }
+
+                                Console.WriteLine();
+                                Console.WriteLine("Нажмите любую клавишу для возврата в меню ...");
+                                Console.ReadKey();
                                 Console.Clear();
                                 break;
                             case 0:
