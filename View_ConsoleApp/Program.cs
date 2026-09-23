@@ -27,11 +27,11 @@ namespace View_ConsoleApp
                 Console.WriteLine("Пункты:");
                 Console.WriteLine("1. Добавление сущности");
                 Console.WriteLine("2. Удаление сущности");
+                Console.WriteLine("3. Изменение сущности");
                 Console.WriteLine("0. Выход\n");
 
-                Console.Write("Выберите пункт: "); string userInput = Console.ReadLine();
-
-                if (int.TryParse(userInput, out int choice) && choice >= 0 && choice < 3)
+                Console.Write("Выберите пункт: ");
+                if (int.TryParse(Console.ReadLine(), out int choice) && choice >= 0 && choice < 3)
                 {
                     switch (choice)
                     {
