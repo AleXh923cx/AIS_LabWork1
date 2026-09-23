@@ -17,6 +17,7 @@ namespace View_ConsoleApp
             Console.WriteLine("3. Изменение сущности");
             Console.WriteLine("4. Просмотр таблиц");
             Console.WriteLine("5. Сортировка по виду");
+            Console.WriteLine("6. Выборка по более минимального возраста");
             Console.WriteLine("0. Выход\n");
 
             Console.Write("Выберите пункт: ");
@@ -57,7 +58,7 @@ namespace View_ConsoleApp
                 else
                 {
                     ShowMenu();
-                    if (int.TryParse(Console.ReadLine(), out int choice) && choice >= 0 && choice < 6)
+                    if (int.TryParse(Console.ReadLine(), out int choice) && choice >= 0 && choice < 7)
                     {
                         switch (choice)
                         {
@@ -193,6 +194,9 @@ namespace View_ConsoleApp
                                 tableMode = true;
                                 Console.Clear();
                                 break;
+                            case 6:
+                                Console.Clear();
+                                break;
                             case 0:
                                 cycleMenu = false;
                                 break;
@@ -200,7 +204,7 @@ namespace View_ConsoleApp
                     }
                     else
                     {
-                        Console.WriteLine("Неверный ввод! (диапазон ввода: 0-5)");
+                        Console.WriteLine("Неверный ввод! (диапазон ввода: 0-6)");
                         Console.ReadKey();
                         Console.Clear();
                     }
