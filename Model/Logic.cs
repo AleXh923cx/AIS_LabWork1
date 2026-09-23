@@ -85,6 +85,13 @@ namespace Model
             return true;
         }
 
+        /// <summary>
+        /// Изменение
+        /// </summary>
+        /// <param name="id">Идентификатор</param>
+        /// <param name="name">Имя</param>
+        /// <param name="genus">Вид</param>
+        /// <param name="age">Возраст</param>
         public void UpdateCharacter(int id, string name, string genus, int age)
         {
             Character character = GetCharacterById(id);
@@ -94,6 +101,11 @@ namespace Model
             character.Name = name;
             character.Genus = genus;
             character.Age = age;
+        }
+
+        public void SortCharacterByGenus()
+        {
+            characters.Sort((a, b) => string.Compare(a.Genus, b.Genus));
         }
     }
 }
