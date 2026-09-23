@@ -112,5 +112,18 @@ namespace Model
         {
             characters.Sort((a, b) => string.Compare(a.Genus, b.Genus));
         }
+
+        public List<Character> GetCharacterListByAge(int min)
+        {
+            List<Character> list = new List<Character>();
+
+            foreach (var character in characters)
+            {
+                if (character.Age >= min)
+                    list.Add(character);
+            }
+
+            return list;
+        }
     }
 }
