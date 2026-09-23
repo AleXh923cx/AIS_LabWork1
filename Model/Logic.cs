@@ -61,29 +61,27 @@ namespace Model
         /// <param name="name">Имя</param>
         /// <param name="genus">Вид</param>
         /// <param name="age">Возраст</param>
-        public bool AddCharacter(string name, string genus, int age)
+        public void AddCharacter(string name, string genus, int age)
         {
             if (name == null || genus == null || age < 0)
-                return false;
+                return;
 
             Character character = new Character(_tempId, name, genus, age);
             characters.Add(character);
             _tempId++;
-            return true;
         }
 
         /// <summary>
         /// Удаление
         /// </summary>
         /// <param name="id">Идентификатор</param>
-        public bool DeleteCharacter(int id)
+        public void DeleteCharacter(int id)
         {
             Character character = GetCharacterById(id);
             if (character == null)
-                return false;
+                return;
 
             characters.Remove(character);
-            return true;
         }
     }
 }
