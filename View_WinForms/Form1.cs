@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using View_WinForms.Подформы;
 
 namespace View_WinForms
 {
@@ -17,8 +18,14 @@ namespace View_WinForms
         {
             InitializeComponent();
         }
+        
+        // Для подформы Form1 (DeleteForm)
+        public Logic GetLogicInstance()
+        {
+            return logic;
+        }
 
-        private void RefreshForm()
+        public void RefreshForm()
         {
             characterBindingSource.DataSource = logic.GetAllCharacters();
             characterBindingSource.ResetBindings(false);
@@ -59,6 +66,12 @@ namespace View_WinForms
                 MessageBox.Show("Возраст должен быть числом", "Ошибка создания", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+        }
+
+        private void button_delete_OnClick(object sender, EventArgs e) 
+        {
+            DeleteCharForm deleteForm = new DeleteCharForm(this);
+            deleteForm.ShowDialog();
         }
     }
 }

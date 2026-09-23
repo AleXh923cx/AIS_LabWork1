@@ -68,6 +68,7 @@
             button_prvs.TabIndex = 5;
             button_prvs.Text = "Удалить персонажа";
             button_prvs.UseVisualStyleBackColor = true;
+            button_prvs.Click += button_delete_OnClick;
             // 
             // dataGridView1
             // 
