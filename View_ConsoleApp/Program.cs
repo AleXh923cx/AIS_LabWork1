@@ -31,7 +31,7 @@ namespace View_ConsoleApp
                 Console.WriteLine("0. Выход\n");
 
                 Console.Write("Выберите пункт: ");
-                if (int.TryParse(Console.ReadLine(), out int choice) && choice >= 0 && choice < 3)
+                if (int.TryParse(Console.ReadLine(), out int choice) && choice >= 0 && choice < 4)
                 {
                     switch (choice)
                     {
@@ -88,6 +88,68 @@ namespace View_ConsoleApp
                                 }
                                 Console.Clear();
                                 break;
+                            }
+                            else
+                            {
+                                Console.WriteLine("ОШИБКА: № персонажа должен быть числом");
+                                Console.ReadKey();
+                                Console.Clear();
+                                break;
+                            }
+                        case 3:
+                            Console.Write("Введите № персонажа: ");
+                            if (int.TryParse(Console.ReadLine(), out charId))
+                            {
+                                if (logic.GetCharacterById(charId) == null)
+                                {
+                                    Console.WriteLine("ОШИБКА: Введённый № персонажа не существует в таблице");
+                                    Console.ReadKey();
+                                    Console.Clear();
+                                    break;
+                                }
+                                else
+                                {
+                                    Console.Write("Введите имя персонажа: ");
+                                    charName = Console.ReadLine();
+                                    if (string.IsNullOrEmpty(charName))
+                                    {
+                                        Console.WriteLine("ОШИБКА: Имя персонажа не должно быть пустым");
+                                        Console.ReadKey();
+                                        Console.Clear();
+                                        break;
+                                    }
+                                    Console.Write("Введите вид персонажа: ");
+                                    charCls = Console.ReadLine();
+                                    if (string.IsNullOrEmpty(charCls))
+                                    {
+                                        Console.WriteLine("ОШИБКА: Вид персонажа не должно быть пустым");
+                                        Console.ReadKey();
+                                        Console.Clear();
+                                        break;
+                                    }
+                                    Console.Write("Введите возраст персонажа: ");
+                                    if (int.TryParse(Console.ReadLine(),out charAge))
+                                    {
+                                        if (charAge < 0)
+                                        {
+                                            Console.WriteLine("ОШИБКА: Возраст должен быть выше нуля");
+                                            Console.ReadKey();
+                                            Console.Clear();
+                                            break;
+                                        }
+
+                                        logic.UpdateCharacter(charId, charName, charCls, charAge);
+                                        Console.Clear();
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("ОШИБКА: Возраст должен быть числом");
+                                        Console.ReadKey();
+                                        Console.Clear();
+                                        break;
+                                    }
+                                }
                             }
                             else
                             {
