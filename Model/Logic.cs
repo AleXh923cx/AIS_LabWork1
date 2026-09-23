@@ -84,5 +84,16 @@ namespace Model
             characters.Remove(character);
             return true;
         }
+
+        public void UpdateCharacter(int id, string name, string genus, int age)
+        {
+            Character character = GetCharacterById(id);
+            if (character == null)
+                return;
+
+            character.Name = name;
+            character.Genus = genus;
+            character.Age = age;
+        }
     }
 }
