@@ -77,14 +77,25 @@ namespace View_ConsoleApp
                             }
                         case 2:
                             Console.Write("Введите № персонажа: ");
-                            int charId = int.Parse(Console.ReadLine());
-                            if (!logic.DeleteCharacter(charId))
+                            if (int.TryParse(Console.ReadLine(), out int charId))
                             {
-                                Console.WriteLine("Не удалось удалить персонажа-дерево! (несуществующий № персонажа)");
-                                Console.ReadKey();
+                                if (!logic.DeleteCharacter(charId))
+                                {
+                                    Console.WriteLine("ОШИБКА: Введённый № персонажа не существует в таблице");
+                                    Console.ReadKey();
+                                    Console.Clear();
+                                    break;
+                                }
+                                Console.Clear();
+                                break;
                             }
-                            Console.Clear();
-                            break;
+                            else
+                            {
+                                Console.WriteLine("ОШИБКА: № персонажа должен быть числом");
+                                Console.ReadKey();
+                                Console.Clear();
+                                break;
+                            }
                         case 0:
                             cycleMenu = false;
                             break;

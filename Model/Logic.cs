@@ -75,13 +75,14 @@ namespace Model
         /// Удаление
         /// </summary>
         /// <param name="id">Идентификатор</param>
-        public void DeleteCharacter(int id)
+        public bool DeleteCharacter(int id)
         {
             Character character = GetCharacterById(id);
             if (character == null)
-                return;
+                return false;
 
             characters.Remove(character);
+            return true;
         }
     }
 }
