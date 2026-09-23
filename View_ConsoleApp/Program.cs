@@ -23,14 +23,14 @@ namespace View_ConsoleApp
             Console.Write("Выберите пункт: ");
         }
 
-        static void ShowTable()
+        static void ShowTable(List<Character> charList)
         {
             // Заголовки таблицы
             Console.WriteLine("| №  |    Имя     |   Вид    | Возраст | Уровень |");
             Console.WriteLine("|----|------------|----------|---------|---------|");
 
             // Записи таблицы
-            foreach (var chrcter in logic.GetAllCharacters())
+            foreach (var chrcter in charList)
             {
                 Console.WriteLine($"| {chrcter.Id,2} | {chrcter.Name,10} | {chrcter.Genus,8} | {chrcter.Age,7} | {chrcter.Level,7} |");
             }
@@ -45,7 +45,7 @@ namespace View_ConsoleApp
             {
                 if (tableMode)
                 {
-                    ShowTable();
+                    ShowTable(logic.GetAllCharacters());
 
                     Console.WriteLine();
                     Console.WriteLine("Нажмите любую клавишу для выхода из режима таблицы ...");
