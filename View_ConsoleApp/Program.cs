@@ -52,6 +52,7 @@ namespace View_ConsoleApp
 
                     tableMode = false;
                     Console.Clear();
+                    logic.SortCharacterById();
                 }
                 else
                 {

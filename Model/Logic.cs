@@ -103,6 +103,11 @@ namespace Model
             character.Age = age;
         }
 
+        public void SortCharacterById()
+        {
+            characters.Sort((a, b) => a.Id.CompareTo(b.Id));
+        }
+
         public void SortCharacterByGenus()
         {
             characters.Sort((a, b) => string.Compare(a.Genus, b.Genus));
