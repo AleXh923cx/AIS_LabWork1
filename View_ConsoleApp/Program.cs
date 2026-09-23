@@ -212,6 +212,7 @@ namespace View_ConsoleApp
                                 else
                                 {
                                     Console.WriteLine("ОШИБКА: Минимальный возраст должен быть числом");
+                                    Console.ReadKey();
                                     Console.Clear();
                                     break;
                                 }
