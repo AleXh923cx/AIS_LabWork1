@@ -116,6 +116,7 @@
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             Name = "CreateCharForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Создание персонажа";
             ResumeLayout(false);
             PerformLayout();
