@@ -8,6 +8,7 @@ namespace View_ConsoleApp
         static Logic logic = new Logic();
 
         static bool IsSortByGenus = false;
+        static int? MinAge = null;
 
         static string ReadText(string message)
         {
