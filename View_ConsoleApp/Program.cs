@@ -12,9 +12,9 @@ namespace View_ConsoleApp
             Console.WriteLine("АИС \"РПГ персонажи-дерево\"");
             Console.WriteLine();
             Console.WriteLine("Пункты:");
-            Console.WriteLine("1. Добавление сущности");
-            Console.WriteLine("2. Удаление сущности");
-            Console.WriteLine("3. Изменение сущности");
+            Console.WriteLine("1. Добавление персонажа");
+            Console.WriteLine("2. Удаление персонажа");
+            Console.WriteLine("3. Изменение персонажа");
             Console.WriteLine("4. Просмотр таблиц");
             Console.WriteLine("5. Сортировка по виду");
             Console.WriteLine("6. Выборка по более минимального возраста");
@@ -22,6 +22,7 @@ namespace View_ConsoleApp
 
             Console.Write("Выберите пункт: ");
         }
+
 
         static void ShowTable(List<Character> charList)
         {
