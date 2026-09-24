@@ -25,14 +25,14 @@ namespace View_WinForms.Подформы
             {
                 if (!_form1.GetLogicInstance().DeleteCharacter(charId))
                 {
-                    MessageBox.Show("Введённый № персонажа не существует в таблице", "Ошибка создания", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Введённый № персонажа не существует в таблице", "Ошибка удаления", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
                 _form1.RefreshForm();
             }
             else
             {
-                MessageBox.Show("№ персонажа должен быть числом", "Ошибка создания", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("№ персонажа не должен быть пустой и должен быть числом", "Ошибка удаления", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
         }

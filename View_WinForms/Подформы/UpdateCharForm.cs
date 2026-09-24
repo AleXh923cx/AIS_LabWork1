@@ -25,27 +25,27 @@ namespace View_WinForms.Подформы
             {
                 if (_form1.GetLogicInstance().GetCharacterById(charId) == null)
                 {
-                    MessageBox.Show("Введённый № персонажа не существует в таблице", "Ошибка создания", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Введённый № персонажа не существует в таблице", "Ошибка изменения", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
                 string charName = textBox_charName.Text;
                 if (charName == null || charName.Length == 0)
                 {
-                    MessageBox.Show("Имя персонажа не должно быть пустым", "Ошибка создания", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Имя персонажа не должно быть пустым", "Ошибка изменения", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
                 string charCls = textBox_charGenus.Text;
                 if (charCls == null || charCls.Length == 0)
                 {
-                    MessageBox.Show("Вид персонажа не должно быть пустым", "Ошибка создания", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Вид персонажа не должно быть пустым", "Ошибка изменения", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
                 if (int.TryParse(textBox_charAge.Text, out int charAge))
                 {
                     if (charAge < 0)
                     {
-                        MessageBox.Show("Возраст должен быть выше нуля", "Ошибка создания", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Возраст должен быть выше нуля", "Ошибка изменения", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
 
@@ -54,13 +54,13 @@ namespace View_WinForms.Подформы
                 }
                 else
                 {
-                    MessageBox.Show("Возраст должен быть числом", "Ошибка создания", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Возраст не должен быть пустой и должен быть числом", "Ошибка изменения", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
             }
             else
             {
-                MessageBox.Show("№ персонажа должен быть числом", "Ошибка создания", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("№ персонажа не должен быть пустой и должен быть числом", "Ошибка изменения", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
         }

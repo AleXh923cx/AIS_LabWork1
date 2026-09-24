@@ -46,7 +46,7 @@ namespace View_WinForms.Подформы
             }
             else
             {
-                MessageBox.Show("Возраст должен быть числом", "Ошибка создания", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Возраст не должен быть пустой и должен быть числом", "Ошибка создания", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
         }
