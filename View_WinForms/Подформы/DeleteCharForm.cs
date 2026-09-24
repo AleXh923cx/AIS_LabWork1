@@ -21,13 +21,13 @@ namespace View_WinForms.Подформы
 
         private void button1_OnClick(object sender, EventArgs e) 
         {
-            if (int.TryParse(textBox1.Text, out int charId)) 
+            if (!int.TryParse(textBox1.Text, out int charId)) 
             {
                 MessageBox.Show("№ персонажа не должен быть пустой и должен быть числом", "Ошибка удаления", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            if (!_form1.GetLogicInstance().DeleteCharacter(charId))
+            if (charId < 1 || !_form1.GetLogicInstance().DeleteCharacter(charId))
             {
                 MessageBox.Show("Введённый № персонажа не существует в таблице", "Ошибка удаления", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
