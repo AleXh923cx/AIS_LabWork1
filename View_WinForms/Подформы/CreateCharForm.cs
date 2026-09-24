@@ -34,22 +34,21 @@ namespace View_WinForms.Подформы
                 return;
             }
 
-            if (int.TryParse(textBox_charAge.Text, out int charAge))
-            {
-                if (charAge < 0)
-                {
-                    MessageBox.Show("Возраст должен быть выше нуля", "Ошибка создания", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-                _form1.GetLogicInstance().AddCharacter(charName, charCls, charAge);
-                _form1.RefreshForm();
-                Close();
-            }
-            else
+            if (!int.TryParse(textBox_charAge.Text, out int charAge))
             {
                 MessageBox.Show("Возраст не должен быть пустой и должен быть числом", "Ошибка создания", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+
+            if (charAge < 0)
+            {
+                MessageBox.Show("Возраст должен быть выше нуля", "Ошибка создания", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            _form1.GetLogicInstance().AddCharacter(charName, charCls, charAge);
+            _form1.RefreshForm();
+            Close();
         }
     }
 }
