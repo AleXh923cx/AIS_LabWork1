@@ -14,6 +14,8 @@ namespace View_WinForms
     {
         Logic logic = new Logic();
 
+        public bool IsSortByGenus;
+
         public Form1()
         {
             InitializeComponent();
@@ -27,6 +29,11 @@ namespace View_WinForms
 
         public void RefreshForm()
         {
+            if (IsSortByGenus)
+                logic.SortCharacterByGenus();
+            else
+                logic.SortCharacterById();
+
             ShowCharacaterList(logic.GetAllCharacters());
         }
 
@@ -62,16 +69,8 @@ namespace View_WinForms
         // Сортировка по виду
         private void checkbox1_Checked(object sender, EventArgs e)
         {
-            if (checkBox1.Checked)
-            {
-                logic.SortCharacterByGenus();
-                RefreshForm();
-            }
-            else
-            {
-                logic.SortCharacterById();
-                RefreshForm();
-            }
+            IsSortByGenus = checkBox1.Checked;
+            RefreshForm();
         }
 
         private void button_agefilter_OnClick(object sender, EventArgs e)
