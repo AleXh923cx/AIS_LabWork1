@@ -90,7 +90,7 @@ namespace Model
         /// <returns>Обработанные списки персонажей</returns>
         public List<Character> GetProcessedCharacters(bool sortByGenus, int? minAge)
         {
-            List<Character> result = new List<Character>();
+            List<Character> result = new List<Character>(characters);
 
             if (sortByGenus)
                 result.Sort((a, b) => string.Compare(a.Genus, b.Genus, StringComparison.Ordinal));
@@ -98,7 +98,7 @@ namespace Model
                 result.Sort((a, b) => a.Id.CompareTo(b.Id));
 
             if (minAge.HasValue)
-                result = result.Where(c => c.Age == minAge.Value).ToList();
+                result = result.Where(c => c.Age >= minAge.Value).ToList();
 
             return result;
         }
