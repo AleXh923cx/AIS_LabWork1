@@ -83,6 +83,7 @@ namespace View_ConsoleApp
             Console.WriteLine("АИС \"РПГ персонажи-дерево\"");
             Console.WriteLine();
             Console.WriteLine($"Сортировка: {(IsSortByGenus ? "по виду" : "по №")}");
+            Console.WriteLine($"Минимальный возраст: {(MinAge.HasValue ? MinAge.Value.ToString() : "не задан")}");
             Console.WriteLine();
             Console.WriteLine("Пункты:");
             Console.WriteLine("1. Добавление персонажа");
@@ -90,30 +91,35 @@ namespace View_ConsoleApp
             Console.WriteLine("3. Изменение персонажа");
             Console.WriteLine("4. Просмотр таблиц");
             Console.WriteLine("5. Переключить сортировку");
-            Console.WriteLine("6. Выборка по более минимального возраста");
+            Console.WriteLine("6. Выборка по возрасту");
+            Console.WriteLine("7. Сбросить выборку");
             Console.WriteLine("0. Выход\n");
 
             Console.Write("Выберите пункт: ");
         }
 
-        static void ShowTable(List<Character> charList)
+        static void ShowTable()
         {
             if (IsSortByGenus)
                 logic.SortCharacterByGenus();
             else
                 logic.SortCharacterById();
 
+            var charLists = MinAge.HasValue ?
+                logic.GetCharacterListByAge(MinAge.Value) :
+                logic.GetAllCharacters();
+
             // Заголовки таблицы
             Console.WriteLine("| №  |    Имя     |   Вид    | Возраст | Уровень |");
             Console.WriteLine("|----|------------|----------|---------|---------|");
 
             // Записи таблицы
-            foreach (var chrcter in charList)
+            foreach (var chrcter in charLists)
             {
                 Console.WriteLine($"| {chrcter.Id,2} | {chrcter.Name,10} | {chrcter.Genus,8} | {chrcter.Age,7} | {chrcter.Level,7} |");
             }
 
-            if (charList.Count == 0)
+            if (charLists.Count == 0)
                 Console.WriteLine("Персонажи не найдены.");
         }
 
@@ -126,7 +132,7 @@ namespace View_ConsoleApp
             {
                 if (tableMode)
                 {
-                    ShowTable(logic.GetAllCharacters());
+                    ShowTable();
 
                     Console.WriteLine();
                     Console.WriteLine("Нажмите любую клавишу для выхода из режима таблицы ...");
@@ -139,18 +145,21 @@ namespace View_ConsoleApp
                 else
                 {
                     ShowMenu();
-                    if (int.TryParse(Console.ReadLine(), out int choice) && choice >= 0 && choice < 7)
+                    if (int.TryParse(Console.ReadLine(), out int choice) && choice >= 0 && choice < 8)
                     {
                         switch (choice)
                         {
                             case 1:
                                 AddCharacter();
+                                Console.Clear();
                                 break;
                             case 2:
                                 DeleteCharacter();
+                                Console.Clear();
                                 break;
                             case 3:
                                 UpdateCharacter();
+                                Console.Clear();
                                 break;
                             case 4:
                                 tableMode = true;
@@ -161,32 +170,12 @@ namespace View_ConsoleApp
                                 Console.Clear();
                                 break;
                             case 6:
-                                Console.Write("Введите минимальный возраст: ");
-                                if (int.TryParse(Console.ReadLine(), out int minAge))
-                                {
-                                    if (minAge < 0)
-                                    {
-                                        Console.WriteLine("ОШИБКА: Минимальный возраст должен быть выше нуля");
-                                        Console.ReadKey();
-                                        Console.Clear();
-                                        break;
-                                    }
-
-                                    Console.Clear();
-                                    ShowTable(logic.GetCharacterListByAge(minAge));
-                                }
-                                else
-                                {
-                                    Console.WriteLine("ОШИБКА: Минимальный возраст должен быть числом");
-                                    Console.ReadKey();
-                                    Console.Clear();
-                                    break;
-                                }
-
-                                Console.WriteLine();
-                                Console.WriteLine("Нажмите любую клавишу для возврата в меню ...");
-                                Console.ReadKey();
-                                Console.Clear();
+                                MinAge = ReadNumber("Введите минимальный возраст: ", 0);
+                                ShowTable();
+                                break;
+                            case 7:
+                                MinAge = null;
+                                ShowTable();
                                 break;
                             case 0:
                                 cycleMenu = false;
@@ -195,7 +184,7 @@ namespace View_ConsoleApp
                     }
                     else
                     {
-                        Console.WriteLine("Неверный ввод! (диапазон ввода: 0-6)");
+                        Console.WriteLine("Неверный ввод! (диапазон ввода: 0-7)");
                         Console.ReadKey();
                         Console.Clear();
                     }
