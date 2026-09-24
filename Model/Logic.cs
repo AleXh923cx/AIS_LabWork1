@@ -98,6 +98,11 @@ namespace Model
             if (character == null)
                 return;
 
+            if (string.IsNullOrWhiteSpace(name) ||
+                string.IsNullOrWhiteSpace(genus) ||
+                age < 0)
+                return;
+
             character.Name = name;
             character.Genus = genus;
             character.Age = age;
