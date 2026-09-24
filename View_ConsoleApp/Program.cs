@@ -125,10 +125,9 @@ namespace View_ConsoleApp
 
         static void Main(string[] args)
         {
-            bool cycleMenu = true;
             bool tableMode = false;
 
-            while (cycleMenu)
+            while (true)
             {
                 if (tableMode)
                 {
@@ -145,48 +144,52 @@ namespace View_ConsoleApp
                 else
                 {
                     ShowMenu();
-                    if (int.TryParse(Console.ReadLine(), out int choice) && choice >= 0 && choice < 8)
+
+                    string choice = Console.ReadLine();
+                    switch (choice)
                     {
-                        switch (choice)
-                        {
-                            case 1:
-                                AddCharacter();
-                                Console.Clear();
-                                break;
-                            case 2:
-                                DeleteCharacter();
-                                Console.Clear();
-                                break;
-                            case 3:
-                                UpdateCharacter();
-                                Console.Clear();
-                                break;
-                            case 4:
-                                tableMode = true;
-                                Console.Clear();
-                                break;
-                            case 5:
-                                IsSortByGenus = !IsSortByGenus;
-                                Console.Clear();
-                                break;
-                            case 6:
-                                MinAge = ReadNumber("Введите минимальный возраст: ", 0);
-                                ShowTable();
-                                break;
-                            case 7:
-                                MinAge = null;
-                                ShowTable();
-                                break;
-                            case 0:
-                                cycleMenu = false;
-                                break;
-                        }
-                    }
-                    else
-                    {
-                        Console.WriteLine("Неверный ввод! (диапазон ввода: 0-7)");
-                        Console.ReadKey();
-                        Console.Clear();
+                        case "1":
+                            AddCharacter();
+                            Console.Clear();
+                            break;
+
+                        case "2":
+                            DeleteCharacter();
+                            Console.Clear();
+                            break;
+
+                        case "3":
+                            UpdateCharacter();
+                            Console.Clear();
+                            break;
+
+                        case "4":
+                            tableMode = true;
+                            Console.Clear();
+                            break;
+
+                        case "5":
+                            IsSortByGenus = !IsSortByGenus;
+                            Console.Clear();
+                            break;
+
+                        case "6":
+                            MinAge = ReadNumber("Введите минимальный возраст: ", 0);
+                            ShowTable();
+                            break;
+
+                        case "7":
+                            MinAge = null;
+                            ShowTable();
+                            break;
+
+                        case null:
+                        case "0":
+                            return;
+
+                        default:
+                            Console.WriteLine("Неверный ввод! (диапазон ввода: 0-7)");
+                            break;
                     }
                 }
             }
