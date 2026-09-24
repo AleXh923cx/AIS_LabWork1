@@ -24,14 +24,6 @@ namespace Model
         }
 
         /// <summary>
-        /// </summary>
-        /// <returns>Cписок персонажей-деревьев</returns>
-        public List<Character> GetAllCharacters()
-        {
-            return characters;
-        }
-
-        /// <summary>
         /// Поиск персонажа по идентификатору
         /// </summary>
         /// <param name="id">Идентификатор</param>
@@ -90,27 +82,25 @@ namespace Model
             return true;
         }
 
-        public void SortCharacterById()
+        /// <summary>
+        /// Возвращает список персонажей с применённой сортировкой и фильтрацией.
+        /// </summary>
+        /// <param name="sortByGenus">true - сортировка по виду, false - по номеру.</param>
+        /// <param name="minAge">Минимальный возраст или null, если фильтр не нужен.</param>
+        /// <returns>Обработанные списки персонажей</returns>
+        public List<Character> GetProcessedCharacters(bool sortByGenus, int? minAge)
         {
-            characters.Sort((a, b) => a.Id.CompareTo(b.Id));
-        }
+            List<Character> result = new List<Character>();
 
-        public void SortCharacterByGenus()
-        {
-            characters.Sort((a, b) => string.Compare(a.Genus, b.Genus));
-        }
+            if (sortByGenus)
+                result.Sort((a, b) => string.Compare(a.Genus, b.Genus, StringComparison.Ordinal));
+            else
+                result.Sort((a, b) => a.Id.CompareTo(b.Id));
 
-        public List<Character> GetCharacterListByAge(int min)
-        {
-            List<Character> list = new List<Character>();
+            if (minAge.HasValue)
+                result = result.Where(c => c.Age == minAge.Value).ToList();
 
-            foreach (var character in characters)
-            {
-                if (character.Age >= min)
-                    list.Add(character);
-            }
-
-            return list;
+            return result;
         }
     }
 }
