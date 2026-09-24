@@ -40,6 +40,7 @@
             characterBindingSource = new BindingSource(components);
             button1 = new Button();
             checkBox1 = new CheckBox();
+            button_agefilter = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)characterBindingSource).BeginInit();
             SuspendLayout();
@@ -139,11 +140,22 @@
             checkBox1.UseVisualStyleBackColor = true;
             checkBox1.CheckedChanged += checkbox1_Checked;
             // 
+            // button_agefilter
+            // 
+            button_agefilter.Location = new Point(155, 205);
+            button_agefilter.Name = "button_agefilter";
+            button_agefilter.Size = new Size(280, 22);
+            button_agefilter.TabIndex = 15;
+            button_agefilter.Text = "Выборка по возрасту";
+            button_agefilter.UseVisualStyleBackColor = true;
+            button_agefilter.Click += button_agefilter_OnClick;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(443, 235);
+            Controls.Add(button_agefilter);
             Controls.Add(checkBox1);
             Controls.Add(button1);
             Controls.Add(dataGridView1);
@@ -173,5 +185,6 @@
         private DataGridViewTextBoxColumn levelDataGridViewTextBoxColumn;
         private Button button1;
         private CheckBox checkBox1;
+        private Button button_agefilter;
     }
 }

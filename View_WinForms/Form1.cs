@@ -73,5 +73,11 @@ namespace View_WinForms
                 RefreshForm();
             }
         }
+
+        private void button_agefilter_OnClick(object sender, EventArgs e)
+        {
+            CharAgeFilterForm ageFilterForm = new CharAgeFilterForm(this);
+            ageFilterForm.ShowDialog();
+        }
     }
 }
