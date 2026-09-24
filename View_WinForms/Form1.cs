@@ -47,5 +47,11 @@ namespace View_WinForms
             DeleteCharForm deleteForm = new DeleteCharForm(this);
             deleteForm.ShowDialog();
         }
+
+        private void button_update_OnClick(object sender, EventArgs e)
+        {
+            UpdateCharForm updateForm = new UpdateCharForm(this);
+            updateForm.ShowDialog();
+        }
     }
 }

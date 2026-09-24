@@ -131,6 +131,7 @@
             button1.TabIndex = 13;
             button1.Text = "Изменить персонажа";
             button1.UseVisualStyleBackColor = true;
+            button1.Click += button_update_OnClick;
             // 
             // Form1
             // 

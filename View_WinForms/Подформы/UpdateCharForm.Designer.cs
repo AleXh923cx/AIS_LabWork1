@@ -35,7 +35,7 @@
             textBox_charGenus = new TextBox();
             textBox_charName = new TextBox();
             label1 = new Label();
-            textBox1 = new TextBox();
+            textBox_charId = new TextBox();
             button1 = new Button();
             SuspendLayout();
             // 
@@ -103,13 +103,13 @@
             label1.TabIndex = 26;
             label1.Text = "№ персонажа";
             // 
-            // textBox1
+            // textBox_charId
             // 
-            textBox1.BorderStyle = BorderStyle.FixedSingle;
-            textBox1.Location = new Point(119, 12);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(140, 23);
-            textBox1.TabIndex = 25;
+            textBox_charId.BorderStyle = BorderStyle.FixedSingle;
+            textBox_charId.Location = new Point(119, 12);
+            textBox_charId.Name = "textBox_charId";
+            textBox_charId.Size = new Size(140, 23);
+            textBox_charId.TabIndex = 25;
             // 
             // button1
             // 
@@ -119,6 +119,7 @@
             button1.TabIndex = 27;
             button1.Text = "Изменить";
             button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_OnClick;
             // 
             // UpdateCharForm
             // 
@@ -127,7 +128,7 @@
             ClientSize = new Size(309, 167);
             Controls.Add(button1);
             Controls.Add(label1);
-            Controls.Add(textBox1);
+            Controls.Add(textBox_charId);
             Controls.Add(label5);
             Controls.Add(label4);
             Controls.Add(label3);
@@ -137,6 +138,7 @@
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             Name = "UpdateCharForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Изменение персонажа";
             ResumeLayout(false);
             PerformLayout();
@@ -151,7 +153,7 @@
         private TextBox textBox_charGenus;
         private TextBox textBox_charName;
         private Label label1;
-        private TextBox textBox1;
+        private TextBox textBox_charId;
         private Button button1;
     }
 }
