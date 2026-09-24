@@ -51,20 +51,17 @@ namespace View_WinForms
 
         private void button_create_OnClick(object sender, EventArgs e)
         {
-            CreateCharForm createForm = new CreateCharForm(this);
-            createForm.ShowDialog();
+            new CreateCharForm(this).ShowDialog();
         }
 
         private void button_delete_OnClick(object sender, EventArgs e) 
         {
-            DeleteCharForm deleteForm = new DeleteCharForm(this);
-            deleteForm.ShowDialog();
+            new DeleteCharForm(this).ShowDialog();
         }
 
         private void button_update_OnClick(object sender, EventArgs e)
         {
-            UpdateCharForm updateForm = new UpdateCharForm(this);
-            updateForm.ShowDialog();
+            new UpdateCharForm(this).ShowDialog();
         }
 
         // Сортировка по виду
@@ -76,8 +73,7 @@ namespace View_WinForms
 
         private void button_agefilter_OnClick(object sender, EventArgs e)
         {
-            CharAgeFilterForm ageFilterForm = new CharAgeFilterForm(this);
-            ageFilterForm.ShowDialog();
+            new CharAgeFilterForm(this).ShowDialog();
         }
     }
 }
