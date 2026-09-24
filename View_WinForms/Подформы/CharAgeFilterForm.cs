@@ -20,21 +20,21 @@ namespace View_WinForms.Подформы
 
         private void button_filter_OnClick(object sender, EventArgs e)
         {
-            if (int.TryParse(textBox_charMinAge.Text, out int minAge))
-            {
-                var chars = _form1.GetLogicInstance().GetCharacterListByAge(minAge);
-                _form1.ShowCharacaterList(chars);
-            }
-            else
+            if (!int.TryParse(textBox_charMinAge.Text, out int minAge))
             {
                 MessageBox.Show("Минимальный возраст не должен быть пустой и должен быть числом", "Ошибка выборки", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+
+            _form1.MinAge = minAge;
+            _form1.RefreshForm();
         }
 
         private void button_reset_OnClick(object sender, EventArgs e)
         {
-            _form1.ShowCharacaterList(_form1.GetLogicInstance().GetAllCharacters());
+            _form1.MinAge = null;
+            textBox_charMinAge.Clear();
+            _form1.RefreshForm();
         }
     }
 }

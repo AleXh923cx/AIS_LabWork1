@@ -15,6 +15,7 @@ namespace View_WinForms
         Logic logic = new Logic();
 
         public bool IsSortByGenus;
+        public int? MinAge;
 
         public Form1()
         {
@@ -34,7 +35,10 @@ namespace View_WinForms
             else
                 logic.SortCharacterById();
 
-            ShowCharacaterList(logic.GetAllCharacters());
+            if (MinAge.HasValue)
+                ShowCharacaterList(logic.GetCharacterListByAge(MinAge.Value));
+            else
+                ShowCharacaterList(logic.GetAllCharacters());
         }
 
         public void ShowCharacaterList(List<Character> chars)
