@@ -38,18 +38,17 @@
             ageDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             levelDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             characterBindingSource = new BindingSource(components);
-            logicBindingSource = new BindingSource(components);
             button1 = new Button();
+            checkBox1 = new CheckBox();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)characterBindingSource).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)logicBindingSource).BeginInit();
             SuspendLayout();
             // 
             // button_create
             // 
-            button_create.Location = new Point(158, 169);
+            button_create.Location = new Point(155, 170);
             button_create.Name = "button_create";
-            button_create.Size = new Size(140, 29);
+            button_create.Size = new Size(137, 29);
             button_create.TabIndex = 4;
             button_create.Text = "Создать персонажа";
             button_create.UseVisualStyleBackColor = true;
@@ -57,9 +56,9 @@
             // 
             // button_prvs
             // 
-            button_prvs.Location = new Point(12, 168);
+            button_prvs.Location = new Point(12, 169);
             button_prvs.Name = "button_prvs";
-            button_prvs.Size = new Size(140, 30);
+            button_prvs.Size = new Size(137, 30);
             button_prvs.TabIndex = 5;
             button_prvs.Text = "Удалить персонажа";
             button_prvs.UseVisualStyleBackColor = true;
@@ -73,7 +72,7 @@
             dataGridView1.DataSource = characterBindingSource;
             dataGridView1.Location = new Point(12, 12);
             dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(440, 150);
+            dataGridView1.Size = new Size(423, 150);
             dataGridView1.TabIndex = 6;
             // 
             // idDataGridViewTextBoxColumn
@@ -119,25 +118,33 @@
             // 
             characterBindingSource.DataSource = typeof(Model.Character);
             // 
-            // logicBindingSource
-            // 
-            logicBindingSource.DataSource = typeof(Model.Logic);
-            // 
             // button1
             // 
-            button1.Location = new Point(304, 169);
+            button1.Location = new Point(298, 170);
             button1.Name = "button1";
-            button1.Size = new Size(140, 29);
+            button1.Size = new Size(137, 29);
             button1.TabIndex = 13;
             button1.Text = "Изменить персонажа";
             button1.UseVisualStyleBackColor = true;
             button1.Click += button_update_OnClick;
             // 
+            // checkBox1
+            // 
+            checkBox1.AutoSize = true;
+            checkBox1.Location = new Point(12, 205);
+            checkBox1.Name = "checkBox1";
+            checkBox1.Size = new Size(137, 19);
+            checkBox1.TabIndex = 14;
+            checkBox1.Text = "Сортировка по виду";
+            checkBox1.UseVisualStyleBackColor = true;
+            checkBox1.CheckedChanged += checkbox1_Checked;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(462, 211);
+            ClientSize = new Size(443, 235);
+            Controls.Add(checkBox1);
             Controls.Add(button1);
             Controls.Add(dataGridView1);
             Controls.Add(button_prvs);
@@ -150,15 +157,14 @@
             Load += Form1_OnLoad;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ((System.ComponentModel.ISupportInitialize)characterBindingSource).EndInit();
-            ((System.ComponentModel.ISupportInitialize)logicBindingSource).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
         private Button button_create;
         private Button button_prvs;
         private DataGridView dataGridView1;
-        private BindingSource logicBindingSource;
         private BindingSource characterBindingSource;
         private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
@@ -166,5 +172,6 @@
         private DataGridViewTextBoxColumn ageDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn levelDataGridViewTextBoxColumn;
         private Button button1;
+        private CheckBox checkBox1;
     }
 }

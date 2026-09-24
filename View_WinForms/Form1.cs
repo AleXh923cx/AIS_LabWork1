@@ -58,5 +58,20 @@ namespace View_WinForms
             UpdateCharForm updateForm = new UpdateCharForm(this);
             updateForm.ShowDialog();
         }
+
+        // Сортировка по виду
+        private void checkbox1_Checked(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked)
+            {
+                logic.SortCharacterByGenus();
+                RefreshForm();
+            }
+            else
+            {
+                logic.SortCharacterById();
+                RefreshForm();
+            }
+        }
     }
 }
