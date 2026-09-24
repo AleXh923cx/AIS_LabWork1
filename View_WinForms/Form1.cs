@@ -30,21 +30,12 @@ namespace View_WinForms
 
         public void RefreshForm()
         {
-            if (IsSortByGenus)
-                logic.SortCharacterByGenus();
-            else
-                logic.SortCharacterById();
+            var list = logic.GetProcessedCharacters(IsSortByGenus, MinAge);
+            ShowCharacaterList(list);
 
-            if (MinAge.HasValue)
-            {
-                ShowCharacaterList(logic.GetCharacterListByAge(MinAge.Value));
-                label_minAgeIndicator.Text = $"Минимальный возраст: {(MinAge.Value)}";
-            }    
-            else
-            {
-                ShowCharacaterList(logic.GetAllCharacters());
-                label_minAgeIndicator.Text = $"Минимальный возраст: не задан";
-            }
+            label_minAgeIndicator.Text = MinAge.HasValue ? 
+                $"Минимальный возраст: {(MinAge.Value)}" : 
+                $"Минимальный возраст: не задан";
         }
 
         public void ShowCharacaterList(List<Character> chars)
