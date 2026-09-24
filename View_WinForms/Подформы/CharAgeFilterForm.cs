@@ -20,12 +20,16 @@ namespace View_WinForms.Подформы
 
         private void button_filter_OnClick(object sender, EventArgs e)
         {
-            
+            int minAge = int.Parse(textBox_charMinAge.Text);
+
+            var chars = _form1.GetLogicInstance().GetCharacterListByAge(minAge);
+
+            _form1.ShowCharacaterList(chars);
         }
 
         private void button_reset_OnClick(object sender, EventArgs e)
         {
-
+            _form1.ShowCharacaterList(_form1.GetLogicInstance().GetAllCharacters());
         }
     }
 }
