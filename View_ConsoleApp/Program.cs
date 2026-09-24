@@ -7,6 +7,8 @@ namespace View_ConsoleApp
     {
         static Logic logic = new Logic();
 
+        static bool IsSortByGenus = false;
+
         static string ReadText(string message)
         {
             while (true)
@@ -79,12 +81,14 @@ namespace View_ConsoleApp
         {
             Console.WriteLine("АИС \"РПГ персонажи-дерево\"");
             Console.WriteLine();
+            Console.WriteLine($"Сортировка: {(IsSortByGenus ? "по виду" : "по №")}");
+            Console.WriteLine();
             Console.WriteLine("Пункты:");
             Console.WriteLine("1. Добавление персонажа");
             Console.WriteLine("2. Удаление персонажа");
             Console.WriteLine("3. Изменение персонажа");
             Console.WriteLine("4. Просмотр таблиц");
-            Console.WriteLine("5. Сортировка по виду");
+            Console.WriteLine("5. Переключить сортировку");
             Console.WriteLine("6. Выборка по более минимального возраста");
             Console.WriteLine("0. Выход\n");
 
@@ -93,6 +97,11 @@ namespace View_ConsoleApp
 
         static void ShowTable(List<Character> charList)
         {
+            if (IsSortByGenus)
+                logic.SortCharacterByGenus();
+            else
+                logic.SortCharacterById();
+
             // Заголовки таблицы
             Console.WriteLine("| №  |    Имя     |   Вид    | Возраст | Уровень |");
             Console.WriteLine("|----|------------|----------|---------|---------|");
@@ -102,6 +111,9 @@ namespace View_ConsoleApp
             {
                 Console.WriteLine($"| {chrcter.Id,2} | {chrcter.Name,10} | {chrcter.Genus,8} | {chrcter.Age,7} | {chrcter.Level,7} |");
             }
+
+            if (charList.Count == 0)
+                Console.WriteLine("Персонажи не найдены.");
         }
 
         static void Main(string[] args)
@@ -144,8 +156,7 @@ namespace View_ConsoleApp
                                 Console.Clear();
                                 break;
                             case 5:
-                                logic.SortCharacterByGenus();
-                                tableMode = true;
+                                IsSortByGenus = !IsSortByGenus;
                                 Console.Clear();
                                 break;
                             case 6:
