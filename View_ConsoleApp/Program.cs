@@ -47,6 +47,16 @@ namespace View_ConsoleApp
             Console.ReadKey();
         }
 
+        static void DeleteCharacter()
+        {
+            int id = ReadNumber("Введите № персонажа: ", 1);
+
+            if (logic.DeleteCharacter(id))
+                Console.WriteLine("Персонаж удалён.");
+            else
+                Console.WriteLine("Персонаж не найден.");
+        }
+
         static void ShowMenu()
         {
             Console.WriteLine("АИС \"РПГ персонажи-дерево\"");
@@ -106,29 +116,11 @@ namespace View_ConsoleApp
                                 AddCharacter();
                                 break;
                             case 2:
-                                Console.Write("Введите № персонажа: ");
-                                if (int.TryParse(Console.ReadLine(), out int charId))
-                                {
-                                    if (!logic.DeleteCharacter(charId))
-                                    {
-                                        Console.WriteLine("ОШИБКА: Введённый № персонажа не существует в таблице");
-                                        Console.ReadKey();
-                                        Console.Clear();
-                                        break;
-                                    }
-                                    Console.Clear();
-                                    break;
-                                }
-                                else
-                                {
-                                    Console.WriteLine("ОШИБКА: № персонажа должен быть числом");
-                                    Console.ReadKey();
-                                    Console.Clear();
-                                    break;
-                                }
+                                DeleteCharacter();
+                                break;
                             case 3:
                                 Console.Write("Введите № персонажа: ");
-                                if (int.TryParse(Console.ReadLine(), out charId))
+                                if (int.TryParse(Console.ReadLine(), out int charId))
                                 {
                                     if (logic.GetCharacterById(charId) == null)
                                     {
