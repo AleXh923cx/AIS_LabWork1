@@ -27,7 +27,12 @@ namespace View_WinForms
 
         public void RefreshForm()
         {
-            characterBindingSource.DataSource = logic.GetAllCharacters();
+            ShowCharacaterList(logic.GetAllCharacters());
+        }
+
+        public void ShowCharacaterList(List<Character> chars)
+        {
+            characterBindingSource.DataSource = chars;
             characterBindingSource.ResetBindings(false);
         }
 
