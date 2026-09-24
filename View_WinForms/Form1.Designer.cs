@@ -41,13 +41,14 @@
             button1 = new Button();
             checkBox1 = new CheckBox();
             button_agefilter = new Button();
+            label_minAgeIndicator = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)characterBindingSource).BeginInit();
             SuspendLayout();
             // 
             // button_create
             // 
-            button_create.Location = new Point(155, 170);
+            button_create.Location = new Point(155, 184);
             button_create.Name = "button_create";
             button_create.Size = new Size(137, 29);
             button_create.TabIndex = 4;
@@ -57,7 +58,7 @@
             // 
             // button_prvs
             // 
-            button_prvs.Location = new Point(12, 169);
+            button_prvs.Location = new Point(12, 183);
             button_prvs.Name = "button_prvs";
             button_prvs.Size = new Size(137, 30);
             button_prvs.TabIndex = 5;
@@ -71,7 +72,7 @@
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn, nameDataGridViewTextBoxColumn, genusDataGridViewTextBoxColumn, ageDataGridViewTextBoxColumn, levelDataGridViewTextBoxColumn });
             dataGridView1.DataSource = characterBindingSource;
-            dataGridView1.Location = new Point(12, 12);
+            dataGridView1.Location = new Point(12, 26);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.Size = new Size(423, 150);
             dataGridView1.TabIndex = 6;
@@ -121,7 +122,7 @@
             // 
             // button1
             // 
-            button1.Location = new Point(298, 170);
+            button1.Location = new Point(298, 184);
             button1.Name = "button1";
             button1.Size = new Size(137, 29);
             button1.TabIndex = 13;
@@ -132,7 +133,7 @@
             // checkBox1
             // 
             checkBox1.AutoSize = true;
-            checkBox1.Location = new Point(12, 205);
+            checkBox1.Location = new Point(12, 219);
             checkBox1.Name = "checkBox1";
             checkBox1.Size = new Size(137, 19);
             checkBox1.TabIndex = 14;
@@ -142,7 +143,7 @@
             // 
             // button_agefilter
             // 
-            button_agefilter.Location = new Point(155, 205);
+            button_agefilter.Location = new Point(155, 219);
             button_agefilter.Name = "button_agefilter";
             button_agefilter.Size = new Size(280, 22);
             button_agefilter.TabIndex = 15;
@@ -150,11 +151,21 @@
             button_agefilter.UseVisualStyleBackColor = true;
             button_agefilter.Click += button_agefilter_OnClick;
             // 
+            // label_minAgeIndicator
+            // 
+            label_minAgeIndicator.AutoSize = true;
+            label_minAgeIndicator.Location = new Point(12, 8);
+            label_minAgeIndicator.Name = "label_minAgeIndicator";
+            label_minAgeIndicator.Size = new Size(147, 15);
+            label_minAgeIndicator.TabIndex = 16;
+            label_minAgeIndicator.Text = "Минимальный возраст: 0";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(443, 235);
+            ClientSize = new Size(443, 248);
+            Controls.Add(label_minAgeIndicator);
             Controls.Add(button_agefilter);
             Controls.Add(checkBox1);
             Controls.Add(button1);
@@ -186,5 +197,6 @@
         private Button button1;
         private CheckBox checkBox1;
         private Button button_agefilter;
+        private Label label_minAgeIndicator;
     }
 }

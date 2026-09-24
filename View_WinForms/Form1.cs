@@ -36,9 +36,15 @@ namespace View_WinForms
                 logic.SortCharacterById();
 
             if (MinAge.HasValue)
+            {
                 ShowCharacaterList(logic.GetCharacterListByAge(MinAge.Value));
+                label_minAgeIndicator.Text = $"Минимальный возраст: {(MinAge.Value)}";
+            }    
             else
+            {
                 ShowCharacaterList(logic.GetAllCharacters());
+                label_minAgeIndicator.Text = $"Минимальный возраст: не задан";
+            }
         }
 
         public void ShowCharacaterList(List<Character> chars)
