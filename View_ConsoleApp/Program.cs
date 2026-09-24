@@ -47,7 +47,6 @@ namespace View_ConsoleApp
 
             logic.AddCharacter(charName, charGenus, charAge);
             Console.WriteLine($"Персонаж добавлен.");
-            Console.ReadKey();
         }
 
         static void DeleteCharacter()
@@ -125,73 +124,54 @@ namespace View_ConsoleApp
 
         static void Main(string[] args)
         {
-            bool tableMode = false;
-
             while (true)
             {
-                if (tableMode)
+                Console.Clear();
+                ShowMenu();
+
+                string choice = Console.ReadLine();
+                switch (choice)
                 {
-                    ShowTable();
+                    case "1":
+                        AddCharacter();
+                        break;
 
-                    Console.WriteLine();
-                    Console.WriteLine("Нажмите любую клавишу для выхода из режима таблицы ...");
-                    Console.ReadKey();
+                    case "2":
+                        DeleteCharacter();
+                        break;
 
-                    tableMode = false;
-                    Console.Clear();
-                    logic.SortCharacterById();
+                    case "3":
+                        UpdateCharacter();
+                        break;
+
+                    case "4":
+                        Console.Clear();
+                        ShowTable();
+                        break;
+
+                    case "5":
+                        IsSortByGenus = !IsSortByGenus;
+                        break;
+
+                    case "6":
+                        MinAge = ReadNumber("Введите минимальный возраст: ", 0);
+                        break;
+
+                    case "7":
+                        MinAge = null;
+                        break;
+
+                    case null:
+                    case "0":
+                        return;
+
+                    default:
+                        Console.WriteLine("Неверный ввод! (диапазон ввода: 0-7)");
+                        break;
                 }
-                else
-                {
-                    ShowMenu();
 
-                    string choice = Console.ReadLine();
-                    switch (choice)
-                    {
-                        case "1":
-                            AddCharacter();
-                            Console.Clear();
-                            break;
-
-                        case "2":
-                            DeleteCharacter();
-                            Console.Clear();
-                            break;
-
-                        case "3":
-                            UpdateCharacter();
-                            Console.Clear();
-                            break;
-
-                        case "4":
-                            tableMode = true;
-                            Console.Clear();
-                            break;
-
-                        case "5":
-                            IsSortByGenus = !IsSortByGenus;
-                            Console.Clear();
-                            break;
-
-                        case "6":
-                            MinAge = ReadNumber("Введите минимальный возраст: ", 0);
-                            ShowTable();
-                            break;
-
-                        case "7":
-                            MinAge = null;
-                            ShowTable();
-                            break;
-
-                        case null:
-                        case "0":
-                            return;
-
-                        default:
-                            Console.WriteLine("Неверный ввод! (диапазон ввода: 0-7)");
-                            break;
-                    }
-                }
+                Console.WriteLine("\nНажмите любую клавишу для возврата в меню...");
+                Console.ReadKey(true);
             }
         }
     }
