@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -20,9 +21,10 @@ namespace View_WinForms.Подформы
 
         private void button_filter_OnClick(object sender, EventArgs e)
         {
-            if (!int.TryParse(textBox_charMinAge.Text, out int minAge))
+            if (!Validation.TryParseAge(textBox_charMinAge.Text, out int minAge, out string error))
             {
-                MessageBox.Show("Минимальный возраст не должен быть пустой и должен быть числом", "Ошибка выборки", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(error, "Ошибка выборки",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
