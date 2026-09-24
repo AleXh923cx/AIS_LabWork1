@@ -51,6 +51,7 @@ namespace View_WinForms.Подформы
 
                     _form1.GetLogicInstance().UpdateCharacter(charId, charName, charCls, charAge);
                     _form1.RefreshForm();
+                    Close();
                 }
                 else
                 {

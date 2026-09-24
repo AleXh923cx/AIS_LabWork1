@@ -29,6 +29,7 @@ namespace View_WinForms.Подформы
                     return;
                 }
                 _form1.RefreshForm();
+                Close();
             }
             else
             {

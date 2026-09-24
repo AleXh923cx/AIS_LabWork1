@@ -43,6 +43,7 @@ namespace View_WinForms.Подформы
                 }
                 _form1.GetLogicInstance().AddCharacter(charName, charCls, charAge);
                 _form1.RefreshForm();
+                Close();
             }
             else
             {

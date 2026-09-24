@@ -28,6 +28,7 @@ namespace View_WinForms.Подформы
 
             _form1.MinAge = minAge;
             _form1.RefreshForm();
+            Close();
         }
 
         private void button_reset_OnClick(object sender, EventArgs e)
@@ -35,6 +36,7 @@ namespace View_WinForms.Подформы
             _form1.MinAge = null;
             textBox_charMinAge.Clear();
             _form1.RefreshForm();
+            Close();
         }
     }
 }
