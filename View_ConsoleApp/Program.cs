@@ -6,7 +6,6 @@ namespace View_ConsoleApp
     class Program
     {
         static Logic logic = new Logic();
-
         static bool IsSortByGenus = false;
         static int? MinAge = null;
 
@@ -45,8 +44,10 @@ namespace View_ConsoleApp
             string charGenus = ReadText("Введите вид персонажа: ");
             int charAge = ReadNumber("Введите возраст персонажа: ", 0);
 
-            logic.AddCharacter(charName, charGenus, charAge);
-            Console.WriteLine($"Персонаж добавлен.");
+            if (logic.AddCharacter(charName, charGenus, charAge))
+                Console.WriteLine($"Персонаж добавлен.");
+            else
+                Console.WriteLine("Не удалось добавить персонажа.");
         }
 
         static void DeleteCharacter()
@@ -73,8 +74,10 @@ namespace View_ConsoleApp
             string charGenus = ReadText("Введите вид: ");
             int charAge = ReadNumber("Введите возраст: ", 0);
 
-            logic.UpdateCharacter(id, charName, charGenus, charAge);
-            Console.WriteLine("Персонаж изменён.");
+            if (logic.UpdateCharacter(id, charName, charGenus, charAge))
+                Console.WriteLine("Персонаж изменён.");
+            else
+                Console.WriteLine("Не удалось изменить персонажа.");
         }
 
         static void ShowMenu()
@@ -99,26 +102,17 @@ namespace View_ConsoleApp
 
         static void ShowTable()
         {
-            if (IsSortByGenus)
-                logic.SortCharacterByGenus();
-            else
-                logic.SortCharacterById();
-
-            var charLists = MinAge.HasValue ?
-                logic.GetCharacterListByAge(MinAge.Value) :
-                logic.GetAllCharacters();
+            var list = logic.GetProcessedCharacters(IsSortByGenus, MinAge);
 
             // Заголовки таблицы
             Console.WriteLine("| №  |    Имя     |   Вид    | Возраст | Уровень |");
             Console.WriteLine("|----|------------|----------|---------|---------|");
 
             // Записи таблицы
-            foreach (var chrcter in charLists)
-            {
+            foreach (var chrcter in list)
                 Console.WriteLine($"| {chrcter.Id,2} | {chrcter.Name,10} | {chrcter.Genus,8} | {chrcter.Age,7} | {chrcter.Level,7} |");
-            }
 
-            if (charLists.Count == 0)
+            if (list.Count == 0)
                 Console.WriteLine("Персонажи не найдены.");
         }
 
@@ -132,38 +126,21 @@ namespace View_ConsoleApp
                 string choice = Console.ReadLine();
                 switch (choice)
                 {
-                    case "1":
-                        AddCharacter();
-                        break;
-
-                    case "2":
-                        DeleteCharacter();
-                        break;
-
-                    case "3":
-                        UpdateCharacter();
-                        break;
+                    case "1": AddCharacter(); break;
+                    case "2": DeleteCharacter(); break;
+                    case "3": UpdateCharacter(); break;
 
                     case "4":
                         Console.Clear();
                         ShowTable();
                         break;
 
-                    case "5":
-                        IsSortByGenus = !IsSortByGenus;
-                        break;
-
-                    case "6":
-                        MinAge = ReadNumber("Введите минимальный возраст: ", 0);
-                        break;
-
-                    case "7":
-                        MinAge = null;
-                        break;
+                    case "5": IsSortByGenus = !IsSortByGenus; break;
+                    case "6": MinAge = ReadNumber("Введите минимальный возраст: ", 0); break;
+                    case "7": MinAge = null; break;
 
                     case null:
-                    case "0":
-                        return;
+                    case "0": return;
 
                     default:
                         Console.WriteLine("Неверный ввод! (диапазон ввода: 0-7)");
