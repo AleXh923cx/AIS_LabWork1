@@ -39,12 +39,7 @@
             levelDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             characterBindingSource = new BindingSource(components);
             logicBindingSource = new BindingSource(components);
-            textBox_charName = new TextBox();
-            textBox_charGenus = new TextBox();
-            textBox_charAge = new TextBox();
-            label3 = new Label();
-            label4 = new Label();
-            label5 = new Label();
+            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)characterBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)logicBindingSource).BeginInit();
@@ -128,71 +123,21 @@
             // 
             logicBindingSource.DataSource = typeof(Model.Logic);
             // 
-            // textBox_charName
+            // button1
             // 
-            textBox_charName.BorderStyle = BorderStyle.FixedSingle;
-            textBox_charName.Location = new Point(552, 33);
-            textBox_charName.Name = "textBox_charName";
-            textBox_charName.Size = new Size(140, 23);
-            textBox_charName.TabIndex = 7;
-            // 
-            // textBox_charGenus
-            // 
-            textBox_charGenus.BorderStyle = BorderStyle.FixedSingle;
-            textBox_charGenus.Location = new Point(552, 62);
-            textBox_charGenus.Name = "textBox_charGenus";
-            textBox_charGenus.Size = new Size(140, 23);
-            textBox_charGenus.TabIndex = 8;
-            // 
-            // textBox_charAge
-            // 
-            textBox_charAge.BorderStyle = BorderStyle.FixedSingle;
-            textBox_charAge.Location = new Point(552, 91);
-            textBox_charAge.Name = "textBox_charAge";
-            textBox_charAge.Size = new Size(140, 23);
-            textBox_charAge.TabIndex = 9;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold);
-            label3.Location = new Point(506, 36);
-            label3.Name = "label3";
-            label3.Size = new Size(40, 20);
-            label3.TabIndex = 10;
-            label3.Text = "Имя";
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold);
-            label4.Location = new Point(510, 65);
-            label4.Name = "label4";
-            label4.Size = new Size(36, 20);
-            label4.TabIndex = 11;
-            label4.Text = "Вид";
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold);
-            label5.Location = new Point(482, 94);
-            label5.Name = "label5";
-            label5.Size = new Size(64, 20);
-            label5.TabIndex = 12;
-            label5.Text = "Возраст";
+            button1.Location = new Point(304, 169);
+            button1.Name = "button1";
+            button1.Size = new Size(140, 29);
+            button1.TabIndex = 13;
+            button1.Text = "Изменить персонажа";
+            button1.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(704, 211);
-            Controls.Add(label5);
-            Controls.Add(label4);
-            Controls.Add(label3);
-            Controls.Add(textBox_charAge);
-            Controls.Add(textBox_charGenus);
-            Controls.Add(textBox_charName);
+            ClientSize = new Size(462, 211);
+            Controls.Add(button1);
             Controls.Add(dataGridView1);
             Controls.Add(button_prvs);
             Controls.Add(button_create);
@@ -206,13 +151,9 @@
             ((System.ComponentModel.ISupportInitialize)characterBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)logicBindingSource).EndInit();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
-
-        private TextBox textBox_charName;
-        private TextBox textBox_charGenus;
         private Button button_create;
         private Button button_prvs;
         private DataGridView dataGridView1;
@@ -223,9 +164,6 @@
         private DataGridViewTextBoxColumn genusDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn ageDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn levelDataGridViewTextBoxColumn;
-        private TextBox textBox_charAge;
-        private Label label3;
-        private Label label4;
-        private Label label5;
+        private Button button1;
     }
 }
