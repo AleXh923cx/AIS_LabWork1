@@ -11,7 +11,7 @@ namespace View_ConsoleApp
         {
             while (true)
             {
-                Console.WriteLine(message);
+                Console.Write(message);
                 string text = Console.ReadLine();
 
                 if (!string.IsNullOrEmpty(text))
@@ -25,7 +25,7 @@ namespace View_ConsoleApp
         {
             while (true)
             {
-                Console.WriteLine(message);
+                Console.Write(message);
 
                 if (int.TryParse(Console.ReadLine(), out int number) && number >= minNumber)
                 {
@@ -34,6 +34,17 @@ namespace View_ConsoleApp
 
                 Console.WriteLine($"ОШИБКА: Введите целое число не меньше {minNumber}.");
             }
+        }
+
+        static void AddCharacter()
+        {
+            string charName = ReadText("Введите имя персонажа: ");
+            string charGenus = ReadText("Введите вид персонажа: ");
+            int charAge = ReadNumber("Введите возраст персонажа: ", 0);
+
+            logic.AddCharacter(charName, charGenus, charAge);
+            Console.WriteLine($"Персонаж добавлен.");
+            Console.ReadKey();
         }
 
         static void ShowMenu()
@@ -92,45 +103,8 @@ namespace View_ConsoleApp
                         switch (choice)
                         {
                             case 1:
-                                Console.Write("Введите имя персонажа: ");
-                                string charName = Console.ReadLine();
-                                if (string.IsNullOrEmpty(charName))
-                                {
-                                    Console.WriteLine("ОШИБКА: Имя персонажа не должно быть пустым");
-                                    Console.ReadKey();
-                                    Console.Clear();
-                                    break;
-                                }
-                                Console.Write("Введите вид персонажа: ");
-                                string charCls = Console.ReadLine();
-                                if (string.IsNullOrEmpty(charCls))
-                                {
-                                    Console.WriteLine("ОШИБКА: Вид персонажа не должно быть пустым");
-                                    Console.ReadKey();
-                                    Console.Clear();
-                                    break;
-                                }
-                                Console.Write("Введите возраст персонажа: ");
-                                if (int.TryParse(Console.ReadLine(), out int charAge))
-                                {
-                                    if (charAge < 0)
-                                    {
-                                        Console.WriteLine("ОШИБКА: Возраст должен быть выше нуля");
-                                        Console.ReadKey();
-                                        Console.Clear();
-                                        break;
-                                    }
-                                    logic.AddCharacter(charName, charCls, charAge);
-                                    Console.Clear();
-                                    break;
-                                }
-                                else
-                                {
-                                    Console.WriteLine("ОШИБКА: Возраст должен быть числом");
-                                    Console.ReadKey();
-                                    Console.Clear();
-                                    break;
-                                }
+                                AddCharacter();
+                                break;
                             case 2:
                                 Console.Write("Введите № персонажа: ");
                                 if (int.TryParse(Console.ReadLine(), out int charId))
@@ -166,7 +140,7 @@ namespace View_ConsoleApp
                                     else
                                     {
                                         Console.Write("Введите имя персонажа: ");
-                                        charName = Console.ReadLine();
+                                        string charName = Console.ReadLine();
                                         if (string.IsNullOrEmpty(charName))
                                         {
                                             Console.WriteLine("ОШИБКА: Имя персонажа не должно быть пустым");
@@ -175,7 +149,7 @@ namespace View_ConsoleApp
                                             break;
                                         }
                                         Console.Write("Введите вид персонажа: ");
-                                        charCls = Console.ReadLine();
+                                        string charCls = Console.ReadLine();
                                         if (string.IsNullOrEmpty(charCls))
                                         {
                                             Console.WriteLine("ОШИБКА: Вид персонажа не должно быть пустым");
@@ -184,7 +158,7 @@ namespace View_ConsoleApp
                                             break;
                                         }
                                         Console.Write("Введите возраст персонажа: ");
-                                        if (int.TryParse(Console.ReadLine(), out charAge))
+                                        if (int.TryParse(Console.ReadLine(), out int charAge))
                                         {
                                             if (charAge < 0)
                                             {
