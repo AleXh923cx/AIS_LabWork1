@@ -57,6 +57,24 @@ namespace View_ConsoleApp
                 Console.WriteLine("Персонаж не найден.");
         }
 
+        static void UpdateCharacter()
+        {
+            int id = ReadNumber("Введите № персонажа: ", 1);
+
+            if (logic.GetCharacterById(id) == null)
+            {
+                Console.WriteLine("Персонаж не найден.");
+                return;
+            }
+
+            string charName = ReadText("Введите имя: ");
+            string charGenus = ReadText("Введите вид: ");
+            int charAge = ReadNumber("Введите возраст: ", 0);
+
+            logic.UpdateCharacter(id, charName, charGenus, charAge);
+            Console.WriteLine("Персонаж изменён.");
+        }
+
         static void ShowMenu()
         {
             Console.WriteLine("АИС \"РПГ персонажи-дерево\"");
@@ -119,67 +137,8 @@ namespace View_ConsoleApp
                                 DeleteCharacter();
                                 break;
                             case 3:
-                                Console.Write("Введите № персонажа: ");
-                                if (int.TryParse(Console.ReadLine(), out int charId))
-                                {
-                                    if (logic.GetCharacterById(charId) == null)
-                                    {
-                                        Console.WriteLine("ОШИБКА: Введённый № персонажа не существует в таблице");
-                                        Console.ReadKey();
-                                        Console.Clear();
-                                        break;
-                                    }
-                                    else
-                                    {
-                                        Console.Write("Введите имя персонажа: ");
-                                        string charName = Console.ReadLine();
-                                        if (string.IsNullOrEmpty(charName))
-                                        {
-                                            Console.WriteLine("ОШИБКА: Имя персонажа не должно быть пустым");
-                                            Console.ReadKey();
-                                            Console.Clear();
-                                            break;
-                                        }
-                                        Console.Write("Введите вид персонажа: ");
-                                        string charCls = Console.ReadLine();
-                                        if (string.IsNullOrEmpty(charCls))
-                                        {
-                                            Console.WriteLine("ОШИБКА: Вид персонажа не должно быть пустым");
-                                            Console.ReadKey();
-                                            Console.Clear();
-                                            break;
-                                        }
-                                        Console.Write("Введите возраст персонажа: ");
-                                        if (int.TryParse(Console.ReadLine(), out int charAge))
-                                        {
-                                            if (charAge < 0)
-                                            {
-                                                Console.WriteLine("ОШИБКА: Возраст должен быть выше нуля");
-                                                Console.ReadKey();
-                                                Console.Clear();
-                                                break;
-                                            }
-
-                                            logic.UpdateCharacter(charId, charName, charCls, charAge);
-                                            Console.Clear();
-                                            break;
-                                        }
-                                        else
-                                        {
-                                            Console.WriteLine("ОШИБКА: Возраст должен быть числом");
-                                            Console.ReadKey();
-                                            Console.Clear();
-                                            break;
-                                        }
-                                    }
-                                }
-                                else
-                                {
-                                    Console.WriteLine("ОШИБКА: № персонажа должен быть числом");
-                                    Console.ReadKey();
-                                    Console.Clear();
-                                    break;
-                                }
+                                UpdateCharacter();
+                                break;
                             case 4:
                                 tableMode = true;
                                 Console.Clear();
