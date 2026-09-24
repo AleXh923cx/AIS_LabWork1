@@ -52,9 +52,9 @@
             // 
             // button_create
             // 
-            button_create.Location = new Point(552, 169);
+            button_create.Location = new Point(158, 169);
             button_create.Name = "button_create";
-            button_create.Size = new Size(140, 30);
+            button_create.Size = new Size(140, 29);
             button_create.TabIndex = 4;
             button_create.Text = "Создать персонажа";
             button_create.UseVisualStyleBackColor = true;
@@ -197,6 +197,7 @@
             Controls.Add(button_prvs);
             Controls.Add(button_create);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "АИС \"РПГ персонажи-деревьи\"";

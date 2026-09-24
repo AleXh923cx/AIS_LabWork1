@@ -70,6 +70,7 @@
             Controls.Add(label1);
             Controls.Add(textBox1);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
             Name = "DeleteCharForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Удаление персонажа";
