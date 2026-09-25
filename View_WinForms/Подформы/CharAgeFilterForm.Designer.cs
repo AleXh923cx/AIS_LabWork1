@@ -64,7 +64,7 @@
             button_reset.Name = "button_reset";
             button_reset.Size = new Size(65, 31);
             button_reset.TabIndex = 3;
-            button_reset.Text = "Возврат";
+            button_reset.Text = "Сброс";
             button_reset.UseVisualStyleBackColor = true;
             button_reset.Click += button_reset_OnClick;
             // 
