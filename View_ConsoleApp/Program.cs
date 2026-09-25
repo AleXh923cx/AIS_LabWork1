@@ -1,5 +1,6 @@
-﻿using System;
-using Model;
+﻿using Model;
+using System;
+using System.Xml.Linq;
 
 namespace View_ConsoleApp
 {
@@ -98,7 +99,13 @@ namespace View_ConsoleApp
 
         static void UpdateCharacter()
         {
-            int id = ReadNumber("Введите № персонажа: ", 1);
+            string idInput = ReadLine("Введите № персонажа: ");
+
+            if (!Validation.TryParseId(idInput, out int id, out string error))
+            {
+                Console.WriteLine($"ОШИБКА: {error}");
+                return;
+            }
 
             if (logic.GetCharacterById(id) == null)
             {
@@ -106,14 +113,24 @@ namespace View_ConsoleApp
                 return;
             }
 
-            string charName = ReadText("Введите имя: ");
-            string charGenus = ReadText("Введите вид: ");
-            int charAge = ReadNumber("Введите возраст: ", 0);
+            string charName = ReadLine("Введите имя: ");
+            string charGenus = ReadLine("Введите вид: ");
+            string charAgeInput = ReadLine("Введите возраст: ");
 
-            if (logic.UpdateCharacter(id, charName, charGenus, charAge))
-                Console.WriteLine("Персонаж изменён.");
-            else
-                Console.WriteLine("Не удалось изменить персонажа.");
+            if (!Validation.TryParseAge(charAgeInput, out int charAge, out error))
+            {
+                Console.WriteLine($"ОШИБКА: {error}");
+                return;
+            }
+
+            if (!Validation.ValidateCharacter(charName, charGenus, charAge, out error))
+            {
+                Console.WriteLine($"ОШИБКА: {error}");
+                return;
+            }
+
+            logic.UpdateCharacter(id, charName, charGenus, charAge);
+            Console.WriteLine("Персонаж изменён.");
         }
 
         static void ShowMenu()
