@@ -93,7 +93,7 @@ namespace Model
             List<Character> result = new List<Character>(characters);
 
             if (sortByGenus)
-                result.Sort((a, b) => string.Compare(a.Genus, b.Genus, StringComparison.Ordinal));
+                result.Sort((a, b) => string.Compare(a.Genus, b.Genus));
             else
                 result.Sort((a, b) => a.Id.CompareTo(b.Id));
 
