@@ -47,19 +47,19 @@ namespace Model
 
             if (string.IsNullOrEmpty(input))
             {
-                error = "Возраст не должен быть пустым.";
+                error = "Возраст персонажа не должен быть пустым.";
                 return false;
             }
 
             if (!int.TryParse(input, out age))
             {
-                error = "№ персонажа должен быть числом.";
+                error = "Возраст персонажа должен быть числом.";
                 return false;
             }
 
             if (age < 0)
             {
-                error = "Возраст не может быть отрицательным.";
+                error = "Возраст персонажа не может быть отрицательным.";
                 return false;
             }
 
