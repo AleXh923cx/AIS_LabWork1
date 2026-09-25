@@ -21,35 +21,6 @@ namespace View_ConsoleApp
             return Console.ReadLine();
         }
 
-        static string ReadText(string message)
-        {
-            while (true)
-            {
-                Console.Write(message);
-                string text = Console.ReadLine();
-
-                if (!string.IsNullOrEmpty(text))
-                    return text;
-
-                Console.WriteLine("ОШИБКА: Значение не должно быть пустым.");
-            }
-        }
-
-        static int ReadNumber(string message, int minNumber)
-        {
-            while (true)
-            {
-                Console.Write(message);
-
-                if (int.TryParse(Console.ReadLine(), out int number) && number >= minNumber)
-                {
-                    return number;
-                }
-
-                Console.WriteLine($"ОШИБКА: Введите целое число не меньше {minNumber}.");
-            }
-        }
-
         static void AddCharacter()
         {
             while (true)
@@ -69,8 +40,6 @@ namespace View_ConsoleApp
                     Console.WriteLine($"ОШИБКА: {error}");
                     continue;
                 }
-
-                Console.WriteLine("Не удалось добавить персонажа.");
 
                 logic.AddCharacter(charName, charGenus, charAge);
                 Console.WriteLine($"Персонаж добавлен.");
