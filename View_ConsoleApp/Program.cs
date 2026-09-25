@@ -189,7 +189,14 @@ namespace View_ConsoleApp
                         break;
 
                     case "5": IsSortByGenus = !IsSortByGenus; break;
-                    case "6": MinAge = ReadNumber("Введите минимальный возраст: ", 0); break;
+                    case "6":
+                        string ageInput = ReadLine("Введите минимальный возраст: ");
+                        if (!Validation.TryParseAge(ageInput, out int minAge, out string error))
+                            Console.WriteLine($"ОШИБКА: {error}");
+                        else
+                            MinAge = minAge;
+                        break;
+
                     case "7": MinAge = null; break;
 
                     case null:
