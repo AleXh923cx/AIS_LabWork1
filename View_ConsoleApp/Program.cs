@@ -51,14 +51,30 @@ namespace View_ConsoleApp
 
         static void AddCharacter()
         {
-            string charName = ReadText("Введите имя персонажа: ");
-            string charGenus = ReadText("Введите вид персонажа: ");
-            int charAge = ReadNumber("Введите возраст персонажа: ", 0);
+            while (true)
+            {
+                string charName = ReadLine("Введите имя персонажа: ");
+                string charGenus = ReadLine("Введите вид персонажа: ");
+                string charAgeInput = ReadLine("Введите возраст персонажа: ");
 
-            if (logic.AddCharacter(charName, charGenus, charAge))
-                Console.WriteLine($"Персонаж добавлен.");
-            else
+                if (!Validation.TryParseAge(charAgeInput, out int charAge, out string error))
+                {
+                    Console.WriteLine($"ОШИБКА: {error}");
+                    continue;
+                }
+
+                if (!Validation.ValidateCharacter(charName, charGenus, charAge, out error))
+                {
+                    Console.WriteLine($"ОШИБКА: {error}");
+                    continue;
+                }
+
                 Console.WriteLine("Не удалось добавить персонажа.");
+
+                logic.AddCharacter(charName, charGenus, charAge);
+                Console.WriteLine($"Персонаж добавлен.");
+                return;
+            }
         }
 
         static void DeleteCharacter()
@@ -76,6 +92,7 @@ namespace View_ConsoleApp
                 Console.WriteLine("Персонаж не найден.");
                 return;
             }
+
             Console.WriteLine("Персонаж удалён.");
         }
 
