@@ -42,6 +42,8 @@ namespace View_ConsoleApp
                 }
 
                 logic.AddCharacter(charName, charGenus, charAge);
+                Console.Clear();
+                ShowTable();
                 Console.WriteLine($"Персонаж добавлен.");
                 return;
             }
@@ -63,6 +65,8 @@ namespace View_ConsoleApp
                 return;
             }
 
+            Console.Clear();
+            ShowTable();
             Console.WriteLine("Персонаж удалён.");
         }
 
@@ -99,6 +103,8 @@ namespace View_ConsoleApp
             }
 
             logic.UpdateCharacter(id, charName, charGenus, charAge);
+            Console.Clear();
+            ShowTable();
             Console.WriteLine("Персонаж изменён.");
         }
 
