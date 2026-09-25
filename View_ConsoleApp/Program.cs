@@ -9,6 +9,17 @@ namespace View_ConsoleApp
         static bool IsSortByGenus = false;
         static int? MinAge = null;
 
+        /// <summary>
+        /// Читает ввод со строки
+        /// </summary>
+        /// <param name="message">Сообщение</param>
+        /// <returns>Ввод пользователя</returns>
+        static string ReadLine(string message)
+        {
+            Console.Write(message);
+            return Console.ReadLine();
+        }
+
         static string ReadText(string message)
         {
             while (true)
@@ -52,12 +63,20 @@ namespace View_ConsoleApp
 
         static void DeleteCharacter()
         {
-            int id = ReadNumber("Введите № персонажа: ", 1);
+            string idInput = ReadLine("Введите № персонажа: ");
 
-            if (logic.DeleteCharacter(id))
-                Console.WriteLine("Персонаж удалён.");
-            else
+            if (!Validation.TryParseId(idInput, out int id, out string error))
+            {
+                Console.WriteLine($"ОШИБКА: {error}");
+                return;
+            }
+
+            if (!logic.DeleteCharacter(id))
+            {
                 Console.WriteLine("Персонаж не найден.");
+                return;
+            }
+            Console.WriteLine("Персонаж удалён.");
         }
 
         static void UpdateCharacter()
