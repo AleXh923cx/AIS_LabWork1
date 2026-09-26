@@ -26,18 +26,18 @@
 
         public string Name
         {
-            get { return _name; }
-            set { _name = value; }
+            get => _name;
+            set => _name = value;
         }
         public string Genus // Это как класс персонажа
         {
-            get { return _genus; }
-            set { _genus = value; }
+            get => _genus;
+            set => _genus = value;
         }
         public int Age
         {
-            get { return _age; }
-            set { _age = value; }
+            get => _age;
+            set => _age = value;
         }
 
         public int Level => _age / 10;
