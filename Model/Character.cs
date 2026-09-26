@@ -1,6 +1,6 @@
 ﻿namespace Model
 {
-    public class Character
+    public class Character : IDomainObject
     {
         private int _id;
         private string _name;
