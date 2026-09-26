@@ -1,4 +1,5 @@
 <Solution>
+  <Project Path="DataAccessLayer/DataAccessLayer.csproj" Id="03bd9dbc-e6a0-4223-b6a9-1aabbc78af18" />
   <Project Path="Model/Model.csproj" />
   <Project Path="View_ConsoleApp/View_ConsoleApp.csproj" />
   <Project Path="View_WinForms/View_WinForms.csproj" />
