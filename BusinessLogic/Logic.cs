@@ -8,11 +8,32 @@ namespace BusinessLogic
 {
     public class Logic
     {
-        private List<Character> characters = new List<Character>();
-        private int _tempId = 1;
+        private readonly IRepository<Character> _repository;
 
-        public Logic()
+        /// <summary>
+        /// Конструктор (для тестов)
+        /// </summary>
+        /// <param name="repository">Репозитория</param>
+        public Logic(IRepository<Character> repository)
         {
+            _repository = repository;
+        }
+
+        /// <summary>
+        /// Конструктор (Entity Framework версия)
+        /// </summary>
+        public Logic() : this(new EntityRepository<Character>())
+        {
+            SeedIfEmpty();
+        }
+
+        /// <summary>
+        /// Заполняет список, но только если он пуст
+        /// </summary>
+        public void SeedIfEmpty()
+        {
+            if (_repository.ReadAll().Any()) return;
+
             AddCharacter("Бримис", "Берёза", 46);
             AddCharacter("Аэрен", "Сосна", 66);
             AddCharacter("Данудор", "Тополь", 80);
@@ -30,8 +51,7 @@ namespace BusinessLogic
         /// </summary>
         /// <param name="id">Идентификатор</param>
         /// <returns>Персонаж по заданному идентификатору</returns>
-        public Character GetCharacterById(int id) => 
-            characters.FirstOrDefault(c => c.Id == id);
+        public Character GetCharacterById(int id) => _repository.ReadById(id);
 
         /// <summary>
         /// Добавление персонажа
@@ -44,7 +64,9 @@ namespace BusinessLogic
             if (!Validation.ValidateCharacter(name, genus, age, out _))
                 return false;
 
-            characters.Add(new Character(_tempId++, name, genus, age));
+            var all = _repository.ReadAll().ToList();
+            int tempId = all.Count == 0 ? 1 : all.Max(x => x.Id) + 1;
+            _repository.Add(new Character(tempId, name, genus, age));
             return true;
         }
 
@@ -54,11 +76,10 @@ namespace BusinessLogic
         /// <param name="id">Идентификатор</param>
         public bool DeleteCharacter(int id)
         {
-            Character character = GetCharacterById(id);
-            if (character == null)
+            if (_repository.ReadById(id) == null)
                 return false;
 
-            characters.Remove(character);
+            _repository.Delete(id);
             return true;
         }
 
@@ -71,7 +92,7 @@ namespace BusinessLogic
         /// <param name="age">Возраст</param>
         public bool UpdateCharacter(int id, string name, string genus, int age)
         {
-            Character character = GetCharacterById(id);
+            var character = _repository.ReadById(id);
             if (character == null)
                 return false;
 
@@ -81,6 +102,7 @@ namespace BusinessLogic
             character.Name = name;
             character.Genus = genus;
             character.Age = age;
+            _repository.Update(character);
             return true;
         }
 
@@ -92,7 +114,7 @@ namespace BusinessLogic
         /// <returns>Обработанные списки персонажей</returns>
         public List<Character> GetProcessedCharacters(bool sortByGenus, int? minAge)
         {
-            List<Character> result = new List<Character>(characters);
+            List<Character> result = _repository.ReadAll().ToList();
 
             if (sortByGenus)
                 result.Sort((a, b) => string.Compare(a.Genus, b.Genus));
