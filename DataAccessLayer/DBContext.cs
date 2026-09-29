@@ -10,13 +10,22 @@ namespace DataAccessLayer
 
         public DBContext()
         {
-            Database.EnsureCreated();
+            // Папка для файла база данных
+            var baseDir = AppDomain.CurrentDomain.BaseDirectory;
+            AppDomain.CurrentDomain.SetData("DataDirectory", baseDir);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            string dbPath = Path.Combine(
+                AppDomain.CurrentDomain.BaseDirectory,
+                "Database1.mdf");
+
             optionsBuilder.UseSqlServer(
-                @"Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\Database1.mdf;Integrated Security=True");
+                $@"Data Source=(LocalDB)\MSSQLLocalDB;
+                   AttachDbFilename={dbPath};
+                   Integrated Security=True;
+                   Database=RpgTreeCharactersDb");
         }
     }
 }
