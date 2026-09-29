@@ -24,22 +24,22 @@ namespace DataAccessLayer
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            var origin = _ctx.Set<T>().FirstOrDefault(x => x.Id == id);
+            if (origin == null) return;
+            _ctx.Set<T>().Remove(origin);
+            _ctx.SaveChanges();
         }
 
-        public IEnumerable<T> ReadAll()
-        {
-            throw new NotImplementedException();
-        }
+        public IEnumerable<T> ReadAll() => _ctx.Set<T>().ToList();
 
-        public T ReadById(int id)
-        {
-            throw new NotImplementedException();
-        }
+        public T ReadById(int id) => _ctx.Set<T>().FirstOrDefault(x => x.Id == id);
 
         public void Update(T entity)
         {
-            throw new NotImplementedException();
+            var origin = _ctx.Set<T>().FirstOrDefault(x => x.Id == entity.Id);
+            if (origin == null) return;
+            _ctx.Entry(origin).CurrentValues.SetValues(entity);
+            _ctx.SaveChanges();
         }
     }
 }
