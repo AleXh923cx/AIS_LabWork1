@@ -1,8 +1,10 @@
-﻿using System;
+﻿using DataAccessLayer;
+using Model;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Model
+namespace BusinessLogic
 {
     public class Logic
     {
