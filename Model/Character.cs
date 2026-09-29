@@ -22,7 +22,11 @@
             Age = age;
         }
 
-        public int Id => _id;
+        public int Id
+        {
+            get => _id;
+            set => _id = value;
+        }
 
         public string Name
         {
