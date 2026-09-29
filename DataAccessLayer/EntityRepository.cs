@@ -9,9 +9,17 @@ namespace DataAccessLayer
 {
     public class EntityRepository<T> : IRepository<T> where T : class, IDomainObject
     {
+        private readonly DBContext _ctx;
+
+        public EntityRepository()
+        {
+            _ctx = new DBContext();
+        }
+
         public void Add(T entity)
         {
-            throw new NotImplementedException();
+            _ctx.Set<T>().Add(entity);
+            _ctx.SaveChanges();
         }
 
         public void Delete(int id)
