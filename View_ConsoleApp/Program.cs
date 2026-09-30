@@ -134,8 +134,8 @@ namespace View_ConsoleApp
             var list = logic.GetProcessedCharacters(IsSortByGenus, MinAge);
 
             // Заголовки таблицы
-            Console.WriteLine("| №  |    Имя     |   Вид    | Возраст | Уровень |");
-            Console.WriteLine("|----|------------|----------|---------|---------|");
+            Console.WriteLine("| №  |      Имя       |      Вид     | Возраст | Уровень |");
+            Console.WriteLine("|----|----------------|--------------|---------|---------|");
 
             // Записи таблицы
             foreach (var chrcter in list)
@@ -147,6 +147,9 @@ namespace View_ConsoleApp
 
         static void Main(string[] args)
         {
+            Console.InputEncoding = System.Text.Encoding.UTF8;
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
+
             while (true)
             {
                 Console.Clear();
