@@ -64,9 +64,7 @@ namespace BusinessLogic
             if (!Validation.ValidateCharacter(name, genus, age, out _))
                 return false;
 
-            var all = _repository.ReadAll().ToList();
-            int tempId = all.Count == 0 ? 1 : all.Max(x => x.Id) + 1;
-            _repository.Add(new Character(tempId, name, genus, age));
+            _repository.Add(new Character(0, name, genus, age));
             return true;
         }
 
