@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations.Operations;
 using Model;
 
@@ -13,19 +14,16 @@ namespace DataAccessLayer
             // Папка для файла база данных
             var baseDir = AppDomain.CurrentDomain.BaseDirectory;
             AppDomain.CurrentDomain.SetData("DataDirectory", baseDir);
+
+            Database.EnsureCreated();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            string dbPath = Path.Combine(
-                AppDomain.CurrentDomain.BaseDirectory,
-                "Database1.mdf");
-
             optionsBuilder.UseSqlServer(
                 $@"Data Source=(LocalDB)\MSSQLLocalDB;
-                   AttachDbFilename={dbPath};
-                   Integrated Security=True;
-                   Database=RpgTreeCharactersDb");
+                   AttachDbFilename=C:\Users\lolpr\source\repos\AIS_LabWork1\DataAccessLayer\Database\Database1.mdf;
+                   Integrated Security=True");
         }
     }
 }
