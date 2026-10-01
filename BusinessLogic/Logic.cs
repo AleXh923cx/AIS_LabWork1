@@ -22,7 +22,7 @@ namespace BusinessLogic
         /// <summary>
         /// Конструктор (Entity Framework версия)
         /// </summary>
-        public Logic() : this(new EntityRepository<Character>())
+        public Logic() : this(new DapperRepository<Character>())
         {
             SeedIfEmpty();
         }
