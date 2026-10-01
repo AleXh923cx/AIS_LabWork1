@@ -18,8 +18,6 @@ namespace DataAccessLayer
             // Папка для файла база данных
             var baseDir = AppDomain.CurrentDomain.BaseDirectory;
             AppDomain.CurrentDomain.SetData("DataDirectory", baseDir);
-
-            Database.EnsureCreated();
         }
 
         /// <summary>
