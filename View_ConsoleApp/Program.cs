@@ -139,7 +139,7 @@ namespace View_ConsoleApp
 
             // Записи таблицы
             foreach (var chrcter in list)
-                Console.WriteLine($"| {chrcter.Id,2} | {chrcter.Name,10} | {chrcter.Genus,8} | {chrcter.Age,7} | {chrcter.Level,7} |");
+                Console.WriteLine($"| {chrcter.Id,2} | {chrcter.Name.PadRight(14)} | {chrcter.Genus.PadRight(12)} | {chrcter.Age,7} | {chrcter.Level,7} |");
 
             if (list.Count == 0)
                 Console.WriteLine("Персонажи не найдены.");

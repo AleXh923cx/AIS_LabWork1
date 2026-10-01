@@ -1,6 +1,7 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations.Operations;
+using System.Configuration;
 using Model;
 
 namespace DataAccessLayer
@@ -8,6 +9,11 @@ namespace DataAccessLayer
     public class DBContext : DbContext
     {
         public DbSet<Character> Characters { get; set; }
+
+        public static string ConnectionString = 
+            ConfigurationManager.ConnectionStrings["RpgTreeDb"]?.ConnectionString
+            ?? throw new InvalidOperationException(
+                "Строка подключения 'CharactersDb' не найдена в App.config.");
 
         public DBContext()
         {
@@ -20,10 +26,7 @@ namespace DataAccessLayer
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(
-                $@"Data Source=(LocalDB)\MSSQLLocalDB;
-                   AttachDbFilename=C:\Users\lolpr\source\repos\AIS_LabWork1\DataAccessLayer\Database\Database1.mdf;
-                   Integrated Security=True");
+            optionsBuilder.UseSqlServer(ConnectionString);
         }
     }
 }
