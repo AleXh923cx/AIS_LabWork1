@@ -14,5 +14,12 @@ namespace DataAccessLayer
             ConfigurationManager.ConnectionStrings["RpgTreeDb"]?.ConnectionString
             ?? throw new InvalidOperationException(
                 "Строка подключения 'CharactersDb' не найдена в App.config.");
+
+        static DBConfig()
+        {
+            // Папка для файла база данных
+            var baseDir = AppDomain.CurrentDomain.BaseDirectory;
+            AppDomain.CurrentDomain.SetData("DataDirectory", baseDir);
+        }
     }
 }

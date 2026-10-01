@@ -13,13 +13,6 @@ namespace DataAccessLayer
     {
         public DbSet<Character> Characters { get; set; }
 
-        public DBContext()
-        {
-            // Папка для файла база данных
-            var baseDir = AppDomain.CurrentDomain.BaseDirectory;
-            AppDomain.CurrentDomain.SetData("DataDirectory", baseDir);
-        }
-
         /// <summary>
         /// При конфигурации, построитель настроек пытается использовать БД по строке подключении
         /// </summary>
