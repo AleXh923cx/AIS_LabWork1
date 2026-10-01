@@ -9,6 +9,7 @@ namespace DataAccessLayer
 {
     internal static class DBConfig
     {
+        // Строка подключения, определяет по App.config
         public static string ConnectionString =
             ConfigurationManager.ConnectionStrings["RpgTreeDb"]?.ConnectionString
             ?? throw new InvalidOperationException(

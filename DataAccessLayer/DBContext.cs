@@ -6,6 +6,9 @@ using Model;
 
 namespace DataAccessLayer
 {
+    /// <summary>
+    /// Это для Entity Framework
+    /// </summary>
     public class DBContext : DbContext
     {
         public DbSet<Character> Characters { get; set; }
@@ -19,6 +22,9 @@ namespace DataAccessLayer
             Database.EnsureCreated();
         }
 
+        /// <summary>
+        /// При конфигурации, построитель настроек пытается использовать БД по строке подключении
+        /// </summary>
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(DBConfig.ConnectionString);
