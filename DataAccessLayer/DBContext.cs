@@ -10,11 +10,6 @@ namespace DataAccessLayer
     {
         public DbSet<Character> Characters { get; set; }
 
-        public static string ConnectionString = 
-            ConfigurationManager.ConnectionStrings["RpgTreeDb"]?.ConnectionString
-            ?? throw new InvalidOperationException(
-                "Строка подключения 'CharactersDb' не найдена в App.config.");
-
         public DBContext()
         {
             // Папка для файла база данных
@@ -26,7 +21,7 @@ namespace DataAccessLayer
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(ConnectionString);
+            optionsBuilder.UseSqlServer(DBConfig.ConnectionString);
         }
     }
 }
