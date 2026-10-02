@@ -24,10 +24,6 @@ namespace BusinessLogic
         /// </summary>
         public Logic() : this(new DapperRepository<Character>())
         {
-            using (var ctx = new DBContext())
-            {
-                ctx.Database.EnsureCreated();
-            }
             SeedIfEmpty();
         }
 

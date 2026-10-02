@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -21,6 +22,32 @@ namespace DataAccessLayer
                     ? "Characters"
                     : typeof(T).Name + "s";
             }
+        }
+
+        static DapperRepository()
+        {
+            if (typeof(T) == typeof(Character))
+                EnsureCharacterDataExists();
+        }
+
+        private static void EnsureCharacterDataExists()
+        {
+            using var connection = new SqlConnection(DBConfig.ConnectionString);
+            connection.Open();
+
+            string sql = @"
+            IF OBJECT_ID(N'dbo.Characters', N'U') IS NULL
+            BEGIN
+                CREATE TABLE [dbo].[Characters] (
+                    [Id]    INT        IDENTITY (1, 1) NOT NULL,
+                    [Name]  NCHAR (14) NOT NULL,
+                    [Genus] NCHAR (12) NOT NULL,
+                    [Age]   INT        NOT NULL,
+                    PRIMARY KEY CLUSTERED ([Id] ASC)
+                );
+            END";
+
+            connection.Execute(sql);
         }
 
         public void Add(T entity)
