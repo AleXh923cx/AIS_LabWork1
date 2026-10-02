@@ -14,9 +14,14 @@ namespace DataAccessLayer
 
         static DBConfig()
         {
-            // Папка для файла база данных
-            var baseDir = AppDomain.CurrentDomain.BaseDirectory;
-            AppDomain.CurrentDomain.SetData("DataDirectory", baseDir);
+            // Папка для файла база данных (находится в AppData/Local, для обоих View)
+            var dbDir = Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), 
+                "RpgTree");
+
+            if (!Directory.Exists(dbDir))
+                Directory.CreateDirectory(dbDir);
+            AppDomain.CurrentDomain.SetData("DataDirectory", dbDir);
 
             ConnectionString = ConfigurationManager.ConnectionStrings["RpgTreeDb"]?.ConnectionString
                 ?? throw new InvalidOperationException(
