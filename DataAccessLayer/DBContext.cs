@@ -14,14 +14,6 @@ namespace DataAccessLayer
         public DbSet<Character> Characters { get; set; }
 
         /// <summary>
-        /// Конструктор
-        /// </summary>
-        public DBContext()
-        {
-            Database.EnsureCreated(); // Проверка на существование БД
-        }
-
-        /// <summary>
         /// Настройка модели данных перед её построением и использованием
         /// </summary>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
