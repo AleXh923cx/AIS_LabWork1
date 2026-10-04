@@ -350,6 +350,10 @@ ASALocalRun/
 # Local History for Visual Studio
 .localhistory/
 
+# Ai Agents
+.agents/
+.skills/
+
 # BeatPulse healthcheck temp database
 healthchecksdb
 

@@ -14,47 +14,24 @@ namespace DataAccessLayer
 {
     public class DapperRepository<T> : IRepository<T> where T : class, IDomainObject
     {
-        private static string _tableName
-        {
-            get
-            {
-                return typeof(T).Name == "Character"
-                    ? "Characters"
-                    : typeof(T).Name + "s";
-            }
-        }
+        private static string _tableName => typeof(T).Name + "s";
 
-        static DapperRepository()
-        {
-            if (typeof(T) == typeof(Character))
-                EnsureCharacterDataExists();
-        }
-
-        private static void EnsureCharacterDataExists()
-        {
-            using var connection = new SqlConnection(DBConfig.ConnectionString);
-            connection.Open();
-
-            string sql = @"
-            IF OBJECT_ID(N'dbo.Characters', N'U') IS NULL
-            BEGIN
-                CREATE TABLE [dbo].[Characters] (
-                    [Id]    INT        IDENTITY (1, 1) NOT NULL,
-                    [Name]  NCHAR (14) NOT NULL,
-                    [Genus] NCHAR (12) NOT NULL,
-                    [Age]   INT        NOT NULL,
-                    PRIMARY KEY CLUSTERED ([Id] ASC)
-                );
-            END";
-
-            connection.Execute(sql);
-        }
+        private static PropertyInfo[] PropertiesWithoutKey =>
+            typeof(T)
+                .GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                .Where(p => p.CanRead && p.Name != nameof(IDomainObject.Id))
+                .ToArray();
 
         public void Add(T entity)
         {
-            using var connection = new SqlConnection(DBConfig.ConnectionString);
+            var props = PropertiesWithoutKey;
 
-            string sql = $"INSERT INTO {_tableName} (Name, Genus, Age) VALUES (@Name, @Genus, @Age);";
+            string columns = string.Join(", ", props.Select(p => $"[{p.Name}]"));
+            string values = string.Join(", ", props.Select(p => $"@{p.Name}"));
+
+            string sql = $"INSERT INTO {_tableName} ({columns}) VALUES ({values});";
+
+            using var connection = new SqlConnection(DBConfig.ConnectionString);
             connection.Execute(sql, entity);
         }
 
@@ -62,7 +39,7 @@ namespace DataAccessLayer
         {
             using var connection = new SqlConnection(DBConfig.ConnectionString);
 
-            string sql = $"DELETE FROM {_tableName} WHERE Id = @Id;";
+            string sql = $"DELETE FROM {_tableName} WHERE [Id] = @Id;";
             connection.Execute(sql, new { Id = id });
         }
 
@@ -78,15 +55,19 @@ namespace DataAccessLayer
         {
             using var connection = new SqlConnection(DBConfig.ConnectionString);
 
-            string sql = $"SELECT * FROM {_tableName} WHERE Id = @Id;";
+            string sql = $"SELECT * FROM {_tableName} WHERE [Id] = @Id;";
             return connection.QueryFirstOrDefault<T>(sql, new { Id = id });
         }
 
         public void Update(T entity)
         {
-            using var connection = new SqlConnection(DBConfig.ConnectionString);
+            var props = PropertiesWithoutKey;
 
-            string sql = $"UPDATE {_tableName} SET Name = @Name, Genus = @Genus, Age = @Age WHERE Id = @Id;";
+            string sets = string.Join(", ", props.Select(p => $"[{p.Name}] = @{p.Name}"));
+            
+            string sql = $"UPDATE {_tableName} SET {sets} WHERE [Id] = @Id;";
+
+            using var connection = new SqlConnection(DBConfig.ConnectionString);
             connection.Execute(sql, entity);
         }
     }
