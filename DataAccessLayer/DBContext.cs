@@ -28,10 +28,31 @@ namespace DataAccessLayer
         {
             modelBuilder.Entity<Character>(e =>
             {
-                e.ToTable("Characters");
-                e.Property(c => c.Name).HasColumnType("nchar(14)").IsRequired();
-                e.Property(c => c.Genus).HasColumnType("nchar(12)").IsRequired();
-                e.Property(c => c.Age).HasColumnType("int").IsRequired();
+                e.ToTable("Characters", table => {
+                    table.HasCheckConstraint(
+                        "CK_Characters_Age_NonNegative",
+                        "[Age] >= 0");
+                });
+
+                e.HasKey(c => c.Id);
+
+                e.Property(c => c.Id)
+                    .ValueGeneratedOnAdd();
+
+                e.Property(c => c.Name)
+                    .IsRequired()
+                    .HasMaxLength(14)
+                    .IsUnicode();
+
+                e.Property(c => c.Genus)
+                    .IsRequired()
+                    .HasMaxLength(12)
+                    .IsUnicode();
+
+                e.Property(c => c.Age)
+                    .IsRequired();
+
+                e.Ignore(c => c.Level);
             });
         }
 

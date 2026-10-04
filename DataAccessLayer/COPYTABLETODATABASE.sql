@@ -3,8 +3,8 @@
 
 CREATE TABLE [dbo].[Characters] (
     [Id]    INT        IDENTITY (1, 1) NOT NULL,
-    [Name]  NCHAR (14) NOT NULL,
-    [Genus] NCHAR (12) NOT NULL,
+    [Name]  NVARCHAR (14) NOT NULL,
+    [Genus] NVARCHAR (12) NOT NULL,
     [Age]   INT        NOT NULL,
     PRIMARY KEY CLUSTERED ([Id] ASC)
 );
