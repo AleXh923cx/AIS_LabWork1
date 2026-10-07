@@ -19,7 +19,7 @@ namespace DataAccessLayer
         private static PropertyInfo[] PropertiesWithoutKey =>
             typeof(T)
                 .GetProperties(BindingFlags.Public | BindingFlags.Instance)
-                .Where(p => p.CanRead && p.Name != nameof(IDomainObject.Id))
+                .Where(p => p.CanRead && p.CanWrite && p.Name != nameof(IDomainObject.Id))
                 .ToArray();
 
         public void Add(T entity)
