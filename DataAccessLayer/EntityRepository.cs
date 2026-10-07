@@ -9,37 +9,41 @@ namespace DataAccessLayer
 {
     public class EntityRepository<T> : IRepository<T> where T : class, IDomainObject
     {
-        private readonly DBContext _ctx;
-
-        public EntityRepository()
-        {
-            _ctx = new DBContext();
-        }
-
         public void Add(T entity)
         {
-            _ctx.Set<T>().Add(entity);
-            _ctx.SaveChanges();
+            using var ctx = new DBContext();
+            ctx.Set<T>().Add(entity);
+            ctx.SaveChanges();
         }
 
         public void Delete(int id)
         {
-            var origin = _ctx.Set<T>().FirstOrDefault(x => x.Id == id);
+            using var ctx = new DBContext();
+            var origin = ctx.Set<T>().FirstOrDefault(x => x.Id == id);
             if (origin == null) return;
-            _ctx.Set<T>().Remove(origin);
-            _ctx.SaveChanges();
+            ctx.Set<T>().Remove(origin);
+            ctx.SaveChanges();
         }
 
-        public IEnumerable<T> ReadAll() => _ctx.Set<T>().ToList();
+        public IEnumerable<T> ReadAll()
+        {
+            using var ctx = new DBContext();
+            return ctx.Set<T>().ToList();
+        }
 
-        public T ReadById(int id) => _ctx.Set<T>().FirstOrDefault(x => x.Id == id);
+        public T ReadById(int id)
+        {
+            using var ctx = new DBContext();
+            return ctx.Set<T>().FirstOrDefault(x => x.Id == id);
+        }
 
         public void Update(T entity)
         {
-            var origin = _ctx.Set<T>().FirstOrDefault(x => x.Id == entity.Id);
+            using var ctx = new DBContext();
+            var origin = ctx.Set<T>().FirstOrDefault(x => x.Id == entity.Id);
             if (origin == null) return;
-            _ctx.Entry(origin).CurrentValues.SetValues(entity);
-            _ctx.SaveChanges();
+            ctx.Entry(origin).CurrentValues.SetValues(entity);
+            ctx.SaveChanges();
         }
     }
 }
