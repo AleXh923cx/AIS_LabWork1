@@ -14,7 +14,15 @@ namespace DataAccessLayer
 {
     public class DapperRepository<T> : IRepository<T> where T : class, IDomainObject
     {
-        private static string _tableName => typeof(T).Name + "s";
+        private static string _tableName {
+            get
+            {
+                return
+                    typeof(T).Name.EndsWith("s") 
+                    ? typeof(T).Name 
+                    : typeof(T).Name + "s";
+            }
+        }
 
         private static PropertyInfo[] PropertiesWithoutKey =>
             typeof(T)
