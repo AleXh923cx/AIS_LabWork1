@@ -17,13 +17,6 @@ namespace BusinessLogic
         public Logic(IRepository<Character> repository)
         {
             _repository = repository;
-        }
-
-        /// <summary>
-        /// Конструктор (Entity Framework версия / Dapper версия)
-        /// </summary>
-        public Logic() : this(new EntityRepository<Character>())
-        {
             SeedIfEmpty();
         }
 
