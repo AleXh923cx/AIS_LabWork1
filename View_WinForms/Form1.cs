@@ -1,5 +1,6 @@
-﻿using Model;
-using BusinessLogic;
+﻿using BusinessLogic;
+using Model;
+using Ninject;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,7 +14,8 @@ namespace View_WinForms
 {
     public partial class Form1 : Form
     {
-        Logic logic = new Logic();
+        static IKernel ninjectKernel = new StandardKernel(new SimpleConfigModule());
+        Logic logic = ninjectKernel.Get<Logic>();
 
         public bool IsSortByGenus;
         public int? MinAge;

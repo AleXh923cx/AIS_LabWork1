@@ -1,5 +1,6 @@
 ﻿using BusinessLogic;
 using Model;
+using Ninject;
 using System;
 using System.Xml.Linq;
 
@@ -7,7 +8,8 @@ namespace View_ConsoleApp
 {
     class Program
     {
-        static Logic logic = new Logic();
+        static IKernel ninjectKernel = new StandardKernel(new SimpleConfigModule());
+        static Logic logic;
         static bool IsSortByGenus = false;
         static int? MinAge = null;
 
@@ -152,6 +154,8 @@ namespace View_ConsoleApp
 
         static void Main(string[] args)
         {
+            logic = ninjectKernel.Get<Logic>();
+
             Console.InputEncoding = System.Text.Encoding.UTF8;
             Console.OutputEncoding = System.Text.Encoding.UTF8;
 
