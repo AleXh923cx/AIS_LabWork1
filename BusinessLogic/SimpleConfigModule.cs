@@ -3,6 +3,7 @@ using Model;
 using Ninject.Modules;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,9 +17,19 @@ namespace BusinessLogic
     {
         public override void Load()
         {
-            Bind<IRepository<Character>>()
-                .To<EntityRepository<Character>>()
-                .InSingletonScope();
+            // Читаем настройку из App.config
+            string repositoryType = ConfigurationManager.AppSettings["RepositoryType"] ?? "entity";
+
+            switch (repositoryType.ToLower().Trim())
+            {
+                case "dapper":
+                    Bind<IRepository<Character>>().To<DapperRepository<Character>>();
+                    break;
+                case "entity":
+                default:
+                    Bind<IRepository<Character>>().To<EntityRepository<Character>>();
+                    break;
+            }
         }
     }
 }
