@@ -22,7 +22,8 @@ namespace DataAccessLayer
         /// Получить сущность по идентификатору
         /// </summary>
         /// <param name="id">Идентификатор сущности</param>
-        /// <returns>Найденная сущность</returns>
-        T ReadById(int id);
+        /// <returns>Найденная сущность типа <typeparamref name="T"/> или <see langword="null"/>, 
+        /// если запись с указанным <paramref name="id"/> нету в базе данных.</returns>
+        T? ReadById(int id);
     }
 }

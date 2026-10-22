@@ -44,7 +44,7 @@ namespace BusinessLogic
         /// </summary>
         /// <param name="id">Идентификатор</param>
         /// <returns>Персонаж по заданному идентификатору</returns>
-        public Character GetCharacterById(int id) => _repository.ReadById(id);
+        public Character? GetCharacterById(int id) => _repository.ReadById(id);
 
         /// <summary>
         /// Добавление персонажа

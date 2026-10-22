@@ -31,7 +31,7 @@ namespace DataAccessLayer
             return ctx.Set<T>().ToList();
         }
 
-        public T ReadById(int id)
+        public T? ReadById(int id)
         {
             using var ctx = new DBContext();
             return ctx.Set<T>().FirstOrDefault(x => x.Id == id);
