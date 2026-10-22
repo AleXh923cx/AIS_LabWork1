@@ -23,11 +23,11 @@ namespace BusinessLogic
             switch (repositoryType.ToLower().Trim())
             {
                 case "dapper":
-                    Bind<IRepository<Character>>().To<DapperRepository<Character>>();
+                    Bind<IRepository<Character>>().To<DapperRepository<Character>>().InSingletonScope();
                     break;
                 case "entity":
                 default:
-                    Bind<IRepository<Character>>().To<EntityRepository<Character>>();
+                    Bind<IRepository<Character>>().To<EntityRepository<Character>>().InSingletonScope();
                     break;
             }
         }
