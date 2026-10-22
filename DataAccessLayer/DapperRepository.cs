@@ -59,7 +59,7 @@ namespace DataAccessLayer
             return connection.Query<T>(sql);
         }
 
-        public T ReadById(int id)
+        public T? ReadById(int id)
         {
             using var connection = new SqlConnection(DBConfig.ConnectionString);
 
