@@ -1,5 +1,8 @@
 ﻿namespace Model
 {
+    /// <summary>
+    /// Класс персонажа, наследующий IDomainObject
+    /// </summary>
     public class Character : IDomainObject
     {
         private int _id;
@@ -22,28 +25,45 @@
             Age = age;
         }
 
+        /// <summary>
+        /// Идентификатор персонажа
+        /// </summary>
         public int Id
         {
             get => _id;
             set => _id = value;
         }
 
+        /// <summary>
+        /// Имя персонажа
+        /// </summary>
         public string Name
         {
             get => _name;
             set => _name = value;
         }
-        public string Genus // Это как класс персонажа
+
+        /// <summary>
+        /// Вид персонажа (это как класс персонажа)
+        /// </summary>
+        public string Genus
         {
             get => _genus;
             set => _genus = value;
         }
+
+        /// <summary>
+        /// Возраст персонажа
+        /// </summary>
         public int Age
         {
             get => _age;
             set => _age = value;
         }
 
+        /// <summary>
+        /// Уровень персонажа (вычислительное свойство)
+        /// </summary>
         public int Level => _age / 10;
     }
 }
