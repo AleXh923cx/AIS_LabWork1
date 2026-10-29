@@ -17,6 +17,8 @@ namespace BusinessLogic
     {
         public override void Load()
         {
+            Bind<Logic>().ToSelf().InSingletonScope();
+
             // Читаем настройку из App.config
             string repositoryType = ConfigurationManager.AppSettings["RepositoryType"] ?? "entity";
 
