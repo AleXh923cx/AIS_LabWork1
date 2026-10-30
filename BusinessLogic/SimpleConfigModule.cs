@@ -17,7 +17,12 @@ namespace BusinessLogic
     {
         public override void Load()
         {
-            Bind<Logic>().ToSelf().InSingletonScope();
+            Bind<CharacterService>().ToSelf().InSingletonScope();
+            Bind<ICharacterService>().To<CharacterService>().InSingletonScope();
+            Bind<ICharacterRead>().To<CharacterService>().InSingletonScope();
+            Bind<ICharacterWrite>().To<CharacterService>().InSingletonScope();
+            Bind<ICharacterSort>().To<CharacterService>().InSingletonScope();
+            Bind<ICharacterFilter>().To<CharacterService>().InSingletonScope();
 
             // Читаем настройку из App.config
             string repositoryType = ConfigurationManager.AppSettings["RepositoryType"] ?? "entity";

@@ -38,7 +38,7 @@ namespace View_WinForms.Подформы
                 return;
             }
 
-            _form1.GetLogicInstance().AddCharacter(charName, charCls, charAge);
+            _form1.GetCharacterService().AddCharacter(charName, charCls, charAge);
             _form1.RefreshForm();
             Close();
         }

@@ -29,7 +29,7 @@ namespace View_WinForms.Подформы
                 return;
             }
 
-            if (!_form1.GetLogicInstance().DeleteCharacter(charId))
+            if (!_form1.GetCharacterService().DeleteCharacter(charId))
             {
                 MessageBox.Show("Персонаж с таким № не найден в таблице.",
                     "Ошибка удаления",

@@ -6,7 +6,10 @@ using System.Text;
 
 namespace BusinessLogic
 {
-    public class Logic
+    /// <summary>
+    /// Служба персонажа (бизнес-логика), наследующий интерфейса
+    /// </summary>
+    public class CharacterService : ICharacterService
     {
         private readonly IRepository<Character> _repository;
 
@@ -14,7 +17,7 @@ namespace BusinessLogic
         /// Конструктор (для тестов)
         /// </summary>
         /// <param name="repository">Репозитория</param>
-        public Logic(IRepository<Character> repository)
+        public CharacterService(IRepository<Character> repository)
         {
             _repository = repository;
             SeedIfEmpty();
@@ -39,6 +42,7 @@ namespace BusinessLogic
             AddCharacter("Циркис", "Тополь", 59);
         }
 
+        #region ICharacterRead
         /// <summary>
         /// Поиск персонажа по идентификатору
         /// </summary>
@@ -46,6 +50,14 @@ namespace BusinessLogic
         /// <returns>Персонаж по заданному идентификатору</returns>
         public Character? GetCharacterById(int id) => _repository.ReadById(id);
 
+        /// <summary>
+        /// Получение всех персонажей
+        /// </summary>
+        /// <returns>Коллекция всех персонажей</returns>
+        public IEnumerable<Character> GetAllCharacters() => _repository.ReadAll();
+        #endregion
+
+        #region ICharacterWrite
         /// <summary>
         /// Добавление персонажа
         /// </summary>
@@ -96,26 +108,23 @@ namespace BusinessLogic
             _repository.Update(character);
             return true;
         }
+        #endregion
 
-        /// <summary>
-        /// Возвращает список персонажей с применённой сортировкой и фильтрацией.
-        /// </summary>
-        /// <param name="sortByGenus">true - сортировка по виду, false - по номеру.</param>
-        /// <param name="minAge">Минимальный возраст или null, если фильтр не нужен.</param>
-        /// <returns>Обработанные списки персонажей</returns>
-        public List<Character> GetProcessedCharacters(bool sortByGenus, int? minAge)
+        #region ICharacterFilter
+        public IEnumerable<Character> FilterByMinAge(IEnumerable<Character> characters, int minAge)
         {
-            List<Character> result = _repository.ReadAll().ToList();
-
-            if (sortByGenus)
-                result.Sort((a, b) => string.Compare(a.Genus, b.Genus));
-            else
-                result.Sort((a, b) => a.Id.CompareTo(b.Id));
-
-            if (minAge.HasValue)
-                result = result.Where(c => c.Age >= minAge.Value).ToList();
-
-            return result;
+            return characters.Where(c => c.Age >= minAge);
         }
+        #endregion
+
+        #region ICharacterSort
+        public IEnumerable<Character> Sort(IEnumerable<Character> characters, bool sortByGenus)
+        {
+            if (sortByGenus)
+                return characters.OrderBy(c => c.Genus);
+            else
+                return characters.OrderBy(c => c.Id);
+        }
+        #endregion
     }
 }

@@ -15,7 +15,7 @@ namespace View_WinForms
     public partial class Form1 : Form
     {
         static IKernel ninjectKernel = new StandardKernel(new SimpleConfigModule());
-        Logic logic = ninjectKernel.Get<Logic>();
+        CharacterService characterService = ninjectKernel.Get<CharacterService>();
 
         public bool IsSortByGenus;
         public int? MinAge;
@@ -24,17 +24,29 @@ namespace View_WinForms
         {
             InitializeComponent();
         }
-        
-        // Для подформы Form1 (DeleteForm)
-        public Logic GetLogicInstance()
+
+        /// <summary>
+        /// Для подформы главного окна - Form1
+        /// </summary>
+        /// <returns>Служба персонажа</returns>
+        public ICharacterService GetCharacterService()
         {
-            return logic;
+            return characterService;
         }
 
+        /// <summary>
+        /// Обновляет форму для сихронизации
+        /// </summary>
         public void RefreshForm()
         {
-            var list = logic.GetProcessedCharacters(IsSortByGenus, MinAge);
-            ShowCharacaterList(list);
+            IEnumerable<Character> chars = characterService.GetAllCharacters();
+
+            if (MinAge.HasValue)
+                chars = characterService.FilterByMinAge(chars, MinAge.Value);
+
+            chars = characterService.Sort(chars, IsSortByGenus);
+
+            ShowCharacaterList(chars.ToList());
 
             label_minAgeIndicator.Text = MinAge.HasValue ? 
                 $"Минимальный возраст: {(MinAge.Value)}" : 

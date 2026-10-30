@@ -28,7 +28,7 @@ namespace View_WinForms.Подформы
                 return;
             }
 
-            if (_form1.GetLogicInstance().GetCharacterById(charId) == null)
+            if (_form1.GetCharacterService().GetCharacterById(charId) == null)
             {
                 MessageBox.Show("Введённый № персонажа не существует в таблице", 
                     "Ошибка изменения", 
@@ -53,7 +53,7 @@ namespace View_WinForms.Подформы
                 return;
             }
 
-            _form1.GetLogicInstance().UpdateCharacter(charId, charName, charCls, charAge);
+            _form1.GetCharacterService().UpdateCharacter(charId, charName, charCls, charAge);
             _form1.RefreshForm();
             Close();
         }

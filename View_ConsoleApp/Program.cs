@@ -9,7 +9,7 @@ namespace View_ConsoleApp
     class Program
     {
         static IKernel ninjectKernel = new StandardKernel(new SimpleConfigModule());
-        static Logic logic;
+        static CharacterService characterService;
         static bool IsSortByGenus = false;
         static int? MinAge = null;
 
@@ -44,7 +44,7 @@ namespace View_ConsoleApp
                     continue;
                 }
 
-                logic.AddCharacter(charName, charGenus, charAge);
+                characterService.AddCharacter(charName, charGenus, charAge);
                 Console.Clear();
                 ShowTable();
                 Console.WriteLine($"Персонаж добавлен.");
@@ -62,7 +62,7 @@ namespace View_ConsoleApp
                 return;
             }
 
-            if (!logic.DeleteCharacter(id))
+            if (!characterService.DeleteCharacter(id))
             {
                 Console.WriteLine("Персонаж не найден.");
                 return;
@@ -83,7 +83,7 @@ namespace View_ConsoleApp
                 return;
             }
 
-            if (logic.GetCharacterById(id) == null)
+            if (characterService.GetCharacterById(id) == null)
             {
                 Console.WriteLine("Персонаж не найден.");
                 return;
@@ -105,7 +105,7 @@ namespace View_ConsoleApp
                 return;
             }
 
-            logic.UpdateCharacter(id, charName, charGenus, charAge);
+            characterService.UpdateCharacter(id, charName, charGenus, charAge);
             Console.Clear();
             ShowTable();
             Console.WriteLine("Персонаж изменён.");
@@ -133,14 +133,19 @@ namespace View_ConsoleApp
 
         static void ShowTable()
         {
-            var list = logic.GetProcessedCharacters(IsSortByGenus, MinAge);
+            IEnumerable<Character> chars = characterService.GetAllCharacters();
+
+            if (MinAge.HasValue)
+                chars = characterService.FilterByMinAge(chars, MinAge.Value);
+
+            chars = characterService.Sort(chars, IsSortByGenus);
 
             // Заголовки таблицы
             Console.WriteLine("| №  |      Имя       |      Вид     | Возраст | Уровень |");
             Console.WriteLine("|----|----------------|--------------|---------|---------|");
 
             // Записи таблицы
-            foreach (var chrcter in list)
+            foreach (var chrcter in chars.ToList())
                 Console.WriteLine(
                     $"| {chrcter.Id,2} | " +
                     $"{chrcter.Name.PadRight(14)} | " +
@@ -148,13 +153,13 @@ namespace View_ConsoleApp
                     $"{chrcter.Age.ToString().PadRight(7)} | " +
                     $"{chrcter.Level.ToString().PadRight(7)} |");
 
-            if (list.Count == 0)
+            if (chars.Count() == 0)
                 Console.WriteLine("Персонажи не найдены.");
         }
 
         static void Main(string[] args)
         {
-            logic = ninjectKernel.Get<Logic>();
+            characterService = ninjectKernel.Get<CharacterService>();
 
             Console.InputEncoding = System.Text.Encoding.UTF8;
             Console.OutputEncoding = System.Text.Encoding.UTF8;
