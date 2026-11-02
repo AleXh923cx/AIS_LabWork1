@@ -1,5 +1,7 @@
 ﻿using DataAccessLayer;
+using Microsoft.Extensions.DependencyInjection;
 using Model;
+using Ninject;
 using Ninject.Modules;
 using System;
 using System.Collections.Generic;
@@ -18,11 +20,11 @@ namespace BusinessLogic
         public override void Load()
         {
             Bind<CharacterService>().ToSelf().InSingletonScope();
-            Bind<ICharacterService>().To<CharacterService>().InSingletonScope();
-            Bind<ICharacterRead>().To<CharacterService>().InSingletonScope();
-            Bind<ICharacterWrite>().To<CharacterService>().InSingletonScope();
-            Bind<ICharacterSort>().To<CharacterService>().InSingletonScope();
-            Bind<ICharacterFilter>().To<CharacterService>().InSingletonScope();
+            Bind<ICharacterService>().ToMethod(ctx => ctx.Kernel.Get<CharacterService>());
+            Bind<ICharacterRead>().ToMethod(ctx => ctx.Kernel.Get<CharacterService>());
+            Bind<ICharacterWrite>().ToMethod(ctx => ctx.Kernel.Get<CharacterService>());
+            Bind<ICharacterSort>().ToMethod(ctx => ctx.Kernel.Get<CharacterService>());
+            Bind<ICharacterFilter>().ToMethod(ctx => ctx.Kernel.Get<CharacterService>());
 
             // Читаем настройку из App.config
             string repositoryType = ConfigurationManager.AppSettings["RepositoryType"] ?? "entity";

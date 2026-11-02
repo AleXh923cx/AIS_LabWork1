@@ -9,7 +9,7 @@ namespace View_ConsoleApp
     class Program
     {
         static IKernel ninjectKernel = new StandardKernel(new SimpleConfigModule());
-        static CharacterService characterService;
+        static CharacterService characterService = ninjectKernel.Get<CharacterService>();
         static bool IsSortByGenus = false;
         static int? MinAge = null;
 
@@ -159,8 +159,6 @@ namespace View_ConsoleApp
 
         static void Main(string[] args)
         {
-            characterService = ninjectKernel.Get<CharacterService>();
-
             Console.InputEncoding = System.Text.Encoding.UTF8;
             Console.OutputEncoding = System.Text.Encoding.UTF8;
 
