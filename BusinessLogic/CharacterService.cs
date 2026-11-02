@@ -26,7 +26,7 @@ namespace BusinessLogic
         /// <summary>
         /// Заполняет список, но только если он пуст
         /// </summary>
-        public void SeedIfEmpty()
+        private void SeedIfEmpty()
         {
             if (_repository.ReadAll().Any()) return;
 

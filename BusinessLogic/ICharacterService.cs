@@ -8,8 +8,6 @@ namespace BusinessLogic
 {
     public interface ICharacterService : 
         ICharacterRead, ICharacterWrite, ICharacterFilter, ICharacterSort
-
     {
-        void SeedIfEmpty();
     }
 }
