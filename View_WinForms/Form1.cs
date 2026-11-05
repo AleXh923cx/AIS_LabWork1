@@ -15,7 +15,7 @@ namespace View_WinForms
     public partial class Form1 : Form
     {
         static IKernel ninjectKernel = new StandardKernel(new SimpleConfigModule());
-        CharacterService characterService = ninjectKernel.Get<CharacterService>();
+        ICharacterService characterService = ninjectKernel.Get<ICharacterService>();
 
         public bool IsSortByGenus;
         public int? MinAge;
@@ -44,7 +44,9 @@ namespace View_WinForms
             if (MinAge.HasValue)
                 chars = characterService.FilterByMinAge(chars, MinAge.Value);
 
-            chars = characterService.Sort(chars, IsSortByGenus);
+            chars = IsSortByGenus
+                ? characterService.Sort(chars, c => c.Genus)
+                : characterService.Sort(chars, c => c.Id);
 
             ShowCharacaterList(chars.ToList());
 

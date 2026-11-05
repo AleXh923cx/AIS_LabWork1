@@ -14,7 +14,7 @@ namespace BusinessLogic
         private readonly IRepository<Character> _repository;
 
         /// <summary>
-        /// Конструктор (для тестов)
+        /// Конструктор
         /// </summary>
         /// <param name="repository">Репозитория</param>
         public CharacterService(IRepository<Character> repository)
@@ -43,27 +43,12 @@ namespace BusinessLogic
         }
 
         #region ICharacterRead
-        /// <summary>
-        /// Поиск персонажа по идентификатору
-        /// </summary>
-        /// <param name="id">Идентификатор</param>
-        /// <returns>Персонаж по заданному идентификатору</returns>
         public Character? GetCharacterById(int id) => _repository.ReadById(id);
 
-        /// <summary>
-        /// Получение всех персонажей
-        /// </summary>
-        /// <returns>Коллекция всех персонажей</returns>
         public IEnumerable<Character> GetAllCharacters() => _repository.ReadAll();
         #endregion
 
         #region ICharacterWrite
-        /// <summary>
-        /// Добавление персонажа
-        /// </summary>
-        /// <param name="name">Имя</param>
-        /// <param name="genus">Вид</param>
-        /// <param name="age">Возраст</param>
         public bool AddCharacter(string name, string genus, int age)
         {
             if (!Validation.ValidateCharacter(name, genus, age, out _))
@@ -73,10 +58,6 @@ namespace BusinessLogic
             return true;
         }
 
-        /// <summary>
-        /// Удаление персонажа
-        /// </summary>
-        /// <param name="id">Идентификатор</param>
         public bool DeleteCharacter(int id)
         {
             if (_repository.ReadById(id) == null)
@@ -86,13 +67,6 @@ namespace BusinessLogic
             return true;
         }
 
-        /// <summary>
-        /// Изменение персонажа
-        /// </summary>
-        /// <param name="id">Идентификатор</param>
-        /// <param name="name">Имя</param>
-        /// <param name="genus">Вид</param>
-        /// <param name="age">Возраст</param>
         public bool UpdateCharacter(int id, string name, string genus, int age)
         {
             var character = _repository.ReadById(id);
@@ -118,13 +92,9 @@ namespace BusinessLogic
         #endregion
 
         #region ICharacterSort
-        public IEnumerable<Character> Sort(IEnumerable<Character> characters, bool sortByGenus)
-        {
-            if (sortByGenus)
-                return characters.OrderBy(c => c.Genus);
-            else
-                return characters.OrderBy(c => c.Id);
-        }
+        public IEnumerable<Character> Sort<T>(IEnumerable<Character> characters,
+            Func<Character, T> keySelector)
+            => characters.OrderBy(keySelector);
         #endregion
     }
 }

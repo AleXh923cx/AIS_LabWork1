@@ -9,7 +9,7 @@ namespace View_ConsoleApp
     class Program
     {
         static IKernel ninjectKernel = new StandardKernel(new SimpleConfigModule());
-        static CharacterService characterService = ninjectKernel.Get<CharacterService>();
+        static ICharacterService characterService = ninjectKernel.Get<ICharacterService>();
         static bool IsSortByGenus = false;
         static int? MinAge = null;
 
@@ -138,7 +138,9 @@ namespace View_ConsoleApp
             if (MinAge.HasValue)
                 chars = characterService.FilterByMinAge(chars, MinAge.Value);
 
-            chars = characterService.Sort(chars, IsSortByGenus);
+            chars = IsSortByGenus 
+                ? characterService.Sort(chars, c => c.Genus) 
+                : characterService.Sort(chars, c => c.Id);
 
             // Заголовки таблицы
             Console.WriteLine("| №  |      Имя       |      Вид     | Возраст | Уровень |");
