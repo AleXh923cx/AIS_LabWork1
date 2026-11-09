@@ -11,15 +11,46 @@ namespace BusinessLogic
     /// </summary>
     public class CharacterService : ICharacterService
     {
-        private readonly IRepository<Character> _repository;
-
-        /// <summary>
-        /// Конструктор
-        /// </summary>
-        /// <param name="repository">Репозитория</param>
-        public CharacterService(IRepository<Character> repository)
+        private readonly ICharacterRead _reader;
+        private readonly ICharacterWrite _writer;
+        private readonly ICharacterFilter _filter;
+        private readonly ICharacterSort _sorter;
+        
+        public CharacterService(
+            ICharacterRead reader,
+            ICharacterWrite writer,
+            ICharacterFilter filter,
+            ICharacterSort sorter
+        )
         {
-            _repository = repository;
+            _reader = reader;
+            _writer = writer;
+            _filter = filter;
+            _sorter = sorter;
+        }
+
+        public bool AddCharacter(string name, string genus, int age)
+            => _writer.AddCharacter(name, genus, age);
+        public bool DeleteCharacter(int id)
+            => _writer.DeleteCharacter(id);
+        public bool UpdateCharacter(int id, string name, string genus, int age)
+            => _writer.UpdateCharacter(id, name, genus, age);
+
+        public IEnumerable<Character> GetAllCharacters()
+            => _reader.GetAllCharacters();
+        public Character? GetCharacterById(int id)
+            => _reader.GetCharacterById(id);
+
+        public List<Character> GetProcessedCharacters<T>(Func<Character, T> sortKey, int? minAge)
+        {
+            IEnumerable<Character> chars = _reader.GetAllCharacters();
+
+            if (minAge.HasValue)
+                chars = _filter.FilterByMinAge(chars, minAge.Value);
+
+            chars = _sorter.Sort(chars, sortKey);
+
+            return chars.ToList();
         }
 
         /// <summary>
@@ -40,60 +71,5 @@ namespace BusinessLogic
         //     AddCharacter("Эладор", "Ель", 38);
         //     AddCharacter("Циркис", "Тополь", 59);
         // }
-
-        #region ICharacterRead
-        public Character? GetCharacterById(int id) => _repository.ReadById(id);
-
-        public IEnumerable<Character> GetAllCharacters() => _repository.ReadAll();
-        #endregion
-
-        #region ICharacterWrite
-        public bool AddCharacter(string name, string genus, int age)
-        {
-            if (!Validation.ValidateCharacter(name, genus, age, out _))
-                return false;
-
-            _repository.Add(new Character(0, name, genus, age));
-            return true;
-        }
-
-        public bool DeleteCharacter(int id)
-        {
-            if (_repository.ReadById(id) == null)
-                return false;
-
-            _repository.Delete(id);
-            return true;
-        }
-
-        public bool UpdateCharacter(int id, string name, string genus, int age)
-        {
-            var character = _repository.ReadById(id);
-            if (character == null)
-                return false;
-
-            if (!Validation.ValidateCharacter(name, genus, age, out _))
-                return false;
-
-            character.Name = name;
-            character.Genus = genus;
-            character.Age = age;
-            _repository.Update(character);
-            return true;
-        }
-        #endregion
-
-        #region ICharacterFilter
-        public IEnumerable<Character> FilterByMinAge(IEnumerable<Character> characters, int minAge)
-        {
-            return characters.Where(c => c.Age >= minAge);
-        }
-        #endregion
-
-        #region ICharacterSort
-        public IEnumerable<Character> Sort<T>(IEnumerable<Character> characters,
-            Func<Character, T> keySelector)
-            => characters.OrderBy(keySelector);
-        #endregion
     }
 }

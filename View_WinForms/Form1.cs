@@ -26,6 +26,12 @@ namespace View_WinForms
         }
 
         /// <summary>
+        /// Маппинг пользовательского выбора в ключ сортировки (OCP-safe граница UI→BL)
+        /// </summary>
+        private Func<Character, object> GetSortKey()
+            => IsSortByGenus ? (c => c.Genus) : (c => c.Id);
+
+        /// <summary>
         /// Для подформы главного окна - Form1
         /// </summary>
         /// <returns>Служба персонажа</returns>
@@ -39,14 +45,7 @@ namespace View_WinForms
         /// </summary>
         public void RefreshForm()
         {
-            IEnumerable<Character> chars = characterService.GetAllCharacters();
-
-            if (MinAge.HasValue)
-                chars = characterService.FilterByMinAge(chars, MinAge.Value);
-
-            chars = IsSortByGenus
-                ? characterService.Sort(chars, c => c.Genus)
-                : characterService.Sort(chars, c => c.Id);
+            IEnumerable<Character> chars = characterService.GetProcessedCharacters(GetSortKey(), MinAge);
 
             ShowCharacaterList(chars.ToList());
 

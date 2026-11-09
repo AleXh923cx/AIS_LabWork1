@@ -14,6 +14,12 @@ namespace View_ConsoleApp
         static int? MinAge = null;
 
         /// <summary>
+        /// Маппинг пользовательского выбора в ключ сортировки (OCP-safe граница UI→BL)
+        /// </summary>
+        static Func<Character, object> GetSortKey()
+            => IsSortByGenus ? (c => c.Genus) : (c => c.Id);
+
+        /// <summary>
         /// Читает ввод со строки
         /// </summary>
         /// <param name="message">Сообщение</param>
@@ -133,14 +139,7 @@ namespace View_ConsoleApp
 
         static void ShowTable()
         {
-            IEnumerable<Character> chars = characterService.GetAllCharacters();
-
-            if (MinAge.HasValue)
-                chars = characterService.FilterByMinAge(chars, MinAge.Value);
-
-            chars = IsSortByGenus 
-                ? characterService.Sort(chars, c => c.Genus) 
-                : characterService.Sort(chars, c => c.Id);
+            IEnumerable<Character> chars = characterService.GetProcessedCharacters(GetSortKey(), MinAge);
 
             // Заголовки таблицы
             Console.WriteLine("| №  |      Имя       |      Вид     | Возраст | Уровень |");
