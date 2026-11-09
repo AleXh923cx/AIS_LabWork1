@@ -16,7 +16,7 @@ namespace BusinessLogic
         /// <summary>
         /// Возвращает список персонажей с применённой сортировкой и фильтрацией
         /// </summary>
-        /// <param name="sortByGenus">true - сортировка по виду, false - по идентификатору</param>
+        /// <param name="sortKey">Сортировка по выбранному ключу (свойству)</param>
         /// <param name="minAge">Минимальный возраст или null, если фильтр не нужен</param>
         /// <returns>Обработанный список персонажей</returns>
         List<Character> GetProcessedCharacters<T>(Func<Character, T> sortKey, int? minAge);
