@@ -1,4 +1,6 @@
-﻿namespace Model
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Model
 {
     /// <summary>
     /// Класс персонажа, наследующий IDomainObject
@@ -9,6 +11,10 @@
         private string _name;
         private string _genus;
         private int _age;
+
+        // Константы максимального длины текста
+        public const int NameMaxLength = 12;
+        public const int GenusMaxLength = 14;
 
         /// <summary>
         /// Конструктор
@@ -37,6 +43,7 @@
         /// <summary>
         /// Имя персонажа
         /// </summary>
+        [MaxLength(NameMaxLength)]
         public string Name
         {
             get => _name;
@@ -46,6 +53,7 @@
         /// <summary>
         /// Вид персонажа (это как класс персонажа)
         /// </summary>
+        [MaxLength(GenusMaxLength)]
         public string Genus
         {
             get => _genus;
