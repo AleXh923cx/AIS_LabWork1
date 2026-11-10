@@ -43,11 +43,13 @@ namespace BusinessLogic
     /// </summary>
     public class CharacterWriter : ICharacterWrite
     {
-        private readonly IRepository<Character> _repository;
+        private readonly IReadRepository<Character> _readRepository;
+        private readonly IWriteRepository<Character> _writeRepository;
 
-        public CharacterWriter(IRepository<Character> repository)
+        public CharacterWriter(IWriteRepository<Character> writer, IReadRepository<Character> reader)
         {
-            _repository = repository;
+            _readRepository = reader;
+            _writeRepository = writer;
         }
 
         public bool AddCharacter(string name, string genus, int age)
@@ -55,22 +57,22 @@ namespace BusinessLogic
             if (!Validation.ValidateCharacter(name, genus, age, out _))
                 return false;
 
-            _repository.Add(new Character(0, name, genus, age));
+            _writeRepository.Add(new Character(0, name, genus, age));
             return true;
         }
 
         public bool DeleteCharacter(int id)
         {
-            if (_repository.ReadById(id) == null)
+            if (_readRepository.ReadById(id) == null)
                 return false;
 
-            _repository.Delete(id);
+            _writeRepository.Delete(id);
             return true;
         }
 
         public bool UpdateCharacter(int id, string name, string genus, int age)
         {
-            var character = _repository.ReadById(id);
+            var character = _readRepository.ReadById(id);
             if (character == null)
                 return false;
 
@@ -80,7 +82,7 @@ namespace BusinessLogic
             character.Name = name;
             character.Genus = genus;
             character.Age = age;
-            _repository.Update(character);
+            _writeRepository.Update(character);
             return true;
         }
     }
