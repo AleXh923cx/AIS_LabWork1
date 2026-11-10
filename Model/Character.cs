@@ -13,8 +13,8 @@ namespace Model
         private int _age;
 
         // Константы максимального длины текста
-        public const int NameMaxLength = 12;
-        public const int GenusMaxLength = 14;
+        public const int NameMaxLength = 14;
+        public const int GenusMaxLength = 12;
 
         /// <summary>
         /// Конструктор
