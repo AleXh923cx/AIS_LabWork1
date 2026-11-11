@@ -17,7 +17,8 @@ namespace BusinessLogic
         /// Поиск персонажа по идентификатору
         /// </summary>
         /// <param name="id">Идентификатор персонажа</param>
-        /// <returns>Персонаж по заданному идентификатору</returns>
+        /// <returns>Персонаж по заданному идентификатору, или <see langword="null"/>,
+        /// если записи с указанным id нет.</returns>
         Character? GetCharacterById(int id);
         /// <summary>
         /// Получение всех персонажей

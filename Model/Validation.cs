@@ -90,6 +90,18 @@ namespace Model
                 return false;
             }
 
+            if (name.Length > Character.NameMaxLength)
+            {
+                error = $"Имя персонажа не должно быть длиннее {Character.NameMaxLength} символов";
+                return false;
+            }
+
+            if (genus.Length > Character.GenusMaxLength)
+            {
+                error = $"Вид персонажа не должен быть длиннее {Character.GenusMaxLength} символов";
+                return false;
+            }
+
             if (age < 0)
             {
                 error = "Возраст не может быть отрицательным.";
