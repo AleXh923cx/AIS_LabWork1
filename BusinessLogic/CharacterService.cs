@@ -52,24 +52,5 @@ namespace BusinessLogic
 
             return chars.ToList();
         }
-
-        /// <summary>
-        /// Заполняет список, но только если он пуст
-        /// </summary>
-        // private void SeedIfEmpty()
-        // {
-        //     if (_repository.ReadAll().Any()) return;
-        // 
-        //     AddCharacter("Бримис", "Берёза", 46);
-        //     AddCharacter("Аэрен", "Сосна", 66);
-        //     AddCharacter("Данудор", "Тополь", 80);
-        //     AddCharacter("Гвинрил", "Дуб", 102);
-        //     AddCharacter("Элалов", "Клён", 92);
-        //     AddCharacter("Каэрра", "Берёза", 76);
-        //     AddCharacter("Финтин", "Дуб", 70);
-        //     AddCharacter("Дэнлоу", "Сосна", 115);
-        //     AddCharacter("Эладор", "Ель", 38);
-        //     AddCharacter("Циркис", "Тополь", 59);
-        // }
     }
 }
