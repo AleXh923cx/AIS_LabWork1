@@ -11,14 +11,8 @@ namespace BusinessLogic
     /// Интерфейс службы персонажа (фасад бизнес-логики)
     /// </summary>
     public interface ICharacterService : 
-        ICharacterRead, ICharacterWrite
+        ICharacterRead, ICharacterWrite, ICharacterQuery
     {
-        /// <summary>
-        /// Возвращает список персонажей с применённой сортировкой и фильтрацией
-        /// </summary>
-        /// <param name="sortKey">Сортировка по выбранному ключу (свойству)</param>
-        /// <param name="minAge">Минимальный возраст или null, если фильтр не нужен</param>
-        /// <returns>Обработанный список персонажей</returns>
-        List<Character> GetProcessedCharacters<T>(Func<Character, T> sortKey, int? minAge);
+        
     }
 }

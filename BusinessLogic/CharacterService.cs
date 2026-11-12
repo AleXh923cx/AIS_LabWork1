@@ -13,20 +13,17 @@ namespace BusinessLogic
     {
         private readonly ICharacterRead _reader;
         private readonly ICharacterWrite _writer;
-        private readonly ICharacterFilter _filter;
-        private readonly ICharacterSort _sorter;
+        private readonly ICharacterQuery _queryService;
         
         public CharacterService(
             ICharacterRead reader,
             ICharacterWrite writer,
-            ICharacterFilter filter,
-            ICharacterSort sorter
+            ICharacterQuery queryService
         )
         {
             _reader = reader;
             _writer = writer;
-            _filter = filter;
-            _sorter = sorter;
+            _queryService = queryService;
         }
 
         public bool AddCharacter(string name, string genus, int age)
@@ -42,15 +39,6 @@ namespace BusinessLogic
             => _reader.GetCharacterById(id);
 
         public List<Character> GetProcessedCharacters<T>(Func<Character, T> sortKey, int? minAge)
-        {
-            IEnumerable<Character> chars = _reader.GetAllCharacters();
-
-            if (minAge.HasValue)
-                chars = _filter.FilterByMinAge(chars, minAge.Value);
-
-            chars = _sorter.Sort(chars, sortKey);
-
-            return chars.ToList();
-        }
+            => _queryService.GetProcessedCharacters<T>(sortKey, minAge);
     }
 }

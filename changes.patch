@@ -1,0 +1,78 @@
+diff --git a/BusinessLogic/CharacterService.cs b/BusinessLogic/CharacterService.cs
+index 90ff91a..b78b05e 100644
+--- a/BusinessLogic/CharacterService.cs
++++ b/BusinessLogic/CharacterService.cs
+@@ -13,20 +13,17 @@ namespace BusinessLogic
+     {
+         private readonly ICharacterRead _reader;
+         private readonly ICharacterWrite _writer;
+-        private readonly ICharacterFilter _filter;
+-        private readonly ICharacterSort _sorter;
++        private readonly ICharacterQuery _queryService;
+         
+         public CharacterService(
+             ICharacterRead reader,
+             ICharacterWrite writer,
+-            ICharacterFilter filter,
+-            ICharacterSort sorter
++            ICharacterQuery queryService
+         )
+         {
+             _reader = reader;
+             _writer = writer;
+-            _filter = filter;
+-            _sorter = sorter;
++            _queryService = queryService;
+         }
+ 
+         public bool AddCharacter(string name, string genus, int age)
+@@ -42,15 +39,6 @@ namespace BusinessLogic
+             => _reader.GetCharacterById(id);
+ 
+         public List<Character> GetProcessedCharacters<T>(Func<Character, T> sortKey, int? minAge)
+-        {
+-            IEnumerable<Character> chars = _reader.GetAllCharacters();
+-
+-            if (minAge.HasValue)
+-                chars = _filter.FilterByMinAge(chars, minAge.Value);
+-
+-            chars = _sorter.Sort(chars, sortKey);
+-
+-            return chars.ToList();
+-        }
++            => _queryService.GetProcessedCharacters<T>(sortKey, minAge);
+     }
+ }
+diff --git a/BusinessLogic/ICharacterService.cs b/BusinessLogic/ICharacterService.cs
+index ea3d443..bdcae62 100644
+--- a/BusinessLogic/ICharacterService.cs
++++ b/BusinessLogic/ICharacterService.cs
+@@ -11,14 +11,8 @@ namespace BusinessLogic
+     /// Интерфейс службы персонажа (фасад бизнес-логики)
+     /// </summary>
+     public interface ICharacterService : 
+-        ICharacterRead, ICharacterWrite
++        ICharacterRead, ICharacterWrite, ICharacterQuery
+     {
+-        /// <summary>
+-        /// Возвращает список персонажей с применённой сортировкой и фильтрацией
+-        /// </summary>
+-        /// <param name="sortKey">Сортировка по выбранному ключу (свойству)</param>
+-        /// <param name="minAge">Минимальный возраст или null, если фильтр не нужен</param>
+-        /// <returns>Обработанный список персонажей</returns>
+-        List<Character> GetProcessedCharacters<T>(Func<Character, T> sortKey, int? minAge);
++        
+     }
+ }
+diff --git a/BusinessLogic/SimpleConfigModule.cs b/BusinessLogic/SimpleConfigModule.cs
+index 50c5cdd..e810cb1 100644
+--- a/BusinessLogic/SimpleConfigModule.cs
++++ b/BusinessLogic/SimpleConfigModule.cs
+@@ -24,6 +24,7 @@ namespace BusinessLogic
+             Bind<ICharacterWrite>().To<CharacterWriter>().InSingletonScope();
+             Bind<ICharacterFilter>().To<CharacterFilter>().InSingletonScope();
+             Bind<ICharacterSort>().To<CharacterSorter>().InSingletonScope();
++            Bind<ICharacterQuery>().To<CharacterQueryService>().InSingletonScope();
+ 
+             // Читаем настройку из App.config
+             string repositoryType = ConfigurationManager.AppSettings["RepositoryType"] ?? "entity";
