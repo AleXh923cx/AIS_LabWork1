@@ -10,7 +10,7 @@ namespace BusinessLogic
     /// <summary>
     /// Интерфейс службы запросов персонажа
     /// </summary>
-    public interface ICharacterQuery
+    public interface ICharacterQueryService
     {
         /// <summary>
         /// Возвращает список персонажей с применённой сортировкой и фильтрацией

@@ -11,7 +11,7 @@ namespace BusinessLogic
     /// <summary>
     /// Класс службы запросов персонажа
     /// </summary>
-    public class CharacterQueryService : ICharacterQuery
+    public class CharacterQueryService : ICharacterQueryService
     {
         private readonly ICharacterRead _reader;
         private readonly ICharacterFilter _filter;
