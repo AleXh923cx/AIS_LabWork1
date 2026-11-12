@@ -23,14 +23,4 @@ namespace BusinessLogic
         IEnumerable<Character> Sort<T>(IEnumerable<Character> characters,
             Func<Character, T> keySelector);
     }
-
-    /// <summary>
-    /// Класс сортировки персонажа
-    /// </summary>
-    public class CharacterSorter : ICharacterSort
-    {
-        public IEnumerable<Character> Sort<T>(IEnumerable<Character> characters,
-            Func<Character, T> keySelector)
-            => characters.OrderBy(keySelector);
-    }
 }

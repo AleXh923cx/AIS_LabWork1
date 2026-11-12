@@ -81,6 +81,7 @@
             // 
             textBox_charGenus.BorderStyle = BorderStyle.FixedSingle;
             textBox_charGenus.Location = new Point(119, 70);
+            textBox_charGenus.MaxLength = 12;
             textBox_charGenus.Name = "textBox_charGenus";
             textBox_charGenus.Size = new Size(140, 23);
             textBox_charGenus.TabIndex = 20;
@@ -89,6 +90,7 @@
             // 
             textBox_charName.BorderStyle = BorderStyle.FixedSingle;
             textBox_charName.Location = new Point(119, 41);
+            textBox_charName.MaxLength = 14;
             textBox_charName.Name = "textBox_charName";
             textBox_charName.Size = new Size(140, 23);
             textBox_charName.TabIndex = 19;

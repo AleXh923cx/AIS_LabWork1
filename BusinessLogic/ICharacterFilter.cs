@@ -20,13 +20,4 @@ namespace BusinessLogic
         /// <returns>Коллекция отфильтрованных персонажей</returns>
         IEnumerable<Character> FilterByMinAge(IEnumerable<Character> characters, int minAge);
     }
-
-    /// <summary>
-    /// Класс фильтрации персонажа
-    /// </summary>
-    public class CharacterFilter : ICharacterFilter
-    {
-        public IEnumerable<Character> FilterByMinAge(IEnumerable<Character> characters, int minAge)
-            => characters.Where(c => c.Age >= minAge);
-    }
 }

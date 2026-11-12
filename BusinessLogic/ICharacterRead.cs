@@ -26,20 +26,4 @@ namespace BusinessLogic
         /// <returns>Коллекция всех персонажей</returns>
         IEnumerable<Character> GetAllCharacters();
     }
-
-    /// <summary>
-    /// Класс чтение персонажа
-    /// </summary>
-    public class CharacterReader : ICharacterRead
-    {
-        private readonly IReadRepository<Character> _readRepository;
-
-        public CharacterReader(IReadRepository<Character> readRepository)
-        {
-            _readRepository = readRepository;
-        }
-
-        public Character? GetCharacterById(int id) => _readRepository.ReadById(id);
-        public IEnumerable<Character> GetAllCharacters() => _readRepository.ReadAll();
-    }
 }
