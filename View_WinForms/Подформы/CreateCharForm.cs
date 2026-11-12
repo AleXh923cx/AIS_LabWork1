@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using BusinessLogic;
+using Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,11 +13,14 @@ namespace View_WinForms.Подформы
     public partial class CreateCharForm : Form
     {
         Form1 _form1;
+
+        private readonly ICharacterWrite _writer;
         
-        public CreateCharForm(Form1 form1)
+        public CreateCharForm(Form1 form1, ICharacterWrite writer)
         {
             InitializeComponent();
             _form1 = form1;
+            _writer = writer;
         }
 
         private void button1_OnClick(object sender, EventArgs e)
@@ -38,7 +42,7 @@ namespace View_WinForms.Подформы
                 return;
             }
 
-            _form1.GetCharacterService().AddCharacter(charName, charCls, charAge);
+            _writer.AddCharacter(charName, charCls, charAge);
             _form1.RefreshForm();
             Close();
         }

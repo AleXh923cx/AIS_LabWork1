@@ -15,7 +15,10 @@ namespace View_WinForms
     public partial class Form1 : Form
     {
         static IKernel ninjectKernel = new StandardKernel(new SimpleConfigModule());
-        ICharacterService characterService = ninjectKernel.Get<ICharacterService>();
+
+        private readonly ICharacterQuery characterQueryService = ninjectKernel.Get<ICharacterQuery>();
+        private readonly ICharacterWrite characterWriter = ninjectKernel.Get<ICharacterWrite>();
+        private readonly ICharacterRead characterReader = ninjectKernel.Get<ICharacterRead>();
 
         public bool IsSortByGenus;
         public int? MinAge;
@@ -32,20 +35,12 @@ namespace View_WinForms
             => IsSortByGenus ? (c => c.Genus) : (c => c.Id);
 
         /// <summary>
-        /// Для подформы главного окна - Form1
-        /// </summary>
-        /// <returns>Служба персонажа</returns>
-        public ICharacterService GetCharacterService()
-        {
-            return characterService;
-        }
-
-        /// <summary>
         /// Обновляет форму для сихронизации
         /// </summary>
         public void RefreshForm()
         {
-            IEnumerable<Character> chars = characterService.GetProcessedCharacters(GetSortKey(), MinAge);
+            IEnumerable<Character> chars = characterQueryService
+                .GetProcessedCharacters(GetSortKey(), MinAge);
 
             ShowCharacaterList(chars.ToList());
 
@@ -67,17 +62,17 @@ namespace View_WinForms
 
         private void button_create_OnClick(object sender, EventArgs e)
         {
-            new CreateCharForm(this).ShowDialog();
+            new CreateCharForm(this, characterWriter).ShowDialog();
         }
 
         private void button_delete_OnClick(object sender, EventArgs e) 
         {
-            new DeleteCharForm(this).ShowDialog();
+            new DeleteCharForm(this, characterWriter).ShowDialog();
         }
 
         private void button_update_OnClick(object sender, EventArgs e)
         {
-            new UpdateCharForm(this).ShowDialog();
+            new UpdateCharForm(this, characterReader, characterWriter).ShowDialog();
         }
 
         // Сортировка по виду

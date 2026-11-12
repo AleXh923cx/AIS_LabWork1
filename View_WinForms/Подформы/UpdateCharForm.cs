@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using BusinessLogic;
+using Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,10 +14,15 @@ namespace View_WinForms.Подформы
     {
         Form1 _form1;
 
-        public UpdateCharForm(Form1 form1)
+        private readonly ICharacterRead _reader;
+        private readonly ICharacterWrite _writer;
+
+        public UpdateCharForm(Form1 form1, ICharacterRead reader, ICharacterWrite writer)
         {
             InitializeComponent();
             _form1 = form1;
+            _writer = writer;
+            _reader = reader;
         }
 
         private void button1_OnClick(object sender, EventArgs e) 
@@ -28,7 +34,7 @@ namespace View_WinForms.Подформы
                 return;
             }
 
-            if (_form1.GetCharacterService().GetCharacterById(charId) == null)
+            if (_reader.GetCharacterById(charId) == null)
             {
                 MessageBox.Show("Введённый № персонажа не существует в таблице", 
                     "Ошибка изменения", 
@@ -53,7 +59,7 @@ namespace View_WinForms.Подформы
                 return;
             }
 
-            _form1.GetCharacterService().UpdateCharacter(charId, charName, charCls, charAge);
+            _writer.UpdateCharacter(charId, charName, charCls, charAge);
             _form1.RefreshForm();
             Close();
         }

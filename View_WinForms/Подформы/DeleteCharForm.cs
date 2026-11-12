@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using BusinessLogic;
+using Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,10 +15,13 @@ namespace View_WinForms.Подформы
     {
         Form1 _form1;
 
-        public DeleteCharForm(Form1 form1)
+        private readonly ICharacterWrite _writer;
+
+        public DeleteCharForm(Form1 form1, ICharacterWrite writer)
         {
             InitializeComponent();
             _form1 = form1;
+            _writer = writer;
         }
 
         private void button1_OnClick(object sender, EventArgs e) 
@@ -29,7 +33,7 @@ namespace View_WinForms.Подформы
                 return;
             }
 
-            if (!_form1.GetCharacterService().DeleteCharacter(charId))
+            if (!_writer.DeleteCharacter(charId))
             {
                 MessageBox.Show("Персонаж с таким № не найден в таблице.",
                     "Ошибка удаления",
