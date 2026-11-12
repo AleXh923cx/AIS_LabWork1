@@ -50,7 +50,12 @@ namespace View_ConsoleApp
                     continue;
                 }
 
-                characterService.AddCharacter(charName, charGenus, charAge);
+                if (!characterService.AddCharacter(charName, charGenus, charAge))
+                {
+                    Console.WriteLine("ОШИБКА: персонаж не добавлен - данные не прошли проверку");
+                    return;
+                }
+
                 Console.Clear();
                 ShowTable();
                 Console.WriteLine($"Персонаж добавлен.");
@@ -111,7 +116,12 @@ namespace View_ConsoleApp
                 return;
             }
 
-            characterService.UpdateCharacter(id, charName, charGenus, charAge);
+            if (!characterService.UpdateCharacter(id, charName, charGenus, charAge))
+            {
+                Console.WriteLine("ОШИБКА: персонаж не изменён - данные неверны или запись не найдена");
+                return;
+            }
+
             Console.Clear();
             ShowTable();
             Console.WriteLine("Персонаж изменён.");

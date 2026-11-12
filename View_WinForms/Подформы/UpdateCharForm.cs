@@ -57,7 +57,12 @@ namespace View_WinForms.Подформы
                 return;
             }
 
-            _characterService.UpdateCharacter(charId, charName, charCls, charAge);
+            if (!_characterService.UpdateCharacter(charId, charName, charCls, charAge))
+            {
+                MessageBox.Show("Не удалось изменить персонажа: данные неверны или запись не найдена", "Ошибка изменения",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             _form1.RefreshForm();
             Close();
         }

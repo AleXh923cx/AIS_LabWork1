@@ -42,7 +42,12 @@ namespace View_WinForms.Подформы
                 return;
             }
 
-            _characterService.AddCharacter(charName, charCls, charAge);
+            if (!_characterService.AddCharacter(charName, charCls, charAge))
+            {
+                MessageBox.Show("Не удалось добавить персонажа: данные не прошли проверку", "Ошибка создания",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             _form1.RefreshForm();
             Close();
         }
