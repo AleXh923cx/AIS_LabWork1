@@ -16,9 +16,7 @@ namespace View_WinForms
     {
         static IKernel ninjectKernel = new StandardKernel(new SimpleConfigModule());
 
-        private readonly ICharacterQuery characterQueryService = ninjectKernel.Get<ICharacterQuery>();
-        private readonly ICharacterWrite characterWriter = ninjectKernel.Get<ICharacterWrite>();
-        private readonly ICharacterRead characterReader = ninjectKernel.Get<ICharacterRead>();
+        private readonly ICharacterService characterService = ninjectKernel.Get<ICharacterService>();
 
         public bool IsSortByGenus;
         public int? MinAge;
@@ -39,7 +37,7 @@ namespace View_WinForms
         /// </summary>
         public void RefreshForm()
         {
-            IEnumerable<Character> chars = characterQueryService
+            IEnumerable<Character> chars = characterService
                 .GetProcessedCharacters(GetSortKey(), MinAge);
 
             ShowCharacaterList(chars.ToList());
@@ -62,17 +60,17 @@ namespace View_WinForms
 
         private void button_create_OnClick(object sender, EventArgs e)
         {
-            new CreateCharForm(this, characterWriter).ShowDialog();
+            new CreateCharForm(this, characterService).ShowDialog();
         }
 
         private void button_delete_OnClick(object sender, EventArgs e) 
         {
-            new DeleteCharForm(this, characterWriter).ShowDialog();
+            new DeleteCharForm(this, characterService).ShowDialog();
         }
 
         private void button_update_OnClick(object sender, EventArgs e)
         {
-            new UpdateCharForm(this, characterReader, characterWriter).ShowDialog();
+            new UpdateCharForm(this, characterService).ShowDialog();
         }
 
         // Сортировка по виду

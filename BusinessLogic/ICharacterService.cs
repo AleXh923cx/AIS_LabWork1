@@ -11,7 +11,7 @@ namespace BusinessLogic
     /// Интерфейс службы персонажа (фасад бизнес-логики)
     /// </summary>
     public interface ICharacterService : 
-        ICharacterRead, ICharacterWrite, ICharacterQuery
+        ICharacterRead, ICharacterWrite, ICharacterQueryService
     {
         
     }

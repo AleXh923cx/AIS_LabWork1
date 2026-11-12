@@ -24,7 +24,7 @@ namespace BusinessLogic
             Bind<ICharacterWrite>().To<CharacterWriter>().InSingletonScope();
             Bind<ICharacterFilter>().To<CharacterFilter>().InSingletonScope();
             Bind<ICharacterSort>().To<CharacterSorter>().InSingletonScope();
-            Bind<ICharacterQuery>().To<CharacterQueryService>().InSingletonScope();
+            Bind<ICharacterQueryService>().To<CharacterQueryService>().InSingletonScope();
 
             // Читаем настройку из App.config
             string repositoryType = ConfigurationManager.AppSettings["RepositoryType"] ?? "entity";

@@ -13,12 +13,12 @@ namespace BusinessLogic
     {
         private readonly ICharacterRead _reader;
         private readonly ICharacterWrite _writer;
-        private readonly ICharacterQuery _queryService;
+        private readonly ICharacterQueryService _queryService;
         
         public CharacterService(
             ICharacterRead reader,
             ICharacterWrite writer,
-            ICharacterQuery queryService
+            ICharacterQueryService queryService
         )
         {
             _reader = reader;
