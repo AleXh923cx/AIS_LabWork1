@@ -2,6 +2,7 @@
   <Project Path="BusinessLogic/BusinessLogic.csproj" Id="3d32bb17-6415-4b1e-ac51-df878ca2f3c2" />
   <Project Path="DataAccessLayer/DataAccessLayer.csproj" Id="03bd9dbc-e6a0-4223-b6a9-1aabbc78af18" />
   <Project Path="Model/Model.csproj" />
+  <Project Path="Shared/Shared.csproj" Id="117063e6-8a08-4771-bece-1888c0450053" />
   <Project Path="View_ConsoleApp/View_ConsoleApp.csproj" />
   <Project Path="View_WinForms/View_WinForms.csproj" />
 </Solution>
