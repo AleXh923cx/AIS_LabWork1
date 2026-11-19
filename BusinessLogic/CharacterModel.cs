@@ -19,26 +19,47 @@ namespace BusinessLogic
 
         public void Add(CharacterDto character)
         {
-            _facade.AddCharacter(
-                character.Name, 
-                character.Genus, 
-                character.Age
-            );
+            try
+            {
+                _facade.AddCharacter(
+                    character.Name,
+                    character.Genus,
+                    character.Age
+                );
+            }
+            catch (Exception ex)
+            {
+                ErrorOccurred?.Invoke(this, $"Не удалось добавить персонажа: {ex.Message}");
+            }
         }
 
         public void Delete(int id)
         {
-            _facade.DeleteCharacter(id);
+            try
+            {
+                _facade.DeleteCharacter(id);
+            }
+            catch (Exception ex)
+            {
+                ErrorOccurred?.Invoke(this, $"Не удалось удалить персонажа: {ex.Message}");
+            }
         }
 
         public void Update(CharacterDto character)
         {
-            _facade.UpdateCharacter(
-                character.Id,
-                character.Name,
-                character.Genus,
-                character.Age
-            );
+            try
+            {
+                _facade.UpdateCharacter(
+                    character.Id,
+                    character.Name,
+                    character.Genus,
+                    character.Age
+                );
+            }
+            catch (Exception ex)
+            {
+                ErrorOccurred?.Invoke(this, $"Не удалось изменить персонажа: {ex.Message}");
+            }
         }
 
         public void Load(SortOption sortBy, int? minAge)
