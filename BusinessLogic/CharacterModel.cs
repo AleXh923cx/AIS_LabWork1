@@ -2,6 +2,8 @@
 using Shared;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace BusinessLogic
 {
@@ -11,6 +13,9 @@ namespace BusinessLogic
 
         public event EventHandler<List<CharacterDto>>? CharactersLoaded;
         public event EventHandler<string>? ErrorOccurred;
+
+        private SortOption _currentSortOption = SortOption.ById;
+        private int? _currentMinAge;
 
         public CharacterModel(ICharacterService facade)
         {
@@ -29,6 +34,7 @@ namespace BusinessLogic
                         "Проверьте корректность данных.");
                     return;
                 }
+                Reload();
             }
             catch (Exception ex)
             {
@@ -46,6 +52,7 @@ namespace BusinessLogic
                         "Проверьте корректность данных.");
                     return;
                 }
+                Reload();
             }
             catch (Exception ex)
             {
@@ -65,6 +72,7 @@ namespace BusinessLogic
                         "Проверьте корректность данных.");
                     return;
                 }
+                Reload();
             }
             catch (Exception ex)
             {
@@ -74,16 +82,24 @@ namespace BusinessLogic
 
         public void Load(SortOption sortBy, int? minAge)
         {
+            _currentSortOption = sortBy;
+            _currentMinAge = minAge;
+
+            Reload();
+        }
+
+        private void Reload()
+        {
             try
             {
-                Func<Character, object> sortKey = sortBy switch
+                Func<Character, object> sortKey = _currentSortOption switch
                 {
                     SortOption.ById => c => c.Id,
                     SortOption.ByGenus => c => c.Genus,
                     _ => c => c.Id // на всякий случай
                 };
 
-                var characters = _facade.GetProcessedCharacters(sortKey, minAge);
+                var characters = _facade.GetProcessedCharacters(sortKey, _currentMinAge);
 
                 var characterDtos = characters
                     .Select(c => new CharacterDto(c.Id, c.Name, c.Genus, c.Age))
