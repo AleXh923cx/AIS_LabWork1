@@ -21,11 +21,14 @@ namespace BusinessLogic
         {
             try
             {
-                _facade.AddCharacter(
-                    character.Name,
-                    character.Genus,
-                    character.Age
-                );
+                if (!_facade.AddCharacter(
+                    character.Name, character.Genus, character.Age
+                ))
+                {
+                    ErrorOccurred?.Invoke(this, "Не удалось добавить персонажа. " +
+                        "Проверьте корректность данных.");
+                    return;
+                }
             }
             catch (Exception ex)
             {
@@ -37,7 +40,12 @@ namespace BusinessLogic
         {
             try
             {
-                _facade.DeleteCharacter(id);
+                if (!_facade.DeleteCharacter(id))
+                {
+                    ErrorOccurred?.Invoke(this, "Не удалось удалить персонажа. " +
+                        "Проверьте корректность данных.");
+                    return;
+                }
             }
             catch (Exception ex)
             {
@@ -49,12 +57,14 @@ namespace BusinessLogic
         {
             try
             {
-                _facade.UpdateCharacter(
-                    character.Id,
-                    character.Name,
-                    character.Genus,
-                    character.Age
-                );
+                if (!_facade.UpdateCharacter(
+                    character.Id, character.Name, character.Genus, character.Age
+                ))
+                {
+                    ErrorOccurred?.Invoke(this, "Не удалось изменить персонажа. " +
+                        "Проверьте корректность данных.");
+                    return;
+                }
             }
             catch (Exception ex)
             {
