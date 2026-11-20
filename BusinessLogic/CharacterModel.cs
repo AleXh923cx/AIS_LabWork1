@@ -2,8 +2,6 @@
 using Shared;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace BusinessLogic
 {

@@ -1,4 +1,5 @@
 ﻿using DataAccessLayer;
+using Shared;
 using Model;
 using Ninject;
 using Ninject.Modules;
@@ -25,6 +26,7 @@ namespace BusinessLogic
             Bind<ICharacterFilter>().To<CharacterFilter>().InSingletonScope();
             Bind<ICharacterSort>().To<CharacterSorter>().InSingletonScope();
             Bind<ICharacterQueryService>().To<CharacterQueryService>().InSingletonScope();
+            Bind<IModel>().To<CharacterModel>().InSingletonScope();
 
             // Читаем настройку из App.config
             string repositoryType = ConfigurationManager.AppSettings["RepositoryType"] ?? "entity";
