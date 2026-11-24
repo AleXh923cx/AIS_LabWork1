@@ -20,6 +20,14 @@ namespace Presenter
         {
             _model = model;
 
+            Subscribe();
+        }
+
+        /// <summary>
+        /// Подписывает событие модели
+        /// </summary>
+        private void Subscribe()
+        {
             _model.CharactersLoaded += OnCharactersLoaded;
             _model.ErrorOccurred += OnErrorOccurred;
         }
