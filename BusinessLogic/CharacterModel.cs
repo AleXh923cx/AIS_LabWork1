@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 namespace BusinessLogic
 {
+    /// <summary>
+    /// Реализация <see cref="IModel"/> на основе фасада <see cref="ICharacterService"/>.
+    /// </summary>
     public class CharacterModel : IModel
     {
         private readonly ICharacterService _facade;
