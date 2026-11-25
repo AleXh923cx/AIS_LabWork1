@@ -60,27 +60,25 @@ namespace View_WinForms
             characterBindingSource.ResetBindings(false);
         }
 
-        /// <summary>
-        /// Отображает список DTO-персонажей.
-        /// </summary>
-        /// <param name="characters">Список персонажей для отображения.</param>
         public void ShowList(List<CharacterDto> characters)
         {
             characterBindingSource.DataSource = characters;
             characterBindingSource.ResetBindings(false);
         }
-        /// <summary>
-        /// Отображает сообщение пользователю.
-        /// </summary>
-        /// <param name="message">Текст сообщения.</param>
+        
         public void ShowMessage(string message)
         {
             MessageBox.Show(message);
         }
 
+        public void Run()
+        {
+            this.ShowDialog();
+        }
+
         private void Form1_OnLoad(object sender, EventArgs e)
         {
-            RefreshForm();
+            
         }
 
         private void button_create_OnClick(object sender, EventArgs e)
@@ -101,6 +99,12 @@ namespace View_WinForms
         // Сортировка по виду
         private void checkbox1_Checked(object sender, EventArgs e)
         {
+            SortOption sortOption = checkBox1.Checked
+                ? SortOption.ByGenus
+                : SortOption.ById;
+
+            RequestSort?.Invoke(this, sortOption);
+
             IsSortByGenus = checkBox1.Checked;
             RefreshForm();
         }

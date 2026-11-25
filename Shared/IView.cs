@@ -43,5 +43,9 @@ namespace Shared
         /// </summary>
         /// <param name="message">Текст сообщения.</param>
         void ShowMessage(string message);
+        /// <summary>
+        /// Запускает процесс вьюхи
+        /// </summary>
+        void Run();
     }
 }

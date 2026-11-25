@@ -11,48 +11,57 @@ namespace Presenter
     public class Presenter
     {
         private readonly IModel _model;
+        private readonly IView _view;
 
         /// <summary>
         /// Конструктор c подписыванием на события указанной модели.
         /// </summary>
         /// <param name="model">Модель предметной области.</param>
-        public Presenter(IModel model)
+        public Presenter(IModel model, IView view)
         {
             _model = model;
+            _view = view;
 
             Subscribe();
         }
 
         /// <summary>
-        /// Подписывает событие модели
+        /// Подписывает событие модели и вьюхи
         /// </summary>
         private void Subscribe()
         {
+            // Подписка модели
             _model.CharactersLoaded += OnCharactersLoaded;
             _model.ErrorOccurred += OnErrorOccurred;
+
+            // Подписка вьюхи
+            _view.RequestSort += OnRequestSort;
         }
 
         private void OnCharactersLoaded(object? sender, List<CharacterDto> e)
         {
-            Console.WriteLine($"ЗАГРУЗКА УСПЕШНА. Получено персонажей: {e.Count()}");
-            foreach (CharacterDto character in e)
-            {
-                Console.WriteLine($"{character.Name} (возраст: {character.Age})");
-            }
+            _view.ShowList(e);
         }
 
         private void OnErrorOccurred(object? sender, string e)
         {
-            Console.WriteLine($"ОШИБКА ПРЕЗЕНТЕРА: {e}");
+            _view.ShowMessage(e);
+        }
+
+        private void OnRequestSort(object? sender, SortOption sortOption)
+        {
+            
         }
 
         /// <summary>
         /// Запускает работу презентера: инициирует начальную загрузку персонажей
-        /// с сортировкой по идентификатору и без фильтра по возрасту.
+        /// с сортировкой по идентификатору и без фильтра по возрасту, а затем
+        /// по свойству ViewType запускает вьюху.
         /// </summary>
         public void Start()
         {
             _model.Load(SortOption.ById, null);
+            _view.Run();
         }
     }
 }
