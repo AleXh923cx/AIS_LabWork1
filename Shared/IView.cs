@@ -27,6 +27,11 @@ namespace Shared
         /// <c>null</c> означает отсутствие фильтра.
         /// </summary>
         event EventHandler<int?> RequestFilter;
+        /// <summary>
+        /// Возникает при запросе пользователя отсортировать персонажей
+        /// по виду или по идентификатору.
+        /// </summary>
+        event EventHandler<SortOption> RequestSort;
 
         /// <summary>
         /// Отображает список персонажей.

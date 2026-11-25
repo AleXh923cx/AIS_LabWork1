@@ -1,6 +1,7 @@
 ﻿using BusinessLogic;
 using Model;
 using Ninject;
+using Shared;
 using System;
 using System.Xml.Linq;
 
