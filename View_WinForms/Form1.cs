@@ -1,4 +1,5 @@
 ﻿using BusinessLogic;
+using Shared;
 using Model;
 using Ninject;
 using System;
@@ -12,7 +13,7 @@ using View_WinForms.Подформы;
 
 namespace View_WinForms
 {
-    public partial class Form1 : Form
+    public partial class Form1 : Form, IView
     {
         static IKernel ninjectKernel = new StandardKernel(new SimpleConfigModule());
 
@@ -20,6 +21,12 @@ namespace View_WinForms
 
         public bool IsSortByGenus;
         public int? MinAge;
+
+        public event EventHandler<CharacterDto>? RequestAdd;
+        public event EventHandler<CharacterDto>? RequestUpdate;
+        public event EventHandler<int>? RequestDelete;
+        public event EventHandler<int?>? RequestFilter;
+        public event EventHandler<SortOption>? RequestSort;
 
         public Form1()
         {
@@ -51,6 +58,24 @@ namespace View_WinForms
         {
             characterBindingSource.DataSource = chars;
             characterBindingSource.ResetBindings(false);
+        }
+
+        /// <summary>
+        /// Отображает список DTO-персонажей.
+        /// </summary>
+        /// <param name="characters">Список персонажей для отображения.</param>
+        public void ShowList(List<CharacterDto> characters)
+        {
+            characterBindingSource.DataSource = characters;
+            characterBindingSource.ResetBindings(false);
+        }
+        /// <summary>
+        /// Отображает сообщение пользователю.
+        /// </summary>
+        /// <param name="message">Текст сообщения.</param>
+        public void ShowMessage(string message)
+        {
+            MessageBox.Show(message);
         }
 
         private void Form1_OnLoad(object sender, EventArgs e)
