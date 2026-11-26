@@ -4,6 +4,7 @@ using View_ConsoleApp;
 using Shared;
 using Ninject;
 using System;
+using System.Configuration;
 
 namespace Presenter
 {
@@ -15,19 +16,22 @@ namespace Presenter
         [STAThread]
         static void Main(string[] args)
         {
-            bool isConsole = true;
+            // Читаем настройку из App.config; по умолчанию — консоль.
+            string viewType = ConfigurationManager.AppSettings["ViewType"] ?? "console";
 
             Presenter presenter;
-            
-            if (isConsole)
+
+            switch (viewType)
             {
-                ConsoleView consoleView = new ConsoleView();
-                presenter = new Presenter(model, consoleView);
-            }
-            else
-            {
-                Form1 form = new Form1();
-                presenter = new Presenter(model, form);
+                case "winforms":
+                    Form1 form = new Form1();
+                    presenter = new Presenter(model, form);
+                    break;
+                case "console":
+                default:
+                    ConsoleView consoleView = new ConsoleView();
+                    presenter = new Presenter(model, consoleView);
+                    break;
             }
 
             presenter.Start();
