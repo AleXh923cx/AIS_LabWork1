@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Shared;
 
 namespace Model
 {
@@ -11,10 +12,6 @@ namespace Model
         private string _name;
         private string _genus;
         private int _age;
-
-        // Константы максимального длины текста
-        public const int NameMaxLength = 14;
-        public const int GenusMaxLength = 12;
 
         /// <summary>
         /// Конструктор
@@ -43,7 +40,7 @@ namespace Model
         /// <summary>
         /// Имя персонажа
         /// </summary>
-        [MaxLength(NameMaxLength)]
+        [MaxLength(CharacterDto.NameMaxLength)]
         public string Name
         {
             get => _name;
@@ -53,7 +50,7 @@ namespace Model
         /// <summary>
         /// Вид персонажа (это как класс персонажа)
         /// </summary>
-        [MaxLength(GenusMaxLength)]
+        [MaxLength(CharacterDto.GenusMaxLength)]
         public string Genus
         {
             get => _genus;

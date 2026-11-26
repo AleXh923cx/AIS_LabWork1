@@ -1,6 +1,4 @@
-﻿using BusinessLogic;
-using Shared;
-using Model;
+﻿using Shared;
 using Ninject;
 using System;
 using System.Collections.Generic;

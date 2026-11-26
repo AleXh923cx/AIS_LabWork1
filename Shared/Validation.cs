@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Shared;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Model
+namespace Shared
 {
     public static class Validation
     {
@@ -90,15 +91,15 @@ namespace Model
                 return false;
             }
 
-            if (name.Length > Character.NameMaxLength)
+            if (name.Length > CharacterDto.NameMaxLength)
             {
-                error = $"Имя персонажа не должно быть длиннее {Character.NameMaxLength} символов";
+                error = $"Имя персонажа не должно быть длиннее {CharacterDto.NameMaxLength} символов";
                 return false;
             }
 
-            if (genus.Length > Character.GenusMaxLength)
+            if (genus.Length > CharacterDto.GenusMaxLength)
             {
-                error = $"Вид персонажа не должен быть длиннее {Character.GenusMaxLength} символов";
+                error = $"Вид персонажа не должен быть длиннее {CharacterDto.GenusMaxLength} символов";
                 return false;
             }
 

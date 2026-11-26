@@ -1,5 +1,5 @@
 ﻿using BusinessLogic;
-using Model;
+using Shared;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

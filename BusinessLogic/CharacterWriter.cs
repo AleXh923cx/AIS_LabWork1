@@ -1,4 +1,5 @@
 ﻿using DataAccessLayer;
+using Shared;
 using Model;
 using System;
 using System.Collections.Generic;
