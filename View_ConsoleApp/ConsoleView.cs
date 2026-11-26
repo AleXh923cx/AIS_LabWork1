@@ -25,7 +25,28 @@ namespace View_ConsoleApp
 
         public void Run()
         {
-            ShowMenu();
+            while (true)
+            {
+                Console.Clear();
+                ShowMenu();
+
+                string choices = Console.ReadLine();
+                switch (choices)
+                {
+                    case "4":
+                        Console.Clear();
+                        PrintCharacters();
+                        break;
+                    case null:
+                    case "0": return;
+                    default:
+                        Console.WriteLine("Неверный ввод! (диапазон ввода: 0-7)");
+                        break;
+                }
+
+                Console.WriteLine("\nНажмите любую клавишу для возврата в меню...");
+                Console.ReadKey();
+            }
         }
 
         public void ShowList(List<CharacterDto> characters)
@@ -54,7 +75,7 @@ namespace View_ConsoleApp
                     $"{chrcter.Level.ToString().PadRight(7)} |");
 
             if (_lastCharacters.Count() == 0)
-                ShowMessage("Персонажи не найдены.");
+                Console.WriteLine("Персонажи не найдены.");
         }
 
         private void ShowMenu()
