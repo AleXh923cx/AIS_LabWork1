@@ -15,6 +15,8 @@ namespace View_ConsoleApp
         public static int? MinAge;
         public static SortOption sortOption = SortOption.ById;
 
+        private List<CharacterDto> _lastCharacters = new List<CharacterDto>();
+
         public event EventHandler<CharacterDto> RequestAdd;
         public event EventHandler<CharacterDto> RequestUpdate;
         public event EventHandler<int> RequestDelete;
@@ -28,21 +30,7 @@ namespace View_ConsoleApp
 
         public void ShowList(List<CharacterDto> characters)
         {
-            // Заголовки таблицы
-            Console.WriteLine("| №  |      Имя       |      Вид     | Возраст | Уровень |");
-            Console.WriteLine("|----|----------------|--------------|---------|---------|");
-
-            // Записи таблицы
-            foreach (var chrcter in characters.ToList())
-                Console.WriteLine(
-                    $"| {chrcter.Id,2} | " +
-                    $"{chrcter.Name.PadRight(14)} | " +
-                    $"{chrcter.Genus.PadRight(12)} | " +
-                    $"{chrcter.Age.ToString().PadRight(7)} | " +
-                    $"{chrcter.Level.ToString().PadRight(7)} |");
-
-            if (characters.Count() == 0)
-                ShowMessage("Персонажи не найдены.");
+            _lastCharacters = characters ?? new List<CharacterDto>();
         }
 
         public void ShowMessage(string message)
@@ -50,7 +38,26 @@ namespace View_ConsoleApp
             Console.WriteLine(message);
         }
 
-        static void ShowMenu()
+        private void PrintCharacters()
+        {
+            // Заголовки таблицы
+            Console.WriteLine("| №  |      Имя       |      Вид     | Возраст | Уровень |");
+            Console.WriteLine("|----|----------------|--------------|---------|---------|");
+
+            // Записи таблицы
+            foreach (var chrcter in _lastCharacters.ToList())
+                Console.WriteLine(
+                    $"| {chrcter.Id,2} | " +
+                    $"{chrcter.Name.PadRight(14)} | " +
+                    $"{chrcter.Genus.PadRight(12)} | " +
+                    $"{chrcter.Age.ToString().PadRight(7)} | " +
+                    $"{chrcter.Level.ToString().PadRight(7)} |");
+
+            if (_lastCharacters.Count() == 0)
+                ShowMessage("Персонажи не найдены.");
+        }
+
+        private void ShowMenu()
         {
             Console.WriteLine("АИС \"РПГ персонажи-дерево\"");
             Console.WriteLine();
