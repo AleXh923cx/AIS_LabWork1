@@ -10,16 +10,12 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using View_WinForms.Подформы;
+using Ninject.Activation;
 
 namespace View_WinForms
 {
     public partial class Form1 : Form, IView
     {
-        static IKernel ninjectKernel = new StandardKernel(new SimpleConfigModule());
-
-        private readonly ICharacterService characterService = ninjectKernel.Get<ICharacterService>();
-
-        public bool IsSortByGenus;
         public int? MinAge;
 
         public event EventHandler<CharacterDto>? RequestAdd;
@@ -31,29 +27,6 @@ namespace View_WinForms
         public Form1()
         {
             InitializeComponent();
-        }
-
-        /// <summary>
-        /// Маппинг пользовательского выбора в ключ сортировки (OCP-safe граница UI→BL)
-        /// </summary>
-        private Func<Character, object> GetSortKey()
-            => IsSortByGenus ? (c => c.Genus) : (c => c.Id);
-
-        /// <summary>
-        /// Обновляет форму для сихронизации
-        /// </summary>
-        public void RefreshForm()
-        {
-            IEnumerable<Character> chars = characterService
-                .GetProcessedCharacters(GetSortKey(), MinAge);
-
-            ShowCharacaterList(chars.ToList());
-        }
-
-        public void ShowCharacaterList(List<Character> chars)
-        {
-            characterBindingSource.DataSource = chars;
-            characterBindingSource.ResetBindings(false);
         }
 
         public void ShowList(List<CharacterDto> characters)
@@ -71,8 +44,31 @@ namespace View_WinForms
         {
             this.ShowDialog();
         }
+
         /// <summary>
-        /// 
+        /// Вызов сообщении об добавлении
+        /// </summary>
+        public void RaiseAddRequest(CharacterDto character)
+        {
+            RequestAdd?.Invoke(this, character);
+        }
+        /// <summary>
+        /// Вызов сообщении об удалении
+        /// </summary>
+        public void RaiseDeleteRequest(int id)
+        {
+            RequestDelete?.Invoke(this, id);
+        }
+        /// <summary>
+        /// Вызов сообщении об изменении
+        /// </summary>
+        public void RaiseUpdateRequest(CharacterDto character)
+        {
+            RequestUpdate?.Invoke(this, character);
+        }
+
+        /// <summary>
+        /// Вызов сообщении об фильтрации по минимальному возраста
         /// </summary>
         /// <param name="minAge">Минимальный возраст</param>
         public void RaiseFilterRequest(int? minAge)
@@ -92,17 +88,17 @@ namespace View_WinForms
 
         private void button_create_OnClick(object sender, EventArgs e)
         {
-            new CreateCharForm(this, characterService).ShowDialog();
+            new CreateCharForm(this).ShowDialog();
         }
 
         private void button_delete_OnClick(object sender, EventArgs e) 
         {
-            new DeleteCharForm(this, characterService).ShowDialog();
+            new DeleteCharForm(this).ShowDialog();
         }
 
         private void button_update_OnClick(object sender, EventArgs e)
         {
-            new UpdateCharForm(this, characterService).ShowDialog();
+            new UpdateCharForm(this).ShowDialog();
         }
 
         // Сортировка по виду

@@ -1,5 +1,6 @@
 ﻿using BusinessLogic;
 using Model;
+using Shared;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,14 +14,11 @@ namespace View_WinForms.Подформы
     public partial class CreateCharForm : Form
     {
         Form1 _form1;
-
-        private readonly ICharacterService _characterService;
         
-        public CreateCharForm(Form1 form1, ICharacterService characterService)
+        public CreateCharForm(Form1 form1)
         {
             InitializeComponent();
             _form1 = form1;
-            _characterService = characterService;
         }
 
         private void button1_OnClick(object sender, EventArgs e)
@@ -42,13 +40,8 @@ namespace View_WinForms.Подформы
                 return;
             }
 
-            if (!_characterService.AddCharacter(charName, charCls, charAge))
-            {
-                MessageBox.Show("Не удалось добавить персонажа: данные не прошли проверку", "Ошибка создания",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            _form1.RefreshForm();
+            CharacterDto character = new CharacterDto(0, charName, charCls, charAge);
+            _form1.RaiseAddRequest(character);
             Close();
         }
     }

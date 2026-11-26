@@ -15,13 +15,10 @@ namespace View_WinForms.Подформы
     {
         Form1 _form1;
 
-        private readonly ICharacterService _characterService;
-
-        public DeleteCharForm(Form1 form1, ICharacterService characterService)
+        public DeleteCharForm(Form1 form1)
         {
             InitializeComponent();
             _form1 = form1;
-            _characterService = characterService;
         }
 
         private void button1_OnClick(object sender, EventArgs e) 
@@ -33,15 +30,7 @@ namespace View_WinForms.Подформы
                 return;
             }
 
-            if (!_characterService.DeleteCharacter(charId))
-            {
-                MessageBox.Show("Персонаж с таким № не найден в таблице.",
-                    "Ошибка удаления",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            _form1.RefreshForm();
+            _form1.RaiseDeleteRequest(charId);
             Close();
         }
     }

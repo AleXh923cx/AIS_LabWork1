@@ -1,5 +1,6 @@
 ﻿using BusinessLogic;
 using Model;
+using Shared;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,13 +15,10 @@ namespace View_WinForms.Подформы
     {
         Form1 _form1;
 
-        private readonly ICharacterService _characterService;
-
-        public UpdateCharForm(Form1 form1, ICharacterService characterService)
+        public UpdateCharForm(Form1 form1)
         {
             InitializeComponent();
             _form1 = form1;
-            _characterService = characterService;
         }
 
         private void button1_OnClick(object sender, EventArgs e) 
@@ -32,13 +30,13 @@ namespace View_WinForms.Подформы
                 return;
             }
 
-            if (_characterService.GetCharacterById(charId) == null)
-            {
-                MessageBox.Show("Введённый № персонажа не существует в таблице", 
-                    "Ошибка изменения", 
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
+            // if (_characterService.GetCharacterById(charId) == null)
+            // {
+            //     MessageBox.Show("Введённый № персонажа не существует в таблице", 
+            //         "Ошибка изменения", 
+            //         MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //     return;
+            // }
 
             string charName = textBox_charName.Text;
             string charCls = textBox_charGenus.Text;
@@ -57,13 +55,8 @@ namespace View_WinForms.Подформы
                 return;
             }
 
-            if (!_characterService.UpdateCharacter(charId, charName, charCls, charAge))
-            {
-                MessageBox.Show("Не удалось изменить персонажа: данные неверны или запись не найдена", "Ошибка изменения",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            _form1.RefreshForm();
+            CharacterDto character = new CharacterDto(charId, charName, charCls, charAge);
+            _form1.RaiseUpdateRequest(character);
             Close();
         }
     }

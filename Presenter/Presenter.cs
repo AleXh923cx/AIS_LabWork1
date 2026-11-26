@@ -38,6 +38,9 @@ namespace Presenter
             _model.ErrorOccurred += OnErrorOccurred;
 
             // Подписка вьюхи
+            _view.RequestAdd += OnRequestAdd;
+            _view.RequestDelete += OnRequestDelete;
+            _view.RequestUpdate += OnRequestUpdate;
             _view.RequestSort += OnRequestSort;
             _view.RequestFilter += OnRequestFilter;
         }
@@ -50,6 +53,21 @@ namespace Presenter
         private void OnErrorOccurred(object? sender, string e)
         {
             _view.ShowMessage(e);
+        }
+
+        private void OnRequestAdd(object? sender, CharacterDto character)
+        {
+            _model.Add(character);
+        }
+
+        private void OnRequestDelete(object? sender, int id)
+        {
+            _model.Delete(id);
+        }
+
+        private void OnRequestUpdate(object? sender, CharacterDto character)
+        {
+            _model.Update(character);
         }
 
         private void OnRequestSort(object? sender, SortOption sortOption)
