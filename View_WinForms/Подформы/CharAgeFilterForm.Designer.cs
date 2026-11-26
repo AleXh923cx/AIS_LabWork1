@@ -38,7 +38,7 @@
             // 
             // characterBindingSource
             // 
-            characterBindingSource.DataSource = typeof(Model.Character);
+            characterBindingSource.DataSource = typeof(Shared.CharacterDto);
             // 
             // textBox_charMinAge
             // 

@@ -1,5 +1,4 @@
 ﻿using Shared;
-using Ninject;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,7 +7,6 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using View_WinForms.Подформы;
-using Ninject.Activation;
 
 namespace View_WinForms
 {
