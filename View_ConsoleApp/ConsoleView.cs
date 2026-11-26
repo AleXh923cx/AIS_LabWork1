@@ -33,6 +33,15 @@ namespace View_ConsoleApp
                 string choices = Console.ReadLine();
                 switch (choices)
                 {
+                    case "1":
+                        AddCharacter();
+                        break;
+                    case "2":
+                        DeleteCharacter();
+                        break;
+                    case "3":
+                        UpdateCharacter();
+                        break;
                     case "4":
                         Console.Clear();
                         PrintCharacters();
@@ -106,6 +115,81 @@ namespace View_ConsoleApp
 
             if (_lastCharacters.Count() == 0)
                 Console.WriteLine("Персонажи не найдены.");
+        }
+
+        private void AddCharacter()
+        {
+            while (true)
+            {
+                string charName = ReadInput("Введите имя персонажа: ");
+                string charGenus = ReadInput("Введите вид персонажа: ");
+                string charAgeInput = ReadInput("Введите возраст персонажа: ");
+
+                if (!Validation.TryParseAge(charAgeInput, out int charAge, out string error))
+                {
+                    Console.WriteLine($"ОШИБКА: {error}");
+                    continue;
+                }
+
+                if (!Validation.ValidateCharacter(charName, charGenus, charAge, out error))
+                {
+                    Console.WriteLine($"ОШИБКА: {error}");
+                    continue;
+                }
+
+                RequestAdd?.Invoke(this, new CharacterDto(
+                    0, charName, charGenus, charAge));
+                Console.Clear();
+                PrintCharacters();
+                Console.WriteLine($"Персонаж добавлен.");
+                return;
+            }
+        }
+
+        private void DeleteCharacter()
+        {
+            string idInput = ReadInput("Введите № персонажа: ");
+            if (!Validation.TryParseId(idInput, out int id, out string idError))
+            {
+                Console.WriteLine($"ОШИБКА: {idError}");
+                return;
+            }
+            RequestDelete?.Invoke(this, id);
+            Console.Clear();
+            PrintCharacters();
+            Console.WriteLine($"Персонаж удалён.");
+        }
+
+        private void UpdateCharacter()
+        {
+            string idInput = ReadInput("Введите № персонажа: ");
+            if (!Validation.TryParseId(idInput, out int id, out string error))
+            {
+                Console.WriteLine($"ОШИБКА: {error}");
+                return;
+            }
+
+            string charName = ReadInput("Введите имя: ");
+            string charGenus = ReadInput("Введите вид: ");
+            string charAgeInput = ReadInput("Введите возраст: ");
+
+            if (!Validation.TryParseAge(charAgeInput, out int charAge, out error))
+            {
+                Console.WriteLine($"ОШИБКА: {error}");
+                return;
+            }
+
+            if (!Validation.ValidateCharacter(charName, charGenus, charAge, out error))
+            {
+                Console.WriteLine($"ОШИБКА: {error}");
+                return;
+            }
+
+            RequestUpdate?.Invoke(this, new CharacterDto(
+                id, charName, charGenus, charAge));
+            Console.Clear();
+            PrintCharacters();
+            Console.WriteLine("Персонаж изменён.");
         }
 
         private void ShowMenu()
