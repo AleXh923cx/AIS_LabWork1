@@ -13,6 +13,9 @@ namespace Presenter
         private readonly IModel _model;
         private readonly IView _view;
 
+        private SortOption _currentSortOption = SortOption.ById;
+        private int? _currentMinAge;
+
         /// <summary>
         /// Конструктор c подписыванием на события указанной модели.
         /// </summary>
@@ -36,6 +39,7 @@ namespace Presenter
 
             // Подписка вьюхи
             _view.RequestSort += OnRequestSort;
+            _view.RequestFilter += OnRequestFilter;
         }
 
         private void OnCharactersLoaded(object? sender, List<CharacterDto> e)
@@ -50,7 +54,14 @@ namespace Presenter
 
         private void OnRequestSort(object? sender, SortOption sortOption)
         {
-            
+            _currentSortOption = sortOption;
+            _model.Load(_currentSortOption, _currentMinAge);
+        }
+
+        private void OnRequestFilter(object? sender, int? minAge)
+        {
+            _currentMinAge = minAge;
+            _model.Load(_currentSortOption, _currentMinAge);
         }
 
         /// <summary>
@@ -60,7 +71,7 @@ namespace Presenter
         /// </summary>
         public void Start()
         {
-            _model.Load(SortOption.ById, null);
+            _model.Load(_currentSortOption, _currentMinAge);
             _view.Run();
         }
     }

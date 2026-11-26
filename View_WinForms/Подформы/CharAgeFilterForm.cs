@@ -28,16 +28,14 @@ namespace View_WinForms.Подформы
                 return;
             }
 
-            _form1.MinAge = minAge;
-            _form1.RefreshForm();
+            _form1.RaiseFilterRequest(minAge);
             Close();
         }
 
         private void button_reset_OnClick(object sender, EventArgs e)
         {
-            _form1.MinAge = null;
             textBox_charMinAge.Clear();
-            _form1.RefreshForm();
+            _form1.RaiseFilterRequest(null);
             Close();
         }
     }

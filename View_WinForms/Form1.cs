@@ -48,10 +48,6 @@ namespace View_WinForms
                 .GetProcessedCharacters(GetSortKey(), MinAge);
 
             ShowCharacaterList(chars.ToList());
-
-            label_minAgeIndicator.Text = MinAge.HasValue ? 
-                $"Минимальный возраст: {(MinAge.Value)}" : 
-                $"Минимальный возраст: не задан";
         }
 
         public void ShowCharacaterList(List<Character> chars)
@@ -74,6 +70,19 @@ namespace View_WinForms
         public void Run()
         {
             this.ShowDialog();
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="minAge">Минимальный возраст</param>
+        public void RaiseFilterRequest(int? minAge)
+        {
+            MinAge = minAge;
+            label_minAgeIndicator.Text = MinAge.HasValue ?
+                $"Минимальный возраст: {(MinAge.Value)}" :
+                $"Минимальный возраст: не задан";
+
+            RequestFilter?.Invoke(this, MinAge);
         }
 
         private void Form1_OnLoad(object sender, EventArgs e)
@@ -104,9 +113,6 @@ namespace View_WinForms
                 : SortOption.ById;
 
             RequestSort?.Invoke(this, sortOption);
-
-            IsSortByGenus = checkBox1.Checked;
-            RefreshForm();
         }
 
         private void button_agefilter_OnClick(object sender, EventArgs e)
