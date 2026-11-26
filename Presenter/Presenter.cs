@@ -36,6 +36,7 @@ namespace Presenter
             // Подписка модели
             _model.CharactersLoaded += OnCharactersLoaded;
             _model.ErrorOccurred += OnErrorOccurred;
+            _model.OperationSucceeded += OnOperationSucceeded;
 
             // Подписка вьюхи
             _view.RequestAdd += OnRequestAdd;
@@ -53,6 +54,11 @@ namespace Presenter
         private void OnErrorOccurred(object? sender, string e)
         {
             _view.ShowMessage(e);
+        }
+
+        private void OnOperationSucceeded(object? sender, OperationResult e)
+        {
+            _view.ShowOperationResult(e);
         }
 
         private void OnRequestAdd(object? sender, CharacterDto character)

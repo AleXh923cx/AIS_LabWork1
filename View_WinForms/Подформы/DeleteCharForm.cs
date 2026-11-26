@@ -31,7 +31,9 @@ namespace View_WinForms.Подформы
             }
 
             _form1.RaiseDeleteRequest(charId);
-            Close();
+
+            if (_form1.LastOperationResult?.IsSuccess == true)
+                Close();
         }
     }
 }

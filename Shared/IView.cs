@@ -34,6 +34,10 @@ namespace Shared
         event EventHandler<SortOption> RequestSort;
 
         /// <summary>
+        /// Показывает результат успешной операции и сохраняет признак успеха.
+        /// </summary>
+        void ShowOperationResult(OperationResult result);
+        /// <summary>
         /// Отображает список персонажей.
         /// </summary>
         /// <param name="characters">Список персонажей для отображения.</param>

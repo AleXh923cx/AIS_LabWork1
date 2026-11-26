@@ -18,6 +18,11 @@ namespace Shared
         /// Возникает при возникновении ошибки; передаёт текст ошибки.
         /// </summary>
         event EventHandler<string> ErrorOccurred;
+        /// <summary>
+        /// Возникает после успешной операции (добавление/изменение/удаление)
+        /// и передаёт результат с текстом сообщения.
+        /// </summary>
+        event EventHandler<OperationResult> OperationSucceeded;
 
         /// <summary>
         /// Добавляет нового персонажа.

@@ -14,6 +14,7 @@ namespace BusinessLogic
 
         public event EventHandler<List<CharacterDto>>? CharactersLoaded;
         public event EventHandler<string>? ErrorOccurred;
+        public event EventHandler<OperationResult>? OperationSucceeded;
 
         private SortOption _currentSortOption = SortOption.ById;
         private int? _currentMinAge;
@@ -35,6 +36,9 @@ namespace BusinessLogic
                         "Проверьте корректность данных.");
                     return;
                 }
+                OperationSucceeded?.Invoke(this,
+                    new OperationResult(true, "Персонаж добавлен.",
+                    canCloseSubform: true));
                 Reload();
             }
             catch (Exception ex)
@@ -53,6 +57,9 @@ namespace BusinessLogic
                         "Проверьте корректность данных.");
                     return;
                 }
+                OperationSucceeded?.Invoke(this,
+                    new OperationResult(true, "Персонаж удалён.", 
+                    canCloseSubform: true));
                 Reload();
             }
             catch (Exception ex)
@@ -73,6 +80,9 @@ namespace BusinessLogic
                         "Проверьте корректность данных.");
                     return;
                 }
+                OperationSucceeded?.Invoke(this,
+                    new OperationResult(true, "Персонаж изменён.", 
+                    canCloseSubform: true));
                 Reload();
             }
             catch (Exception ex)

@@ -56,7 +56,9 @@ namespace View_WinForms.Подформы
 
             CharacterDto character = new CharacterDto(charId, charName, charCls, charAge);
             _form1.RaiseUpdateRequest(character);
-            Close();
+
+            if (_form1.LastOperationResult?.IsSuccess == true)
+                Close();
         }
     }
 }

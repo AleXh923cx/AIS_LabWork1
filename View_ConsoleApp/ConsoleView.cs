@@ -14,6 +14,7 @@ namespace View_ConsoleApp
         public static SortOption sortOption = SortOption.ById;
 
         private List<CharacterDto> _lastCharacters = new List<CharacterDto>();
+        private OperationResult? _lastOperationResult;
 
         public event EventHandler<CharacterDto>? RequestAdd;
         public event EventHandler<CharacterDto>? RequestUpdate;
@@ -54,10 +55,14 @@ namespace View_ConsoleApp
                     case "6":
                         string ageInput = ReadInput("Введите минимальный возраст: ");
                         if (!Validation.TryParseAge(ageInput, out int minAge, out string error))
+                        {
                             Console.WriteLine($"ОШИБКА: {error}");
+                        } 
                         else
+                        {
                             MinAge = minAge;
-                        RequestFilter?.Invoke(this, MinAge);
+                            RequestFilter?.Invoke(this, MinAge);
+                        }
                         break;
                     case "7":
                         MinAge = null;
@@ -83,6 +88,11 @@ namespace View_ConsoleApp
         public void ShowMessage(string message)
         {
             Console.WriteLine(message);
+        }
+
+        public void ShowOperationResult(OperationResult result)
+        {
+            _lastOperationResult = result;
         }
 
         /// <summary>
@@ -135,11 +145,17 @@ namespace View_ConsoleApp
                     continue;
                 }
 
+                _lastOperationResult = null;
                 RequestAdd?.Invoke(this, new CharacterDto(
                     0, charName, charGenus, charAge));
-                Console.Clear();
-                PrintCharacters();
-                Console.WriteLine($"Персонаж добавлен.");
+
+                if (_lastOperationResult?.IsSuccess == true)
+                {
+                    Console.Clear();
+                    PrintCharacters();
+                    Console.WriteLine(_lastOperationResult.Message);
+                }
+                
                 return;
             }
         }
@@ -152,10 +168,16 @@ namespace View_ConsoleApp
                 Console.WriteLine($"ОШИБКА: {idError}");
                 return;
             }
+
+            _lastOperationResult = null;
             RequestDelete?.Invoke(this, id);
-            Console.Clear();
-            PrintCharacters();
-            Console.WriteLine($"Персонаж удалён.");
+
+            if (_lastOperationResult?.IsSuccess == true)
+            {
+                Console.Clear();
+                PrintCharacters();
+                Console.WriteLine(_lastOperationResult.Message);
+            }
         }
 
         private void UpdateCharacter()
@@ -183,11 +205,16 @@ namespace View_ConsoleApp
                 return;
             }
 
+            _lastOperationResult = null;
             RequestUpdate?.Invoke(this, new CharacterDto(
                 id, charName, charGenus, charAge));
-            Console.Clear();
-            PrintCharacters();
-            Console.WriteLine("Персонаж изменён.");
+
+            if (_lastOperationResult?.IsSuccess == true)
+            {
+                Console.Clear();
+                PrintCharacters();
+                Console.WriteLine(_lastOperationResult.Message);
+            }
         }
 
         private void ShowMenu()

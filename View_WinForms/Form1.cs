@@ -15,6 +15,12 @@ namespace View_WinForms
     public partial class Form1 : Form, IView
     {
         public int? MinAge;
+        // Последний результат операции; подформы читают его после Raise...Request.
+        private OperationResult? _lastOperationResult;
+        /// <summary>
+        /// Результат последней операции (только для чтения из подформ).
+        /// </summary>
+        public OperationResult? LastOperationResult => _lastOperationResult;
 
         public event EventHandler<CharacterDto>? RequestAdd;
         public event EventHandler<CharacterDto>? RequestUpdate;
@@ -38,6 +44,16 @@ namespace View_WinForms
             MessageBox.Show(message);
         }
 
+        public void ShowOperationResult(OperationResult result)
+        {
+            _lastOperationResult = result;
+            
+            if (!result.IsSuccess) return;
+
+            // Показываем текст результата
+            MessageBox.Show(result.Message, "Готово");
+        }
+
         public void Run()
         {
             this.ShowDialog();
@@ -48,6 +64,7 @@ namespace View_WinForms
         /// </summary>
         public void RaiseAddRequest(CharacterDto character)
         {
+            _lastOperationResult = null;
             RequestAdd?.Invoke(this, character);
         }
         /// <summary>
@@ -55,6 +72,7 @@ namespace View_WinForms
         /// </summary>
         public void RaiseDeleteRequest(int id)
         {
+            _lastOperationResult = null;
             RequestDelete?.Invoke(this, id);
         }
         /// <summary>
@@ -62,6 +80,7 @@ namespace View_WinForms
         /// </summary>
         public void RaiseUpdateRequest(CharacterDto character)
         {
+            _lastOperationResult = null;
             RequestUpdate?.Invoke(this, character);
         }
 
