@@ -17,11 +17,11 @@ namespace View_ConsoleApp
 
         private List<CharacterDto> _lastCharacters = new List<CharacterDto>();
 
-        public event EventHandler<CharacterDto> RequestAdd;
-        public event EventHandler<CharacterDto> RequestUpdate;
-        public event EventHandler<int> RequestDelete;
-        public event EventHandler<int?> RequestFilter;
-        public event EventHandler<SortOption> RequestSort;
+        public event EventHandler<CharacterDto>? RequestAdd;
+        public event EventHandler<CharacterDto>? RequestUpdate;
+        public event EventHandler<int>? RequestDelete;
+        public event EventHandler<int?>? RequestFilter;
+        public event EventHandler<SortOption>? RequestSort;
 
         public void Run()
         {
@@ -36,6 +36,13 @@ namespace View_ConsoleApp
                     case "4":
                         Console.Clear();
                         PrintCharacters();
+                        break;
+                    case "5":
+                        sortOption = sortOption == SortOption.ById
+                            ? SortOption.ByGenus
+                            : SortOption.ById;
+
+                        RequestSort?.Invoke(this, sortOption);
                         break;
                     case null:
                     case "0": return;
