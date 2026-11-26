@@ -44,6 +44,18 @@ namespace View_ConsoleApp
 
                         RequestSort?.Invoke(this, sortOption);
                         break;
+                    case "6":
+                        string ageInput = ReadInput("Введите минимальный возраст: ");
+                        if (!Validation.TryParseAge(ageInput, out int minAge, out string error))
+                            Console.WriteLine($"ОШИБКА: {error}");
+                        else
+                            MinAge = minAge;
+                        RequestFilter?.Invoke(this, MinAge);
+                        break;
+                    case "7":
+                        MinAge = null;
+                        RequestFilter?.Invoke(this, MinAge);
+                        break;
                     case null:
                     case "0": return;
                     default:
@@ -64,6 +76,17 @@ namespace View_ConsoleApp
         public void ShowMessage(string message)
         {
             Console.WriteLine(message);
+        }
+
+        /// <summary>
+        /// Выводит приглашение к вводу в консоль и читает введённую пользователем строку.
+        /// </summary>
+        /// <param name="message">Текст приглашения перед вводом</param>
+        /// <returns>Введённая пользователем строка или <c>null</c>, если поток ввода закрыт.</returns>
+        private static string ReadInput(string message)
+        {
+            Console.Write(message);
+            return Console.ReadLine();
         }
 
         private void PrintCharacters()
