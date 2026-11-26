@@ -1,5 +1,6 @@
 ﻿using BusinessLogic;
 using View_WinForms;
+using View_ConsoleApp;
 using Shared;
 using Ninject;
 using System;
@@ -14,8 +15,20 @@ namespace Presenter
         [STAThread]
         static void Main(string[] args)
         {
-            Form1 form = new Form1();
-            Presenter presenter = new Presenter(model, form);
+            bool isConsole = true;
+
+            Presenter presenter;
+            
+            if (isConsole)
+            {
+                ConsoleView consoleView = new ConsoleView();
+                presenter = new Presenter(model, consoleView);
+            }
+            else
+            {
+                Form1 form = new Form1();
+                presenter = new Presenter(model, form);
+            }
 
             presenter.Start();
         }
