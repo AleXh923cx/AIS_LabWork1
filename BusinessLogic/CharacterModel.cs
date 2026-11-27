@@ -28,14 +28,17 @@ namespace BusinessLogic
         {
             try
             {
-                if (!_facade.AddCharacter(
+                var result = _facade.AddCharacter(
                     character.Name, character.Genus, character.Age
-                ))
+                );
+
+                if (!result.Success)
                 {
-                    ErrorOccurred?.Invoke(this, "Не удалось добавить персонажа. " +
-                        "Проверьте корректность данных.");
+                    ErrorOccurred?.Invoke(this, "Не удалось добавить персонажа: " +
+                        $"{result.ErrorMessage}");
                     return;
                 }
+
                 OperationSucceeded?.Invoke(this,
                     new OperationResult(true, "Персонаж добавлен.",
                     canCloseSubform: true));
@@ -51,12 +54,15 @@ namespace BusinessLogic
         {
             try
             {
-                if (!_facade.DeleteCharacter(id))
+                var result = _facade.DeleteCharacter(id);
+                
+                if (!result.Success)
                 {
-                    ErrorOccurred?.Invoke(this, "Не удалось удалить персонажа. " +
-                        "Проверьте корректность данных.");
+                    ErrorOccurred?.Invoke(this, "Не удалось удалить персонажа: " +
+                        $"{result.ErrorMessage}");
                     return;
                 }
+
                 OperationSucceeded?.Invoke(this,
                     new OperationResult(true, "Персонаж удалён.", 
                     canCloseSubform: true));
@@ -72,14 +78,17 @@ namespace BusinessLogic
         {
             try
             {
-                if (!_facade.UpdateCharacter(
+                var result = _facade.UpdateCharacter(
                     character.Id, character.Name, character.Genus, character.Age
-                ))
+                );
+
+                if (!result.Success)
                 {
-                    ErrorOccurred?.Invoke(this, "Не удалось изменить персонажа. " +
-                        "Проверьте корректность данных.");
+                    ErrorOccurred?.Invoke(this, "Не удалось изменить персонажа: " +
+                        $"{result.ErrorMessage}");
                     return;
                 }
+
                 OperationSucceeded?.Invoke(this,
                     new OperationResult(true, "Персонаж изменён.", 
                     canCloseSubform: true));

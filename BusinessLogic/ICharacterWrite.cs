@@ -21,7 +21,7 @@ namespace BusinessLogic
         /// <param name="genus">Вид персонажа</param>
         /// <param name="age">Возраст персонажа</param>
         /// <returns>Успешность операции</returns>
-        bool AddCharacter(string name, string genus, int age);
+        (bool Success, string ErrorMessage) AddCharacter(string name, string genus, int age);
         /// <summary>
         /// <b>Удаление персонажа</b>: получает персонажа по ИД.
         /// Если существует персонаж, то удаляется, иначе возвращается <see langword="false"/>, 
@@ -29,7 +29,7 @@ namespace BusinessLogic
         /// </summary>
         /// <param name="id">Идентификатор персонажа</param>
         /// <returns>Успешность операции</returns>
-        bool DeleteCharacter(int id);
+        (bool Success, string ErrorMessage) DeleteCharacter(int id);
         /// <summary>
         /// <b>Изменение персонажа</b>: сначала ищет персонажа по ИД, потом валидирует его (проверяет), а затем изменяет персонажа.
         /// </summary>
@@ -38,6 +38,6 @@ namespace BusinessLogic
         /// <param name="genus">Вид персонажа</param>
         /// <param name="age">Возраст персонажа</param>
         /// <returns>Успешность операции</returns>
-        bool UpdateCharacter(int id, string name, string genus, int age);
+        (bool Success, string ErrorMessage) UpdateCharacter(int id, string name, string genus, int age);
     }
 }

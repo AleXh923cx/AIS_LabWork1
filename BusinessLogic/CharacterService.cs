@@ -26,11 +26,11 @@ namespace BusinessLogic
             _queryService = queryService;
         }
 
-        public bool AddCharacter(string name, string genus, int age)
+        public (bool Success, string ErrorMessage) AddCharacter(string name, string genus, int age)
             => _writer.AddCharacter(name, genus, age);
-        public bool DeleteCharacter(int id)
+        public (bool Success, string ErrorMessage) DeleteCharacter(int id)
             => _writer.DeleteCharacter(id);
-        public bool UpdateCharacter(int id, string name, string genus, int age)
+        public (bool Success, string ErrorMessage) UpdateCharacter(int id, string name, string genus, int age)
             => _writer.UpdateCharacter(id, name, genus, age);
 
         public IEnumerable<Character> GetAllCharacters()
