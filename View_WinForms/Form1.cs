@@ -10,8 +10,14 @@ using View_WinForms.Подформы;
 
 namespace View_WinForms
 {
+    /// <summary>
+    /// Форма оконного типа вьюхи
+    /// </summary>
     public partial class Form1 : Form, IView
     {
+        /// <summary>
+        /// Хранимый минимальный возраст
+        /// </summary>
         public int? MinAge;
         // Последний результат операции; подформы читают его после Raise...Request.
         private OperationResult? _lastOperationResult;

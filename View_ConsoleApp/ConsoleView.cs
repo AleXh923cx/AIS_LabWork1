@@ -8,12 +8,27 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace View_ConsoleApp
 {
+    /// <summary>
+    /// Класс консольного типа вьюхи
+    /// </summary>
     public class ConsoleView : IView
     {
+        /// <summary>
+        /// Хранимый минимальный возраст
+        /// </summary>
         public static int? MinAge;
+        /// <summary>
+        /// Хранимый вариант сортировки
+        /// </summary>
         public static SortOption sortOption = SortOption.ById;
 
+        /// <summary>
+        /// Результат последней списки персонажей.
+        /// </summary>
         private List<CharacterDto> _lastCharacters = new List<CharacterDto>();
+        /// <summary>
+        /// Результат последней операции.
+        /// </summary>
         private OperationResult? _lastOperationResult;
 
         public event EventHandler<CharacterDto>? RequestAdd;

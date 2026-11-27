@@ -10,16 +10,30 @@ namespace Presenter
     /// </summary>
     public class Presenter
     {
+        /// <summary>
+        /// Хранимый только для чтение - модель (CharacterModel
+        /// </summary>
         private readonly IModel _model;
+        /// <summary>
+        /// Хранимый только для чтение - вьюха (либо WinForms, либо Console,
+        /// по App.config - ViewType)
+        /// </summary>
         private readonly IView _view;
 
+        /// <summary>
+        /// Хранимый текущий вариант сортировок для Презентера.
+        /// </summary>
         private SortOption _currentSortOption = SortOption.ById;
+        /// <summary>
+        /// Хранимый текущий минимальный возраст для Презентера.
+        /// </summary>
         private int? _currentMinAge;
 
         /// <summary>
         /// Конструктор c подписыванием на события указанной модели.
         /// </summary>
         /// <param name="model">Модель предметной области.</param>
+        /// <param name="view">Вьюха предметной области.</param>
         public Presenter(IModel model, IView view)
         {
             _model = model;

@@ -5,6 +5,9 @@ using System.Text;
 
 namespace Shared
 {
+    /// <summary>
+    /// Валидатор
+    /// </summary>
     public static class Validation
     {
         /// <summary>
